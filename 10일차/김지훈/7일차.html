@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="6일차.html">&larr; 6일</a>
+        <span class="day-title"><span class="n">7일차</span></span>
+        <a class="back-link" href="8일차.html">8일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">Python</span>
+          <span class="badge">조건문 · 반복문</span>
+        </div>
+        <h2>Python 조건문 · 반복문 연습</h2>
+        <p class="lede">
+          Jupyter Notebook으로 조건문(if/elif/else)과 반복문(for, while)을 연습하고,
+          IDLE에서 turtle 모듈로 그래픽도 그려본 날입니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>양수 · 음수 · 0 판별</h3>
+          </div>
+          <p>if / elif / else 기본 조건문으로 입력한 정수의 부호 판별하기</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 코드
+num = int(input("정수를 입력하세요: "))
+
+if num > 0:
+    print("양수입니다.")
+elif num < 0:
+    print("음수입니다.")
+else:
+    print("0입니다.")
+
+# 실행 결과 (입력: -5)
+정수를 입력하세요:  -5
+음수입니다.</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>합계와 평균 계산</h3>
+          </div>
+          <p>for문과 input으로 여러 숫자를 입력받아 합계·평균 구하기</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 코드
+count = int(input("몇 개의 숫자를 입력하시겠습니까? "))
+total = 0
+
+for i in range(count):
+    num = int(input(f"{i+1}번째 숫자를 입력하세요: "))
+    total += num
+
+average = total / count
+print(f"합계: {total}")
+print(f"평균: {average}")
+
+# 실행 결과 (입력: 3개 - 10, 20, 30)
+몇 개의 숫자를 입력하시겠습니까?  3
+1번째 숫자를 입력하세요:  10
+2번째 숫자를 입력하세요:  20
+3번째 숫자를 입력하세요:  30
+합계: 60
+평균: 20.0</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>구구단 출력</h3>
+          </div>
+          <p>for문으로 입력한 단의 구구단(1~9단) 출력하기</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 코드
+dan = int(input("출력할 단을 입력하세요 (예: 2, 3, 7...): "))
+
+for i in range(1, 10):
+    print(f"{dan} x {i} = {dan * i}")
+
+# 실행 결과 (입력: 11)
+출력할 단을 입력하세요 (예: 2, 3, 7...):  11
+11 x 1 = 11
+11 x 2 = 22
+11 x 3 = 33
+11 x 4 = 44
+11 x 5 = 55
+11 x 6 = 66
+11 x 7 = 77
+11 x 8 = 88
+11 x 9 = 99</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>무한 루프와 break</h3>
+          </div>
+          <p>while True + break로 0을 입력할 때까지 반복 실행하기</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 코드
+while True:
+    num = int(input("숫자를 입력하세요 (0을 입력하면 종료): "))
+
+    if num == 0:
+        print("프로그램을 종료합니다.")
+        break
+
+    print(f"입력한 숫자: {num}")
+
+# 실행 결과 (입력: 1, 2, 3, 4, 10, 0)
+숫자를 입력하세요 (0을 입력하면 종료):  1
+입력한 숫자: 1
+숫자를 입력하세요 (0을 입력하면 종료):  2
+입력한 숫자: 2
+숫자를 입력하세요 (0을 입력하면 종료):  3
+입력한 숫자: 3
+숫자를 입력하세요 (0을 입력하면 종료):  4
+입력한 숫자: 4
+숫자를 입력하세요 (0을 입력하면 종료):  10
+입력한 숫자: 10
+숫자를 입력하세요 (0을 입력하면 종료):  0
+프로그램을 종료합니다.</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python (미완성)</span>
+            <h3>할인 금액 계산기</h3>
+          </div>
+          <p>for문 들여쓰기 오류가 있어 끝까지 실행되지 않은 미완성 코드입니다. 원본 그대로 남겨둡니다.</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 코드 (들여쓰기 오류 있음)
+total = 0
+while True:
+    num = int(input("상품 가격을 입력하세요. (0을 입력하면 종료): "))
+    count = int(input("상품 가격을 입력하세요."))
+    for i in range(count):
+    num = int(input("상품 가격을 입력하세요. "))
+    if num == 0:
+        print("할인 전 금액. ")
+        break
+    total += num
+if total >= 50000 :
+    print("할인금액: (int total*0.2)원")
+elif total >= 30000 :
+    print("할인금액: (int total*0.1)원")
+elif total >= 30000 :
+    print("할인금액: (int total*0.05)원")
+
+# 실행 결과 (입력: 40000, 이후 미완료)
+상품 가격을 입력하세요.  40000</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>Turtle로 사인 곡선 그리기</h3>
+          </div>
+          <p>IDLE에서 math.sin과 turtle 모듈로 사인 곡선 그래픽 그리기</p>
+          <img class="content-image" src="../../7일차/그림/화면 캡처 2026-08-11 154824.png" alt="IDLE과 turtle로 그린 사인 곡선 스크린샷">
+          <details class="code-viewer">
+            <summary>코드 보기</summary>
+            <pre><code>import math
+import turtle
+t = turtle.Turtle()
+for angle in range(360):
+    y = math.sin(math.radians(angle))
+    scaledX = angle
+    scaledY = y*100
+    t.goto(scaledX, scaledY)</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>7일차</span>
+    </footer>
+  </div>
+</body>
+</html>

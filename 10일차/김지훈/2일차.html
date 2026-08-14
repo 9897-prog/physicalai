@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="1일차.html">&larr; 1일</a>
+        <span class="day-title"><span class="n">2일차</span></span>
+        <a class="back-link" href="3일차.html">3일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">HTML</span>
+          <span class="badge">표 &amp; 폼</span>
+        </div>
+        <h2>HTML 기초 문법 연습</h2>
+        <p class="lede">
+          태그, 표(table), 폼(form) 요소를 하나씩 다뤄본 미니 예제 모음입니다. 각 항목에서
+          결과 페이지를 열어보거나 작성한 코드를 바로 확인할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">기초 태그</span>
+            <h3>일경험 프로젝트</h3>
+          </div>
+          <p>제목·굵게·기울임·하이퍼링크·이미지 태그 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/0804/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt; 일경험 프로젝트 &lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;화면 구현&lt;/h1&gt;
+        &lt;p&gt;HTML5, CSS3, Javascript를 이용한 화면 구현&lt;/p&gt;
+        &lt;b&gt; 미래내일 일경험 프로젝트 &lt;/b&gt;
+        &lt;br&gt;&lt;i&gt; 미래내일 일경험 프로젝트 &lt;/i&gt;
+        &lt;a href="http://www.naver.com"&gt; 네이버 하이퍼링크 &lt;/a&gt;
+        &lt;br&gt;&lt;img src="images.jpg"&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">표</span>
+            <h3>colspan, rowspan</h3>
+          </div>
+          <p>표 셀 병합(colspan·rowspan) 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/colspan_/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; colspan,rowspan &lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;table border="1"&gt;
+        &lt;colgroup&gt;
+            &lt;col style="width: 100px;"&gt;
+            &lt;col style="width: 300px;"&gt;
+            &lt;col style="width: 100px;"&gt;
+            &lt;col style="width: 300px;"&gt;
+        &lt;/colgroup&gt;
+        &lt;tr&gt;
+            &lt;th&gt;이름&lt;/th&gt;
+            &lt;td&gt;&lt;/td&gt;
+            &lt;th&gt;연락처&lt;/th&gt;
+            &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;주소&lt;/th&gt;
+            &lt;td colspan="3"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;자기소개&lt;/th&gt;
+            &lt;td colspan="3"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">표</span>
+            <h3>표 생성</h3>
+          </div>
+          <p>table 태그로 표 만들기 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/table생성/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; &lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;h3&gt; 조별 발표하기 &lt;/h3&gt;
+    &lt;table border="1"&gt;
+        &lt;tr&gt;
+            &lt;th&gt; 1조 &lt;/th&gt;
+            &lt;td&gt; 홍길동 &lt;/td&gt;
+            &lt;td&gt; 춘향이 &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt; 2조 &lt;/th&gt;
+            &lt;td&gt; 최집사 &lt;/td&gt;
+            &lt;td&gt; 심청이 &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;  
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">표</span>
+            <h3>시간표</h3>
+          </div>
+          <p>표를 이용한 시간표 만들기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/시간표/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt;시간표&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;h3&gt; 시간표 &lt;/h3&gt;
+    &lt;caption&gt; 시 간 표 &lt;/caption&gt;
+     &lt;table border="1"&gt;
+        &lt;tr&gt;
+            &lt;th&gt;시간&lt;/th&gt;
+            &lt;th&gt;월&lt;/th&gt;
+            &lt;th&gt;화&lt;/th&gt;
+            &lt;th&gt;수&lt;/th&gt;
+            &lt;th&gt;목&lt;/th&gt;
+            &lt;th&gt;금&lt;/th&gt;
+        &lt;/tr&gt;
+         &lt;tr&gt;
+            &lt;th&gt;1교시&lt;/th&gt;
+            &lt;td&gt;국어&lt;/td&gt;
+            &lt;td&gt;역사&lt;/td&gt;
+            &lt;td&gt;수학&lt;/td&gt;
+            &lt;td&gt;미술&lt;/td&gt;
+            &lt;td&gt;영어&lt;/td&gt;
+            
+        &lt;/tr&gt;
+         &lt;tr&gt;
+            &lt;th&gt;2교시&lt;/th&gt;
+            &lt;td&gt;음악&lt;/td&gt;
+            &lt;td&gt;과확&lt;/td&gt;
+            &lt;td&gt;영어&lt;/td&gt;
+            &lt;td&gt;체육&lt;/td&gt;
+            &lt;td&gt;사회&lt;/td&gt;
+        &lt;/tr&gt;
+         &lt;tr&gt;
+            &lt;th&gt;3교시&lt;/th&gt;
+            &lt;td&gt;수학&lt;/td&gt;
+            &lt;td&gt;국어&lt;/td&gt;
+            &lt;td&gt;역사&lt;/td&gt;
+            &lt;td&gt;과학&lt;/td&gt;
+            &lt;td&gt;수학&lt;/td&gt;
+        &lt;/tr&gt;
+     &lt;/table&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">목록</span>
+            <h3>리스트 활용하기</h3>
+          </div>
+          <p>ul, li 태그로 목록 만들기 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/uLli/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; 리스트 활용하기 &lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;h3&gt; 가족여행 일지 &lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;ol type="a"&gt;
+              &lt;li&gt; 서울 &lt;/li&gt;
+             &lt;li&gt; 부산 &lt;/li&gt;
+            &lt;li&gt; 대구 &lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+        &lt;ol type="a" start="3"&gt;
+            &lt;li&gt; 서울 &lt;/li&gt;
+            &lt;li&gt; 부산 &lt;/li&gt;
+            &lt;li&gt; 대구 &lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/ul&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">폼</span>
+            <h3>타입_넘버, 레인지</h3>
+          </div>
+          <p>input type="number", type="range" 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/type_number,range/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; 타입_넘버, 레인지 &lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt; 주문 현황 &lt;/legend&gt;
+                &lt;ul&gt; 
+                    &lt;li&gt;
+                        &lt;label class="reg" for="mem"&gt;인원&lt;/label&gt;
+                        &lt;input type="number" id="mem" value="1" min="0" max="10" step="5"&gt;
+                        &lt;!--인풋 타입 넘버, 최솟값 최댓값 설정--&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;label class = "reg" for="step"&gt;등급&lt;small&gt;(하,중,상)&lt;/small&gt;&lt;/label&gt;
+                        &lt;input type="range" id="step" value="1" min="1" max="100"&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">폼</span>
+            <h3>라디오 · 체크박스</h3>
+          </div>
+          <p>input type="radio", type="checkbox" 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/type_radio,checkbox/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; &lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;form&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;학년&lt;/legend&gt;
+            &lt;p&gt;해당 학년을 선택하세요&lt;/p&gt;
+            &lt;label&gt;&lt;input type="radio" name="grade" value="1"&gt;1학년&lt;/label&gt;
+            &lt;label&gt;&lt;input type="radio" name="grade" value="1"&gt;2학년&lt;/label&gt;
+            &lt;label&gt;&lt;input type="radio" name="grade" value="1"&gt;3학년&lt;/label&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;관심 분야&lt;/legend&gt;
+            &lt;p&gt;해당 학년을 선택하세요&lt;/p&gt;
+            &lt;label&gt;&lt;input type="checkbox" name="enjoy" value="music"&gt;음악&lt;/label&gt;
+            &lt;label&gt;&lt;input type="checkbox" name="enjoy" value="math"&gt;수학&lt;/label&gt;
+            &lt;label&gt;&lt;input type="checkbox" name="enjoy" value="sport"&gt;운동&lt;/label&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;취향조사&lt;/legend&gt;
+            &lt;label&gt;선호색상 &lt;input type="color" value="#0000ff#"&gt; &lt;/label&gt;
+        &lt;/fieldset&gt;
+    &lt;/form&gt;
+   &lt;/body&gt;
+   
+&lt;/html&gt;
+
+&lt;body&gt;
+&lt;form&gt;
+&lt;fieldset&gt;
+&lt;legend&gt; 로그인 &lt;/legend&gt;
+&lt;label&gt;아이디 &lt;input type="text" size="15"&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;비밀번호 &lt;input type="password" size="15"&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+&lt;input type="submit" value="로그인"&gt;
+&lt;input type="reset" value="다시입력"&gt;
+&lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;/body&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">폼</span>
+            <h3>로그인 폼</h3>
+          </div>
+          <p>아이디·비밀번호 로그인 폼 만들기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/form/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; 로그인 폼 &lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;form action="login.php" method="post"&gt;
+        &lt;label for="id"&gt;아이디&lt;/label&gt;
+        &lt;input type="text" id="id"&gt;
+        &lt;br&gt;
+        &lt;label for="pw"&gt;비밀번호&lt;/label&gt;
+        &lt;input type="password" id="id"&gt;
+        &lt;br&gt;
+        &lt;input type="submit" title="로그인" value="로그인"&gt;       
+    &lt;/form&gt;
+    &lt;form&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;개인 정보&lt;/legend&gt;
+            &lt;ul&gt;
+                &lt;il&gt;
+                    &lt;label for="name"&gt;이름&lt;/label&gt;
+                    &lt;input type="text" id="name"&gt;
+                &lt;/il&gt;
+                &lt;il&gt;
+                    &lt;label for="name"&gt;메일주소&lt;/label&gt;
+                    &lt;input type="text" id="name"&gt;
+                &lt;/il&gt;                
+            &lt;/ul&gt;
+        &lt;/fieldset&gt;
+    &lt;/form&gt;    
+   &lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; 로그인 폼 &lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form action="login.php" method="post"&gt;
+            &lt;label for="id"&gt;아이디&lt;/label&gt;
+            &lt;input type="text" id="id"&gt;
+            &lt;br&gt;
+            &lt;label for="pw"&gt;비밀번호&lt;/label&gt;
+            &lt;input type="password" id="pw"&gt;
+            &lt;br&gt;
+            &lt;input type="submit" title="로그인" value="로그인"&gt;
+        &lt;/form&gt;
+        &lt;form&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;개인 정보&lt;/legend&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;label for="name"&gt;이름&lt;/label&gt;
+                        &lt;input type="text" id="name"&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;label for="mail"&gt;메일주소&lt;/label&gt;
+                        &lt;input type="text" id="mail"&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/fieldset&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;로그인 정보&lt;/legend&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;label for="name"&gt;아이디&lt;/label&gt;
+                        &lt;input type="text" id="id"&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;label for="mail"&gt;비밀번호&lt;/label&gt;
+                        &lt;input type="text" id="mail"&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">폼</span>
+            <h3>수강신청</h3>
+          </div>
+          <p>수강신청 폼 페이지 만들기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/수강신청/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+       &lt;title&gt; 수강신청 &lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+    &lt;form accept="study.jsp" method="post"&gt;
+        &lt;fieldset id="subject"&gt;
+            &lt;legend&gt;수강과목&lt;/legend&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label class="reg" for="sub.J"&gt;프로그래밍(초급)&lt;/label&gt;
+                    &lt;input type="text" id="sub.j" value="오전 13:00~15:00" readonly&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset id="register"&gt;
+            &lt;legend&gt; 신청자 &lt;/legend&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label class="reg" for="uid"&gt;학번&lt;/label&gt;
+                    &lt;input type="text" id="uid" placeholder="5자리 숫자로 입력" maxlength="S" required&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label class="reg" for="uname"&gt;이름&lt;/label&gt;
+                    &lt;input type="text" id="uname" autofocus required&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt; 교재 및 재료 주문 &lt;/legend&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label class="reg" for="book"&gt; 교재 &lt;/label&gt;
+                    &lt;input type="number" id="book" value="1" min="1" max="1"&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label class="reg" for="group"&gt;재료 &lt;/label&gt;
+                    &lt;input type="number" id="group" value="5" min="5" max="50" step="3"&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;button type="submit" value="submit"&gt;신청하기&lt;/button&gt;
+            &lt;button type="reset" value="reset"&gt;재작성&lt;/button&gt;
+        &lt;/fieldset&gt;
+        &lt;/select&gt;
+        &lt;body&gt;
+&lt;form&gt;
+&lt;fieldset&gt;
+&lt;legend&gt;관심분야를 선택하세요&lt;/legend&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;span class="reg"&gt;관심분야&lt;/span&gt;
+&lt;label for="interest"&gt;&lt;/label&gt;
+&lt;input type="text" id="interest" list="choices"&gt;
+&lt;datalist id="choices"&gt;
+&lt;option value="baseball" label="야구"&gt;&lt;/option&gt;
+&lt;option value="football" label="축구"&gt;&lt;/option&gt;
+&lt;option value="basketball" label="농구"&gt;&lt;/option&gt;
+&lt;option value="volleyball" label="배구"&gt;&lt;/option&gt;
+&lt;option value="golf" label="골프"&gt;&lt;/option&gt;
+&lt;/datalist&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+    &lt;/form&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">폼</span>
+            <h3>회원가입 페이지</h3>
+          </div>
+          <p>회원가입 폼과 완료/취소 화면 연동</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../2일차/회원가입/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!doctype html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;회원가입 페이지&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;12345 김지훈&lt;/h1&gt;
+    &lt;a href="form.html"&gt;
+        &lt;button&gt;회원가입 하기&lt;/button&gt;
+    &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>form.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;회원가입 페이지&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt; 회원가입 &lt;/h2&gt;
+    &lt;a href="index.html"&gt; 뒤로 &lt;/a&gt;
+    &lt;form&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;아이디&lt;/td&gt;
+                &lt;td colspan="3"&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;비밀번호&lt;/td&gt;
+                &lt;td colspan="3"&gt;&lt;input type="=password" required&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;/td&gt;
+                &lt;td colspan="3"&gt;
+                    &lt;input type="password" placeholder="비밀번호 재확인" required&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;이름&lt;/td&gt;
+                &lt;td colspan="3"&gt;&lt;input type="text" value="김지훈" maxlength="4"&gt;&lt;/td&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;우편번호&lt;/td&gt;
+                    &lt;td colspan="2"&gt;&lt;input type="text" maxlength="5"&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;button&gt;검색&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;휴대전화&lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;select&gt;
+                            &lt;option&gt;011&lt;/option&gt;
+                            &lt;option&gt;016&lt;/option&gt;
+                            &lt;option&gt;018&lt;/option&gt;
+                            &lt;option selected&gt;010&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" size="4" required&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" size="4" required&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;이메일&lt;/td&gt;
+                    &lt;td colspan="3"&gt;&lt;input type="email" required&gt;&lt;/td&gt;   
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;생년월일&lt;/td&gt;
+                    &lt;td colspan="3"&gt;&lt;input type="radio" name="birth"&gt;양
+                                    &lt;input type="radio" name="birth"&gt;음&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;select&gt;&lt;option&gt;1998&lt;/option&gt;
+                            &lt;option&gt;1999&lt;/option&gt;
+                            &lt;option selected&gt;2000&lt;/option&gt;
+                            &lt;option&gt;2001&lt;/option&gt;
+                            &lt;option&gt;2002&lt;/option&gt;
+                        &lt;/select&gt;년&lt;/td&gt;
+                        &lt;td&gt;&lt;input type="number" min="1" max="12" step="1" value="5"월&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;input type="number" min="1" max="31" step="1" value="2"일&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="4"&gt;&lt;input type="checkbox"&gt;이메일을 수신합니다.&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="2"&gt;&lt;button type="reset"&gt;
+                        &lt;img src="cancel.jpg" width="120px"&gt;&lt;/button&gt;&lt;/td&gt;
+                    &lt;td colspan="2"&gt;&lt;button type="submit"&gt;
+                        &lt;img src="okay.jpg" width="120px"&gt;&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/form&gt;
+&lt;/body&gt;</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>2일차</span>
+    </footer>
+  </div>
+</body>
+</html>

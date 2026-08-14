@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>내 사진 분석기</title>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
+<link rel="stylesheet" href="사진분석기.css">
+</head>
+<body>
+  <div class="app">
+    <h1>내 사진 분석기</h1>
+
+    <div id="uploadArea">
+      <input type="file" id="fileInput" accept="image/*" hidden>
+      <label for="fileInput" class="upload-label">사진 업로드</label>
+      <p style="margin-top:16px; font-size:13px;">사진을 업로드하면 사람/강아지를 찾아드려요</p>
+    </div>
+
+    <div id="resultArea">
+      <p id="fileNameDisplay"></p>
+      <div class="image-wrap">
+        <img id="preview">
+        <canvas id="overlay"></canvas>
+      </div>
+      <button id="detectBtn" style="margin-bottom: 20px;">물체찾기</button>
+      <p id="resultText" style="color: gray;"></p>
+    </div>
+
+    <button id="resetBtn">리셋</button>
+  </div>
+
+<script>
+const fileInput = document.getElementById('fileInput');
+const uploadArea = document.getElementById('uploadArea');
+const resultArea = document.getElementById('resultArea');
+const preview = document.getElementById('preview');
+const overlay = document.getElementById('overlay');
+const detectBtn = document.getElementById('detectBtn');
+const resultText = document.getElementById('resultText');
+const resetBtn = document.getElementById('resetBtn');
+const ctx = overlay.getContext('2d');
+
+let model = null;
+
+const LABEL_MAP = {
+  person: { ko: '사람', color: '#c9a227' },
+  dog: { ko: '강아지', color: '#ff9800' }
+};
+
+const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  fileNameDisplay.textContent = `📄 파일 선택 - ${file.name}`;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    preview.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+preview.addEventListener('load', () => {
+  uploadArea.style.display = 'none';
+  resultArea.style.display = 'flex';
+  resultText.textContent = '';
+  const w = preview.clientWidth;
+  const h = preview.clientHeight;
+  overlay.width = w;
+  overlay.height = h;
+  overlay.style.width = w + 'px';
+  overlay.style.height = h + 'px';
+  ctx.clearRect(0, 0, w, h);
+});
+
+detectBtn.addEventListener('click', async () => {
+  detectBtn.disabled = true;
+  detectBtn.textContent = model ? '분석 중...' : '모델 불러오는 중...';
+  resultText.textContent = '';
+
+  try {
+    if (!model) {
+      model = await cocoSsd.load();
+    }
+
+    detectBtn.textContent = '분석 중...';
+    const predictions = await model.detect(preview);
+
+    const w = preview.clientWidth;
+    const h = preview.clientHeight;
+    overlay.width = w;
+    overlay.height = h;
+    ctx.clearRect(0, 0, w, h);
+
+    const found = predictions.filter(p => LABEL_MAP[p.class]);
+
+    found.forEach(p => {
+      const info = LABEL_MAP[p.class];
+      const [x, y, bw, bh] = p.bbox;
+      const percent = Math.round(p.score * 100);
+
+      ctx.strokeStyle = info.color;
+      ctx.lineWidth = 3;
+      ctx.strokeRect(x, y, bw, bh);
+
+      const label = `${info.ko} ${percent}%`;
+      ctx.font = '15px sans-serif';
+      const textWidth = ctx.measureText(label).width;
+
+      ctx.fillStyle = info.color;
+      ctx.fillRect(x, Math.max(y - 22, 0), textWidth + 12, 22);
+
+      ctx.fillStyle = '#fff';
+      ctx.fillText(label, x + 6, Math.max(y - 6, 16));
+    });
+
+    if (found.length > 0) {
+      const names = found.map(p => LABEL_MAP[p.class].ko).join(' ');
+      resultText.textContent = `물체를 ${found.length}개 찾았어요: ${names}`;
+    } else {
+      resultText.textContent = '사람이나 강아지를 찾지 못했어요';
+    }
+  } catch (err) {
+    resultText.textContent = '분석 중 오류가 발생했어요';
+    console.error(err);
+  } finally {
+    detectBtn.disabled = false;
+    detectBtn.textContent = '물체찾기';
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  fileInput.value = '';
+  preview.src = '';
+  ctx.clearRect(0, 0, overlay.width, overlay.height);
+  resultText.textContent = '';
+  fileNameDisplay.textContent = '';
+  resultArea.style.display = 'none';
+  uploadArea.style.display = 'block';
+  detectBtn.disabled = false;
+  detectBtn.textContent = '물체찾기';
+});
+</script>
+</body>
+</html>

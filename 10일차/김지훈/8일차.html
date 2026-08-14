@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="7일차.html">&larr; 7일</a>
+        <span class="day-title"><span class="n">8일차</span></span>
+        <a class="back-link" href="9일차.html">9일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">Python</span>
+          <span class="badge">집합 · 리스트 · 복습문제</span>
+        </div>
+        <h2>Python 집합 · 리스트 · 종합 복습</h2>
+        <p class="lede">
+          집합 연산, 리스트 다루기, 로또 번호 생성기, 그리고 여러 조건문·반복문 복습문제를
+          Jupyter Notebook으로 연습한 날입니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>집합 연산 — 교집합 · 합집합 · 차집합</h3>
+          </div>
+          <p>for문 + in 연산자로 직접 구현한 방식과 set 연산자를 이용한 방식을 각각 비교</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 1. 교집합 (for문 + in)
+A=[23, 15, 2, 14, 14, 16, 20, 14]
+B=[2, 48, 15, 14, 26, 32, 47, 14]
+C=[]
+for item in A:
+    if item in B:
+        C.append(item)
+print(C)
+# 실행 결과
+[15, 2, 14, 14, 14]
+
+# 2. 교집합 (set.intersection)
+A=[23, 15, 2, 14, 14, 16, 20, 14]
+B=[2, 48, 15, 14, 26, 32, 47, 14]
+C=list(set(A).intersection(B))
+print(C)
+# 실행 결과
+[2, 14, 15]
+
+# 3. 합집합 (리스트 + 연산자, 중복 포함)
+A=[23, 15, 2, 14, 14, 16, 20, 14]
+B=[2, 48, 15, 14, 26, 32, 47, 14]
+U=[]
+U=A+B
+print(U)
+# 실행 결과
+[23, 15, 2, 14, 14, 16, 20, 14, 2, 48, 15, 14, 26, 32, 47, 14]
+
+# 4. 합집합 (set.union, 중복 제거)
+A=[23, 15, 2, 14, 14, 16, 20, 14]
+B=[2, 48, 15, 14, 26, 32, 47, 14]
+U=[]
+U=list(set(A).union(B))
+print(U)
+# 실행 결과
+[2, 14, 15, 16, 20, 23, 26, 32, 47, 48]
+
+# 5. 차집합 (for문 + not in)
+A=[23, 15, 2, 14, 14, 16, 20, 14]
+B=[2, 48, 15, 14, 26, 32, 47, 14]
+D=[]
+for item in A:
+    if item not in B:
+        D.append(item)
+print(D) #in 연산을 이용한 for문으로 구현한 차집합
+# 실행 결과
+[23, 16, 20]
+
+# 6. 차집합 (set.difference)
+A=[23, 15, 2, 14, 14, 16, 20, 14]
+B=[2, 48, 15, 14, 26, 32, 47, 14]
+D=list(set(A).difference(B))
+print(D) #set 연산을 이용한 차집합
+# 실행 결과
+[16, 20, 23]</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>리스트 다루기 + 로또 번호 생성기</h3>
+          </div>
+          <p>슬라이싱·삭제·정렬을 연습한 뒤, 로또 번호 생성기를 세 단계에 걸쳐 점점 완성해감</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 1. 슬라이싱
+testList=[0, 1, 2, 3, 4, 5]
+print(testList[:3])
+print(testList[2:])
+print(testList[:])
+# 실행 결과
+[0, 1, 2]
+[2, 3, 4, 5]
+[0, 1, 2, 3, 4, 5]
+
+# 2. del로 인덱스 삭제
+testList=[0, 1, 2, 3, 4, 5]
+del testList[1]
+print(testList) #del를 사용한 삭제(인덱스)
+# 실행 결과
+[0, 2, 3, 4, 5]
+
+# 3. remove로 값 삭제
+testList=[0, 1, 2, 3, 4, 5]
+testList.remove(3)
+print(testList) #remove를 사용한 삭제(특정 값)
+# 실행 결과
+[0, 1, 2, 4, 5]
+
+# 4. 오름차순 정렬
+testList=[5, -1, 3, 2]
+testList.sort() #오름차순 정렬 sort()
+print(testList)
+# 실행 결과
+[-1, 2, 3, 5]
+
+# 5. 내림차순 정렬
+testList=[5, -1, 3, 2]
+testList.sort(reverse=True) #내림차순 정렬 sort(reverse=True)
+print(testList)
+# 실행 결과
+[5, 3, 2, -1]
+
+# 6. 로또 번호 생성기 (1차 - 생성만)
+import random
+
+def newLotto():
+    lottoNumber=[]
+    while True:
+        if len(lottoNumber)==6:
+            break
+        newNumber = random.randint(1,45)
+        if newNumber not in lottoNumber:
+            lottoNumber.append(newNumber)
+    lottoNumber.sort()
+    print(lottoNumber)
+
+newLotto()
+# 실행 결과
+[6, 11, 15, 29, 32, 41]
+
+# 7. 로또 번호 생성기 (2차 - 사용자 번호 입력 추가)
+import random
+
+def newLotto():
+    lottoNumber=[]
+    while True:
+        if len(lottoNumber)==6:
+            break
+        newNumber = random.randint(1,45)
+        if newNumber not in lottoNumber:
+            lottoNumber.append(newNumber)
+    lottoNumber.sort()
+    return lottoNumber
+
+userNumber=[]
+for i in range(6):
+    newNumber = int(input("번호를 입력해주세요:"))
+    userNumber.append(newNumber)
+
+newLotto()
+# 실행 결과 (입력: 1, 2, 3, 4, 5, 6)
+번호를 입력해주세요: 1
+번호를 입력해주세요: 2
+번호를 입력해주세요: 3
+번호를 입력해주세요: 4
+번호를 입력해주세요: 5
+번호를 입력해주세요: 6
+[8, 11, 24, 33, 41, 43]
+
+# 8. 로또 번호 생성기 (3차 - 당첨 등수까지 판정)
+import random
+
+def newLotto():
+    lottoNumber = []
+
+    while True:
+        if len(lottoNumber) == 6:
+            break
+        newNumber = random.randint(1, 45)
+        if newNumber not in lottoNumber:
+            lottoNumber.append(newNumber)
+    lottoNumber.sort()
+    return lottoNumber
+
+userNumber = []
+
+for i in range(6):
+    number = int(input("숫자를 입력하세요: "))
+    userNumber.append(number)
+
+lottoNumber = newLotto()
+count = 0
+
+for number in userNumber:
+    if number in lottoNumber:
+        count += 1
+
+
+if count == 6:
+    print("1등")
+elif count == 5:
+    print("2등")
+elif count == 4:
+    print("3등")
+elif count == 3:
+    print("4등")
+else:
+    print("꽝")
+
+print("로또 번호!!!")
+print(lottoNumber)
+# (이 셀은 실행되지 않아 결과가 남아있지 않습니다)</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>조건문 · 반복문 복습 (성적 등급, 할인 계산 등)</h3>
+          </div>
+          <p>부호 판별, 성적 등급 집계, 양수·음수 개수와 합계·평균, 구구단, 할인 계산기 복습</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 1. 부호 판별
+num = int(input("정수입력"))
+
+if num>0:
+    print("양수입니다.")
+elif num<0:
+    print("음수입니다.")
+else:
+    print("0입니다.")
+# 실행 결과 (입력: 0)
+정수입력 0
+0입니다.
+
+# 2. 성적 등급 집계 (5명)
+a=0
+b=0
+c=0
+d=0
+f=0
+
+for i in range(5):
+    score = int(input(str(i+1)+"번째 학생 점수:"))
+
+    if score>=90:
+        a+=1
+    elif score>=80:
+        b+=1
+    elif score>=70:
+        c+=1
+    elif score>=60:
+        d+=1
+    else:
+        f+=1
+
+print("A:",a,"명")
+print("B:",b,"명")
+print("C:",c,"명")
+print("D:",d,"명")
+print("F:",f,"명")
+# 실행 결과 (입력: 95, 82, 76, 55, 91)
+1번째 학생 점수: 95
+2번째 학생 점수: 82
+3번째 학생 점수: 76
+4번째 학생 점수: 55
+5번째 학생 점수: 91
+A: 2 명
+B: 1 명
+C: 1 명
+D: 0 명
+F: 1 명
+
+# 3. 양수·음수 개수 + 합계·평균
+positive=0
+negative=0
+sum=0
+for i in range(5):
+    num = int(input(str(i+1)+"번째 숫자:"))
+
+    if num>0:
+        positive+=1
+    elif num<0:
+        negative+=1
+
+    sum+=num
+
+avg=sum/5
+print("양수의 개수:",positive)
+print("음수의 개수:",negative)
+print("전체 합:",sum)
+print("평균:",avg)
+# 실행 결과 (입력: 10, -5, 20, -3, 8)
+1번째 숫자: 10
+2번째 숫자: -5
+3번째 숫자: 20
+4번째 숫자: -3
+5번째 숫자: 8
+양수의 개수: 3
+음수의 개수: 2
+전체 합: 30
+평균: 6.0
+
+# 4. 구구단
+dan = int(input("몇 단을 출력할까요?"))
+
+for i in range(1,10):
+    print(dan,"x",i,"=",dan*i)
+# 실행 결과 (입력: 1)
+몇 단을 출력할까요? 1
+1 x 1 = 1
+1 x 2 = 2
+1 x 3 = 3
+1 x 4 = 4
+1 x 5 = 5
+1 x 6 = 6
+1 x 7 = 7
+1 x 8 = 8
+1 x 9 = 9
+
+# 5. while로 양수·음수 판별 + 합계 (0 입력 시 종료)
+positive=0
+negative=0
+sum=0
+
+while True:
+    num=int(input("숫자를 입력하세요:"))
+
+    if num>0:
+        print("양수입니다.")
+        positive+=1
+    elif num<0:
+        print("음수입니다.")
+        negative+=1
+    else:
+        break
+    sum+=num
+
+print("입력종료!")
+print("양수:",positive,"개")
+print("음수:",negative,"개")
+print("전체 합:",sum)
+# 실행 결과 (입력: 10, -3, 7, -5, 0)
+숫자를 입력하세요: 10
+양수입니다.
+숫자를 입력하세요: -3
+음수입니다.
+숫자를 입력하세요: 7
+양수입니다.
+숫자를 입력하세요: -5
+음수입니다.
+숫자를 입력하세요: 0
+입력종료!
+양수: 2 개
+음수: 2 개
+전체 합: 9
+
+# 6. 할인 금액 계산기
+tot=0
+
+while True:
+    price=int(input("상품 가격을 입력하세요:"))
+
+    if price==0:
+        break
+    tot+=price
+if tot>=50000:
+    disccunt_rate=0.2
+elif tot>=30000:
+    disccunt_rate=0.2
+elif tot>=10000:
+    disccunt_rate=0.05
+else:
+    disccunt_rate=0
+
+disccunt=tot*disccunt_rate
+
+print("결제결과")
+print("할인전금액:",tot,"원")
+print("할인율:",disccunt_rate*100,"%")
+print("할인금액:",disccunt,"원")
+# 실행 결과 (입력: 10000, 20000, 30000, 40000, 50000, 0)
+상품 가격을 입력하세요: 10000
+상품 가격을 입력하세요: 20000
+상품 가격을 입력하세요: 30000
+상품 가격을 입력하세요: 40000
+상품 가격을 입력하세요: 50000
+상품 가격을 입력하세요: 0
+결제결과
+할인전금액: 150000 원
+할인율: 20.0 %
+할인금액: 30000.0 원</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>종합 문법 연습 (소수 판별, 구구단, 팩토리얼, 별 패턴)</h3>
+          </div>
+          <p>for-else, in / not in 연산자, 중첩 반복문으로 만든 구구단·팩토리얼·별 패턴 5종과 문장 필터링</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code># 1. 소수 판별 (for-else)
+num=int(input("양의 정수를 입력하세요:"))
+for i in range(2,num):
+    if num %i==0:
+        print("소수가 아닙니다.")
+        break
+else:
+    print("소수입니다.")
+# 실행 결과 (입력: 6)
+양의 정수를 입력하세요: 6
+소수가 아닙니다.
+
+# 2. 리스트 포함 여부 (in)
+x = ["apple", "banana"]
+print("banana" in x)
+# 실행 결과
+True
+
+# 3. 튜플 포함 여부 (not in)
+ch="yellow"
+if ch not in("red","green","blue"):
+    print("빛의 3원색이 아닙니다.")
+else:
+    print("빛의 3원색 입니다.")
+# 실행 결과
+빛의 3원색이 아닙니다.
+
+# 4. 2~9단 구구단 (중첩 for)
+for x in range(2, 10) : # 2단부터 9단까지
+ for y in range(1, 10) : # 곱하는 수는 1부터 9까지
+   print("%s*%s=%s" % (x, y, x*y), end = " ")
+ print()
+# 실행 결과 (2단, 3단 일부)
+2*1=2 2*2=4 2*3=6 2*4=8 2*5=10 2*6=12 2*7=14 2*8=16 2*9=18
+3*1=3 3*2=6 3*3=9 3*4=12 3*5=15 3*6=18 3*7=21 3*8=24 3*9=27
+... (4~9단 생략)
+
+# 5. 팩토리얼 (while)
+while True:
+    num = int(input("양의 정수를 입력(종료는 -1):"))
+    if num == -1:
+        break
+    i = factorial = 1
+    while i <= num:
+        factorial = factorial * i
+        i = i + 1
+    print("%s!=%s" % (num, factorial))
+# 실행 결과 (입력: 10, -1)
+양의 정수를 입력(종료는 -1): 10
+10!=3628800
+양의 정수를 입력(종료는 -1): -1
+
+# 6. 별 패턴 (오른쪽 확장 삼각형)
+for x in range(10):
+    for y in range(x+1):
+        print("*",end="")
+    print()
+# 실행 결과
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+
+# 7. 별 패턴 (역삼각형)
+for x in range(10):
+    for y in range(10-x):
+        print("*",end="")
+    print()
+# 실행 결과
+**********
+*********
+********
+*******
+******
+*****
+****
+***
+**
+*
+
+# 8. 별 패턴 (오른쪽 정렬 삼각형)
+for x in range(10):
+    print(" "*(9-x),end="")
+    for y in range(x+1):
+        print("*",end="")
+    print()
+# 실행 결과
+         *
+        **
+       ***
+      ****
+     *****
+    ******
+   *******
+  ********
+ *********
+**********
+
+# 9. 별 패턴 (왼쪽 정렬 역삼각형)
+for x in range(10):
+    print(" "*x,end="")
+    for y in range(10-x):
+        print("*",end="")
+    print()
+# 실행 결과
+**********
+ *********
+  ********
+   *******
+    ******
+     *****
+      ****
+       ***
+        **
+         *
+
+# 10. 별 패턴 (같은 모양, 다른 방식)
+for i in range(10):
+    for j in range(i):
+        print(" ",end="")
+    for k in range(10-i):
+        print("*",end="")
+    print()
+# 실행 결과
+**********
+ *********
+  ********
+   *******
+    ******
+     *****
+      ****
+       ***
+        **
+         *
+
+# 11. 숫자 포함 단어 걸러내기
+statement=input("문장을 입력:")
+for word in statement.split():
+ for digit in "0123456789":
+     if digit in word:
+         break
+ else:
+    print(word,end=" ")
+# 실행 결과 (입력: "나이는 23세이고, 주소는 A아파트 12동 205호 입니다.")
+문장을 입력: 나이는 23세이고, 주소는 A아파트 12동 205호 입니다.
+나이는 주소는 A아파트 입니다.</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python (연습 중)</span>
+            <h3>8/12 복습문제 — 직접 풀이 시도</h3>
+          </div>
+          <p>로그인 시도, 자판기, 소수 판별, 별 피라미드 등 10문제를 직접 풀어본 시도입니다. 일부는 미완성 상태 그대로 남겨둡니다.</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code>#1. 로그인 시도 (5회, for-else)
+pw="python123"
+for i in range(5):
+    userpw=input("비밀번호를 입력하세요.")
+    if userpw==pw:
+        print("로그인 성공")
+        break
+    else:
+        print("비밀번호가 틀렸습니다.")
+else:
+    print("로그인 실패")
+# 실행 결과 (입력: 2, 3, 4, 5, 3 — 전부 틀림)
+비밀번호를 입력하세요. 2
+비밀번호가 틀렸습니다.
+비밀번호를 입력하세요. 3
+비밀번호가 틀렸습니다.
+비밀번호를 입력하세요. 4
+비밀번호가 틀렸습니다.
+비밀번호를 입력하세요. 5
+비밀번호가 틀렸습니다.
+비밀번호를 입력하세요. 3
+비밀번호가 틀렸습니다.
+로그인 실패
+
+#2. 자판기 메뉴 (리스트만 정의, 미완성)
+item1=[[1, "콜라", 1500],
+       [2, "사이다", 1200],
+       [3, "물", 1500]
+      ]
+# (실행 결과 없음 — 아직 로직 작성 전)
+
+#3. (미완성 — 반복문 본문 작성 전)
+n = int(input("숫자를 입력해주세요:"))
+for i in range(1, n+1):
+
+# (실행 결과 없음)
+
+#4. 소수 판별 (for-else, 미실행)
+num=int(input("양의 정수를 입력하세요:"))
+for i in range(2,num):
+    if num %i==0:
+        print("소수가 아닙니다.")
+        break
+else:
+    print("소수입니다.")
+# (실행 결과 없음)
+
+#5. 별 피라미드 (미완성 — 왼쪽 여백 계산 오류)
+n = int(input("숫자를 입력해주세요:"))
+for x in range(n):
+    print(" "*(n-1), end="")
+    for y in range(x+1):
+        print("*", end="")
+    print()
+# (실행 결과 없음)
+
+# 6. 별 삼각형
+n = int(input("숫자를 입력해주세요:"))
+for x in range(n):
+    for y in range(x+1):
+        print("*",end="")
+    print()
+# 실행 결과 (입력: 5)
+숫자를 입력해주세요: 5
+*
+**
+***
+****
+*****
+
+# 7. (코드 없음 — 번호만 적어둠)
+
+#8. 내림차순 정렬
+testList=[10, 20, 30, 40, 50]
+testList.sort(reverse=True) #내림차순 정렬 sort(reverse=True)
+print(testList)
+# 실행 결과
+[50, 40, 30, 20, 10]
+
+# 9. (6번과 동일한 코드만 재작성, 미실행)
+n = int(input("숫자를 입력해주세요:"))
+for x in range(n):
+    for y in range(x+1):
+        print("*",end="")
+    print()
+# (실행 결과 없음)
+
+# 10. 2차원 리스트 (좌석 배치용, 아직 좌석 표시 로직은 없음)
+testList=[[0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0]
+         ]
+print(testList)
+# (참고: 아래 출력은 이전 실행의 결과가 남아있는 것으로 보입니다)
+[[0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5]]</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">참고 자료</span>
+            <h3>8/12 복습문제 — 정답 참고</h3>
+          </div>
+          <p>위 10문제를 직접 풀어본 뒤 맞춰본 정답 노트북입니다 (강사 제공 정답 파일로 보입니다).</p>
+          <details class="code-viewer">
+            <summary>노트북 내용 보기</summary>
+            <pre><code>#1. 로그인 시도 (3회 제한)
+pw = "python123"
+
+for i in range(3):
+    userpw = input("비밀번호 입력:")
+
+    if userpw == pw:
+        print("로그인 성공")
+        break
+    else:
+        print("비밀번호가 틀렸습니다.")
+if userpw != pw:
+    print("로그인 실패")
+# 실행 결과 (입력: python123)
+비밀번호 입력: python123
+로그인 성공
+
+#2. 자판기
+print("====자판기====")
+print("1. 콜라 1500원")
+print("2. 사이다 1200원")
+print("3. 물 800원")
+
+menu = int(input("메뉴를 선택하세요 :"))
+
+if menu==1:
+    price = 1500
+elif menu==2:
+    price = 1200
+elif menu==3:
+    price = 800
+else:
+    print("잘못된 선택입니다.")
+    price=0
+
+if price!=0:
+    money = int(input("금액 입력: "))
+    if money < price:
+        print("금액이 부족합니다.")
+    else:
+        print("구매 완료!")
+        print("거스름돈:", money-price, "원")
+# 실행 결과
+====자판기====
+1. 콜라 1500원
+2. 사이다 1200원
+3. 물 800원
+
+#3. 3,6,9 게임
+num=int(input("숫자 입력:"))
+
+for i in range(1,num+1):
+    if "3" in str(i) or "6" in str(i) or "9" in str(i):
+        print("짝",end=" ")
+    else:
+        print(i,end=" ")
+# 실행 결과 (입력: 15)
+숫자 입력: 15
+1 2 짝 4 5 짝 7 8 짝 10 11 12 짝 14 15
+
+#4. 소수 판별
+num = int(input("숫자 입력:"))
+count=0
+
+for i in range(2,num):
+    if num%i==0:
+        count+=1
+
+if count==0 and num>1:
+    print(num,"은 소수입니다.")
+else:
+    print(num,"은 소수가 아닙니다.")
+# 실행 결과 (입력: 2)
+숫자 입력: 2
+2 은 소수입니다.
+
+#5. 별 피라미드
+n=int(input("숫자 입력 : "))
+
+for i in range(1,n+1):
+    for j in range(n-i):
+        print(" ", end="")
+    for j in range(2*i-1):
+        print("*",end="")
+    print()
+# 실행 결과 (입력: 7)
+숫자 입력 :  7
+      *
+     ***
+    *****
+   *******
+  *********
+ ***********
+*************
+
+#6. 숫자 삼각형
+for i in range(1,n+1):
+    for j in range(1,i+1):
+        print(j,end="")
+    print()
+# 실행 결과
+1
+12
+123
+1234
+12345
+123456
+1234567
+
+#7. 다이아몬드 별
+n = int(input("숫자 입력:"))
+
+for i in range(1,n+1):
+    for j in range(n-i):
+        print(" ", end="")
+    for j in range(2*i-1):
+        print("*",end="")
+    print()
+
+for i in range(n-1, 0, -1):
+    for j in range(n-i):
+        print(" ", end="")
+    for j in range(2*i-1):
+        print("*", end="")
+    print()
+# 실행 결과 (입력: 5)
+숫자 입력: 5
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+
+#8. 리스트 뒤집기
+A=[10,20,30,40,50]
+B=[]
+
+for i in range(len(A)-1, -1, -1):
+    B.append(A[i])
+print(B)
+# 실행 결과
+[50, 40, 30, 20, 10]
+
+#9. 홀짝에 따라 다른 기호 출력
+n = int(input("숫자 입력:"))
+
+for i in range(1, n+1):
+    print(i, end=": ")
+
+    if i%2==0:
+        for j in range(i):
+            print("+",end="")
+    else:
+        for j in range(i):
+            print("*",end="")
+
+    print()
+# 실행 결과 (입력: 7)
+숫자 입력: 7
+1: *
+2: ++
+3: ***
+4: ++++
+5: *****
+6: ++++++
+7: *******
+
+#10. 좌석 예약
+seats = [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+]
+
+for row in seats:
+    for seat in row:
+        if seat==0:
+            print("[ ]",end="")
+        else:
+            print("[X]",end="")
+    print()
+
+row = int(input("행 입력: "))
+col = int(input("열 입력: "))
+
+if seats[row][col] == 0:
+    seats[row][col] = 1
+else:
+    print("이미 예약된 좌석입니다.")
+
+for row in seats:
+    for seat in row:
+        if seat==0:
+            print("[ ]",end="")
+        else:
+            print("[X]",end="")
+    print()
+# 실행 결과 (초기 좌석표까지 출력, 이후 입력 대기)
+[ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ]</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>8일차</span>
+    </footer>
+  </div>
+</body>
+</html>

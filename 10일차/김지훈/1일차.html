@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        
+        <span class="day-title"><span class="n">1일차</span></span>
+        <a class="back-link" href="2일차.html">2일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">Teachable Machine</span>
+          <span class="badge">이미지 분류</span>
+        </div>
+        <h2>도형 분류 모델 — 타원 vs 사각</h2>
+        <img class="content-image" src="../../1일차/0803_김지훈/%ED%83%80%EC%9B%90%EA%B3%BC%20%EC%82%AC%EA%B0%81%EC%9D%84%20%EA%B0%81%EA%B0%81%20n%25%EB%A1%9C%20%EB%91%90%20%EA%B0%80%EC%A7%80%20%EB%8F%84%ED%98%95%EC%9D%84%20%EA%B5%AC%EB%B6%84%ED%95%98%EB%8F%84%EB%A1%9D%20%ED%95%99%EC%8A%B5%ED%95%9C%20ai%20%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A5%BC%20%EC%83%9D%EC%84%B1%ED%95%B4%EC%A4%98.png" alt="타원 vs 사각형 분류 학습 예시 인포그래픽">
+        <p class="lede">
+          Teachable Machine으로 학습한 이미지 분류 모델입니다. 타원과 사각, 두 가지 도형을
+          구분하도록 학습했습니다.
+        </p>
+        <ul class="meta-list">
+          <li><strong>분류 클래스</strong> : 타원, 사각</li>
+          <li><strong>입력 이미지 크기</strong> : 224 x 224</li>
+          <li><strong>모델</strong> : @teachablemachine/image v2.4.14 (TensorFlow.js 1.7.4)</li>
+        </ul>
+        <p class="file-list-title">사용한 파일</p>
+        <ul class="file-list">
+          <li>metadata.json</li>
+          <li>model.json</li>
+          <li>weights.bin</li>
+        </ul>
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>1일차</span>
+    </footer>
+  </div>
+
+  <div class="hacker-avatar floating" id="fugitive-avatar" title="수상한 캐릭터가 숨어있다..." style="display:none;">
+    <div class="avatar-speech" id="fugitive-speech"></div>
+    <div class="avatar-hood"></div>
+    <div class="avatar-face">
+      <span class="eye left"></span>
+      <span class="eye right"></span>
+    </div>
+    <div class="typing-hands"></div>
+  </div>
+
+  <script>
+    (() => {
+      const FLED_KEY = "physicalai_hacker_fled";
+
+      // 메인 페이지에서 30번 넘게 눌러 도망친 상태일 때만 여기 나타남
+      if (localStorage.getItem(FLED_KEY) !== "1") return;
+
+      const avatar = document.getElementById("fugitive-avatar");
+      const speech = document.getElementById("fugitive-speech");
+      avatar.style.display = "";
+
+      let clickCount = 0;
+      let leaving = false;
+
+      avatar.addEventListener("click", () => {
+        if (leaving) return;
+        clickCount++;
+
+        if (clickCount >= 5) {
+          leaving = true;
+          speech.textContent = "들켰다... 메인으로 돌아갈게요!";
+          speech.classList.add("show");
+          avatar.classList.add("alert");
+
+          setTimeout(() => avatar.classList.add("rage-exit"), 700);
+          avatar.addEventListener(
+            "animationend",
+            () => {
+              localStorage.removeItem(FLED_KEY);
+              window.location.href = "index.html";
+            },
+            { once: true }
+          );
+          return;
+        }
+
+        speech.textContent = `쉿... (${clickCount}/5)`;
+        speech.classList.add("show");
+        avatar.classList.add("alert");
+        setTimeout(() => {
+          speech.classList.remove("show");
+          avatar.classList.remove("alert");
+        }, 1200);
+      });
+    })();
+  </script>
+</body>
+</html>

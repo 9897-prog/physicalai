@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코드 학습 Lab — HTML & JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 상단 네비게이션 -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span class="brand-text">Code Lab</span>
+    </div>
+    <nav class="navbar-menu">
+      <button class="nav-btn active" data-screen="home">홈</button>
+      <button class="nav-btn" data-screen="html-codes">HTML 코드</button>
+      <button class="nav-btn" data-screen="js-codes">JS 코드</button>
+    </nav>
+    <div class="navbar-spacer" aria-hidden="true">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span class="brand-text">Code Lab</span>
+    </div>
+  </header>
+
+  <main id="app">
+
+    <!-- ===== 홈 화면 ===== -->
+    <section id="screen-home" class="screen active">
+      <div class="hero">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <span class="glitch" data-text="CODE LAB">CODE LAB</span>
+          </h1>
+          <p class="hero-subtitle">HTML과 JavaScript를 배우는 인터랙티브 학습 공간</p>
+          <div class="hero-tags">
+            <button type="button" class="tag tag-html" data-screen="html-info">HTML</button>
+            <button type="button" class="tag tag-js" data-screen="js-info">JavaScript</button>
+            <button type="button" class="tag tag-quiz" data-screen="html-quiz">퀴즈</button>
+          </div>
+        </div>
+
+        <!-- 해커 코드 작성 애니메이션 -->
+        <div class="hacker-scene">
+          <div class="terminal-window">
+            <div class="terminal-bar">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="terminal-title">root@hacklab:~$</span>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+              <div class="hacker-row">
+                <div class="hacker-avatar" id="hacker-avatar">
+                  <div class="avatar-hood"></div>
+                  <div class="avatar-face">
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                  </div>
+                  <div class="typing-hands"></div>
+                </div>
+                <div class="code-stream">
+                  <pre id="typing-code" class="typing-code"></pre>
+                  <textarea id="visitor-input" class="visitor-input" spellcheck="false" autocomplete="off" autocapitalize="off" rows="1"></textarea>
+                </div>
+              </div>
+              <div class="type-hint" id="type-hint">⌨ 클릭하고 직접 코드를 작성해보세요</div>
+              <div class="scan-line"></div>
+            </div>
+          </div>
+          <div class="matrix-rain" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="home-cards">
+        <button class="home-card" data-screen="html-info">
+          <span class="home-card-icon">&lt;HTML&gt;</span>
+          <h3>HTML 학습</h3>
+          <p>웹 페이지의 뼈대, HTML 태그와 구조를 배워보세요.</p>
+        </button>
+        <button class="home-card" data-screen="js-info">
+          <span class="home-card-icon">{ JS }</span>
+          <h3>JavaScript 학습</h3>
+          <p>동적인 웹, 변수·조건문·함수를 배워보세요.</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== HTML 코드 목록 화면 (상단바) ===== -->
+    <section id="screen-html-codes" class="screen">
+      <div class="page-header">
+        <h1>HTML 기초 코드 모음</h1>
+        <p class="page-desc">HTML을 처음 배울 때 가장 먼저 만나는 코드들을 하나씩 모았습니다. 코드와 함께 쉬운 설명을 확인해보세요.</p>
+      </div>
+      <div id="html-codes-container" class="code-ref-list"></div>
+    </section>
+
+    <!-- ===== JS 코드 목록 화면 (상단바) ===== -->
+    <section id="screen-js-codes" class="screen">
+      <div class="page-header">
+        <h1>JavaScript 기초 코드 모음</h1>
+        <p class="page-desc">JavaScript를 처음 배울 때 가장 먼저 만나는 코드들을 하나씩 모았습니다. 코드와 함께 쉬운 설명을 확인해보세요.</p>
+      </div>
+      <div id="js-codes-container" class="code-ref-list"></div>
+    </section>
+
+    <!-- ===== HTML 설명 화면 ===== -->
+    <section id="screen-html-info" class="screen">
+      <div class="page-header">
+        <h1>HTML 코드란?</h1>
+        <p class="page-desc">HTML(HyperText Markup Language)은 웹 페이지의 구조와 내용을 정의하는 마크업 언어입니다.</p>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>기본 구조</h3>
+          <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+  &lt;head&gt;
+    &lt;title&gt;페이지 제목&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;안녕하세요!&lt;/h1&gt;
+    &lt;p&gt;문단 텍스트&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </article>
+
+        <article class="info-card">
+          <h3>주요 태그</h3>
+          <ul class="info-list">
+            <li><code>&lt;h1&gt;~&lt;h6&gt;</code> — 제목 (Heading)</li>
+            <li><code>&lt;p&gt;</code> — 문단 (Paragraph)</li>
+            <li><code>&lt;a href=""&gt;</code> — 링크 (Anchor)</li>
+            <li><code>&lt;img src="" alt=""&gt;</code> — 이미지</li>
+            <li><code>&lt;div&gt;</code> — 블록 컨테이너</li>
+            <li><code>&lt;ul&gt; / &lt;li&gt;</code> — 목록</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3>HTML의 역할</h3>
+          <p>HTML은 웹 페이지의 <strong>뼈대</strong>입니다. CSS가 꾸미고, JavaScript가 동작을 추가합니다. 세 가지가 함께 작동하여 완성된 웹 페이지를 만듭니다.</p>
+        </article>
+      </div>
+
+      <button class="btn-primary btn-learn" data-screen="html-quiz">HTML 학습 시작 →</button>
+    </section>
+
+    <!-- ===== HTML 퀴즈 화면 ===== -->
+    <section id="screen-html-quiz" class="screen">
+      <div class="page-header">
+        <nav class="breadcrumb">
+          <button class="crumb" data-screen="html-info">HTML 학습</button>
+          <span>/</span>
+          <span class="crumb-current">학습 문제</span>
+        </nav>
+        <h1>HTML 학습 문제</h1>
+        <p class="page-desc">객관식 5문제, 주관식 5문제 — 총 10문제. 힌트를 확인하고 즉시 정답을 검증해보세요.</p>
+      </div>
+      <div id="html-quiz-container" class="quiz-container"></div>
+      <div class="quiz-score" id="html-score">0 / 10 문제 정답</div>
+    </section>
+
+    <!-- ===== JS 설명 화면 ===== -->
+    <section id="screen-js-info" class="screen">
+      <div class="page-header">
+        <h1>JavaScript 코드란?</h1>
+        <p class="page-desc">JavaScript는 웹 페이지에 동적인 기능을 추가하는 프로그래밍 언어입니다.</p>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>기본 문법</h3>
+          <pre class="code-block"><code>// 변수 선언
+var name = "철수";
+let age = 20;
+
+// 조건문
+if (age >= 18) {
+  console.log("성인입니다");
+}
+
+// 함수
+function greet(n) {
+  return "안녕, " + n;
+}</code></pre>
+        </article>
+
+        <article class="info-card">
+          <h3>핵심 개념</h3>
+          <ul class="info-list">
+            <li><strong>변수</strong> — 데이터를 저장하는 상자</li>
+            <li><strong>연산자</strong> — +, -, ==, &amp;&amp;, || 등</li>
+            <li><strong>조건문</strong> — if / else로 분기 처리</li>
+            <li><strong>반복문</strong> — for, while로 반복 실행</li>
+            <li><strong>함수</strong> — 재사용 가능한 코드 블록</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3>JavaScript의 역할</h3>
+          <p>JavaScript는 버튼 클릭, 입력 검증, 애니메이션, API 호출 등 <strong>사용자와 상호작용</strong>하는 모든 동적 기능을 담당합니다. 브라우저에서 바로 실행됩니다.</p>
+        </article>
+      </div>
+
+      <button class="btn-primary btn-learn" data-screen="js-quiz">JS 학습 시작 →</button>
+    </section>
+
+    <!-- ===== JS 퀴즈 화면 ===== -->
+    <section id="screen-js-quiz" class="screen">
+      <div class="page-header">
+        <nav class="breadcrumb">
+          <button class="crumb" data-screen="js-info">JS 학습</button>
+          <span>/</span>
+          <span class="crumb-current">학습 문제</span>
+        </nav>
+        <h1>JavaScript 학습 문제</h1>
+        <p class="page-desc">객관식 5문제, 주관식 5문제 — 총 10문제. 힌트를 확인하고 즉시 정답을 검증해보세요.</p>
+      </div>
+      <div id="js-quiz-container" class="quiz-container"></div>
+      <div class="quiz-score" id="js-score">0 / 10 문제 정답</div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

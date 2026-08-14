@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="2일차.html">&larr; 2일</a>
+        <span class="day-title"><span class="n">3일차</span></span>
+        <a class="back-link" href="4일차.html">4일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">CSS</span>
+          <span class="badge">스타일링</span>
+        </div>
+        <h2>CSS 기초 문법 연습</h2>
+        <p class="lede">
+          텍스트 스타일, 색상, 폰트, 스타일시트 적용 방식(인라인·내부·외부)을 하나씩 다뤄본
+          미니 예제 모음입니다. 각 항목에서 결과 페이지를 열어보거나 작성한 코드를 바로
+          확인할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">텍스트</span>
+            <h3>text-align</h3>
+          </div>
+          <p>텍스트 정렬(좌/우/가운데/양쪽) 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/text-align/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;style&gt;
+    .align-left{text-align: left;}
+    .align-right{text-align: right;}
+    .align-center{text-align: center;}
+    .align-justify{text-align: justify;}
+
+
+&lt;/style&gt;
+&lt;p class="align-left"&gt; 가나다라마바사....&lt;/p&gt;
+&lt;p class="align-right"&gt; 가나다라마바사....&lt;/p&gt;
+&lt;p class="align-center"&gt; 가나다라마바사....&lt;/p&gt;
+&lt;p class="align-justify"&gt; 가나다라마바사....&lt;/p&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">텍스트</span>
+            <h3>text-decoration</h3>
+          </div>
+          <p>밑줄 제거·취소선·대소문자 변환 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/text-decoration/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;style&gt;
+    a{
+        text-decoration: none;
+    }
+    .edited{
+        text-decoration: line-through;
+    }
+&lt;/style&gt;
+
+&lt;h2&gt;토마토&lt;/h2&gt;
+&lt;p&gt; [&lt;a href="https://www.naver.com"&gt; 외부 링크 &lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt; 토마토는 비타민 A,C가 풍부한 &lt;span class="edited"&gt;괴일이다&lt;/span&gt; 채소다. &lt;/p&gt;
+
+&lt;style&gt;
+  .trans1 {text-transform:uppercase; }  /* 대문자로 */
+  .trans2 {text-transform:capitalize; }  /* 첫글자만 대문자로 */
+&lt;/style&gt;
+
+ &lt;h1&gt;Have to study&lt;/h1&gt;
+  &lt;ul&gt;
+    &lt;li class="trans1"&gt;html&lt;/li&gt;
+    &lt;li class="trans1"&gt;css&lt;/li&gt;
+    &lt;li class="trans2"&gt;javascript&lt;/li&gt;
+  &lt;/ul&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">폰트</span>
+            <h3>구글 웹폰트</h3>
+          </div>
+          <p>@import로 구글 웹폰트 적용하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/구글웹폰트/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;style&gt;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;display=swap');
+.nanum-brush-script-regular {
+  font-family: "Nanum Brush Script", cursive;}
+&lt;/style&gt;
+&lt;body&gt;
+    &lt;p&gt;브라우저 기본 폰트 사용&lt;/p&gt;
+    &lt;p class="nanum-brush-script-regular"&gt;나눔고딕 웹 폰트 사용&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">스타일 적용</span>
+            <h3>인라인 스타일</h3>
+          </div>
+          <p>style 속성으로 태그에 직접 스타일 적용</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/인라인스타일/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;body&gt;
+&lt;h1&gt;블루베리와 항산화 효능&lt;/h1&gt;
+&lt;p style="color:blue;"&gt; 히비스커스는 항산화제인 폴리페놀이 포함&lt;/p&gt;
+&lt;p&gt;매사츄세츠 보스톤에 있는 USDA 노화에 관한 인류 영양 연구센터 (the USDA Human Nutrition Research Center on Aging) 의 자료에 의하면 히비스커스는 항산화 작용이 뛰어난 차라고 합니다.  &lt;/p&gt;
+&lt;/body&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">스타일 적용</span>
+            <h3>외부 스타일시트</h3>
+          </div>
+          <p>link 태그로 별도 CSS 파일 연결하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/내부스타일시트/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt; 외부 스타일시트 &lt;/title&gt;
+    &lt;link href="style.css" rel="stylesheet" type="=text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;우리나라 3대 명산&lt;/h1&gt;
+    &lt;ul&gt;
+        &lt;li&gt;한라산&lt;/li&gt;
+        &lt;li&gt;지리산&lt;/li&gt;
+        &lt;li&gt;설악산&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>style.css 코드 보기</summary>
+            <pre><code>ul{
+            color: aqua;
+            list-style-type: square;
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">색상</span>
+            <h3>색상 설정</h3>
+          </div>
+          <p>rgb·색상명·16진수로 색상 지정하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/색상설정/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;style&gt;
+  h1 {color:rgb(0,200,0); }  /* rgb 값 사용 - 녹색 계열 */
+  h2 {color:blue; }  /* 색상 이름 사용 - 파랑 */
+  .accent {color:#ff0000; } /* 16진수 사용 – 빨강 */
+&lt;/style&gt;
+&lt;h1&gt;세계 10대 슈퍼푸드&lt;/h1&gt;
+&lt;h2&gt;마늘(Garlic)&lt;/h2&gt;
+&lt;p&gt;일해백리(一害百利)는 …… 준다는 것이다. &lt;/p&gt;
+&lt;p&gt;마늘 특유의 아린 맛은 &lt;span class="accent"&gt;알리신&lt;/span&gt;이라는…… 준다.&lt;/p&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">레이아웃</span>
+            <h3>네비게이션</h3>
+          </div>
+          <p>nav 메뉴 목록 스타일링</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/네비게이션/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+    &lt;head&gt;
+        &lt;meta charset="=UTF-8"&gt;
+        &lt;title&gt; navigation &lt;/title&gt;
+        &lt;style&gt;
+            nav ul{
+                list-style-type: none; /*불릿제거*/
+            }
+            nav ul li{
+                display: inline-block;      /*한줄로 정렬*/
+                padding: 10px 20px;         /*패딩의 여백 위,아래10 좌우20*/
+                margin: 10px;               /*패딩 밖 여백10*/
+                border: 1px solid black;  /*테두리 실선으로된 검은색*/
+            }
+            a:link, a:visited{          /*방문o방문x 구분*/
+                color: black;         /*방문o방문x색상설정*/
+                text-decoration: none;  /*링크 밑줄제거*/
+            }
+        &lt;/style&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#"&gt;메뉴1&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;메뉴2&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;메뉴3&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;메뉴4&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>포트폴리오 실습</h3>
+          </div>
+          <p>header·nav·section·footer 구조 + 반응형 미디어쿼리</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/실습/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>!&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;내 포트폴리오&lt;/title&gt;
+        &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;h1&gt; 안녕하세요! 저는 김지훈입니다. &lt;/h1&gt;
+            &lt;nav&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="#about"&gt;자기소개&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#projects"&gt;프로젝트&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#contact"&gt;연락처&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+        &lt;/header&gt;
+
+        &lt;section id="about"&gt;
+            &lt;h2&gt;자기소개&lt;/h2&gt;
+            &lt;p&gt;저는 웹 개발을 배우고 있는 학생입니다.&lt;/p&gt;
+        &lt;/section&gt;
+                &lt;section id="projects"&gt;
+            &lt;h2&gt;프로젝트&lt;/h2&gt;
+            &lt;ul&gt;
+                &lt;li&gt;웹사이트 디자인&lt;/li&gt;
+                &lt;li&gt;간단한 게임 만들기&lt;/li&gt;
+                &lt;li&gt;포트폴리오 사이트 제작&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/section&gt;
+        &lt;section id="contact"&gt;
+            &lt;h2&gt;연락처&lt;/h2&gt;
+            &lt;p&gt;이메일 : u9897@naaver.com &lt;/p&gt;
+            &lt;p&gt;전화 : 010-9897-5718 &lt;/p&gt;
+        &lt;/section&gt;
+        &lt;footer&gt;
+            &lt;p&gt;&amp;copy; 2026 김지훈, All rights reserved. &lt;/p&gt;
+        &lt;/footer&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>styles.css 코드 보기</summary>
+            <pre><code>body{
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header{
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+nav ul{
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li{
+    display: inline;
+    margin: 0 10px;
+}
+nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+h2{
+    color: #b00b0b;
+}
+section{
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+footer{
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/*반응형 디자인*/
+@media screen and (max-width:600px) {
+    nav ul{
+        text-align: center;
+    }
+    nav ul li{
+        display: block;
+        margin: 5px;
+    }
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>자기소개 페이지</h3>
+          </div>
+          <p>자기소개 메인 + 이력서 폼 + 회원가입 폼 3페이지 구성</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/자기소개/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;나의 소개&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;안녕하세요! 저는 신코딩입니다.&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;p&gt;프론트엔드 개발자를 꿈꾸는 학생입니다.&lt;br&gt;
+        아래 버튼을 눌러 이력서를 확인하거나 회원가입을 해보세요!&lt;/p&gt;
+        &lt;!-- 버튼 두 개 배치 --&gt;
+        &lt;button onclick="location.href='resume.html'"&gt;📄 이력서 보기&lt;/button&gt;
+        &lt;button onclick="location.href='signup.html'"&gt;📝 회원가입&lt;/button&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2026 신코딩. 모든 권리 보유.&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>resume.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+    &lt;title&gt;신코딩 이력서&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;신코딩 이력서&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;form&gt;
+            &lt;table border="1" width="700"&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;이름&lt;/th&gt;
+                    &lt;td&gt;&lt;input type="  text" name="name"&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;생년월일&lt;/th&gt;
+                    &lt;td&gt;&lt;input type=" date" name="birth"&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;성별&lt;/th&gt;
+                    &lt;td&gt;
+                        &lt;input type="radio"   name="gender"&gt; 남자
+                        &lt;input type="radio"   name="gender"&gt; 여자
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;학력&lt;/th&gt;
+                    &lt;td&gt;
+                        &lt;select name="education"&gt;
+                            &lt;option value=""&gt;-- 선택하세요 --&lt;/option&gt;
+                            &lt;option value="middle"&gt;중학교 졸업&lt;/option&gt;
+                            &lt;option value="high"&gt;고등학교 졸업&lt;/option&gt;
+                            &lt;option value="college"&gt;대학교 졸업&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;보유 자격증&lt;/th&gt;
+                    &lt;td&gt;
+                        &lt;input type="checkbox" name="cert" value="itq"&gt; ITQ
+                        &lt;input type="checkbox" name="cert" value="cos"&gt; COS
+                        &lt;input type="checkbox" name="cert" value="etc"&gt; 기타
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;자기소개&lt;/th&gt;
+                    &lt;td&gt;&lt;textarea rows="5" cols="50"  placeholder="자기소개를 입력하세요."&gt;                        &lt;/textarea&gt;&lt;/td&gt; 
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;br&gt;
+            &lt;input type="submit" value="제출하기" onclick="alert('rkskekkdkkdjdldkj')"&gt;
+        &lt;/form&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p style="text-align:center;"&gt;감사합니다. 열심히 하겠습니다!&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>signup.html 코드 보기</summary>
+            <pre><code>&lt;form&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;로그인&lt;/legend&gt;
+        &lt;label for="username"&gt;Username : &lt;/label&gt;
+        &lt;input type="text" id="username" name="username" placeholder="Enter your username"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;label for="password"&gt;Password : &lt;/label&gt;
+        &lt;input type="password" id="password" name="password"&gt;
+    &lt;/fieldset&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;사용자정보&lt;/legend&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;label for="name"&gt;이름 : &lt;/label&gt;
+                &lt;input type="text" id="name"&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;label for="mail"&gt;메일 주소 : &lt;/label&gt;
+                &lt;input type="text" id="mail"&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;label for="age"&gt;Age : &lt;/label&gt;
+        &lt;input type="number" id="age" name="age" min="1" max="100"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;label for="phone"&gt;Phone : &lt;/label&gt;
+        &lt;input type="tel" id="phone" name="phone" placeholder="123-456-7890"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;label for="appointment"&gt;Appointment Time : &lt;/label&gt;
+        &lt;input type="time" id="appointment" name="appointment"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;label for="file"&gt;Upload a file : &lt;/label&gt;
+        &lt;input type="file" id="file" name="file"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;label for="volume"&gt;Volume : &lt;/label&gt;
+        &lt;input type="range" id="volume" name="volume" min="0" max="100"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;label for="color"&gt;Choose a color : &lt;/label&gt;
+        &lt;input type="color" id="color" name="color"&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;input type=" image" src="submit.jpg" alt="제출버튼" &gt;
+        &lt;p&gt;&lt;/p&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>이력서 작성 과제</h3>
+          </div>
+          <p>메인 페이지 + 표 기반 이력서 작성 폼</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../3일차/김지훈/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;2026 미래내일 1기 과제2(메인페이지)&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;31201 김지훈&lt;/h1&gt;
+    &lt;a href="form.html"&gt;&lt;button&gt;이력서양식 작성하기&lt;/button&gt;&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>form.html 코드 보기</summary>
+            <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;모의 수행평가(이력서작성)&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+      th {color:blue; background-color: yellow;}
+    
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+   &lt;form method="post"&gt;
+    &lt;table border="1" width="900px"&gt;
+        &lt;tr&gt;
+            &lt;th rowspan="5"&gt;인&lt;br&gt;적&lt;br&gt;사&lt;br&gt;항&lt;/th&gt;
+            &lt;td rowspan="5"&gt;
+                &lt;img src="images.jpg" width="100px" height="130px"&gt;  
+            &lt;/td&gt;
+            &lt;th rowspan="3"&gt;성명&lt;/th&gt;
+            &lt;th&gt;한글&lt;/th&gt;
+            &lt;td&gt;&lt;input type="text" maxlength="4"&gt;&lt;/td&gt;
+            &lt;th&gt;업무/지역&lt;/th&gt;
+            &lt;td colspan="3"&gt;
+                &lt;select&gt;
+                &lt;option value="0"&gt;부산&lt;/option&gt;
+                &lt;option value="1"&gt;서울&lt;/option&gt;
+                &lt;option value="2"&gt;대전&lt;/option&gt;
+                &lt;option value="3"&gt;대구&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th&gt;영문&lt;/th&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="10"&gt;&lt;/td&gt;
+          &lt;th&gt;주민등록번호&lt;/th&gt;
+          &lt;td colspan="3"&gt;&lt;input type="text"&gt;-&lt;input type="text"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th&gt;한자&lt;/th&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="3"&gt;&lt;/td&gt;
+          &lt;th&gt;성별&lt;/th&gt;
+          &lt;td&gt;
+              &lt;select&gt;
+                &lt;option value="0"&gt;남자&lt;/option&gt;
+                &lt;option value="1"&gt;여자&lt;/option&gt;
+              &lt;/select&gt;
+          &lt;/td&gt;
+          &lt;th&gt;연령&lt;/th&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="2"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th colspan="2"&gt;현주소&lt;/th&gt;
+          &lt;td colspan="7"&gt;&lt;input type="text" maxlength="50"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th&gt;휴대전화&lt;/th&gt;
+              &lt;td colspan="2"&gt;&lt;input type="text" size="1"&gt;-&lt;input type="text" size="4"&gt;-&lt;input type="text" size="4"&gt;&lt;/td&gt;
+          &lt;th&gt;E-mail&lt;/th&gt;
+          &lt;td colspan="3"&gt;&lt;input type="text" maxlength="5" size="10"&gt;@&lt;input type="text" maxlength="5" size="10"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;br&gt;
+    &lt;table border="1" width="900px"&gt;
+        &lt;tr&gt;
+            &lt;th rowspan="4"&gt;학&lt;br&gt;력&lt;/th&gt;
+            &lt;th&gt;기간(년, 월)&lt;/th&gt;
+            &lt;th&gt;출신학교&lt;/th&gt;
+            &lt;th&gt;전공&lt;/th&gt;
+            &lt;th&gt;졸업여부&lt;/th&gt;
+            &lt;th&gt;학위&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;input type="date"&gt;&lt;/tdinput&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;input type="date"&gt;&lt;/tdinput&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;input type="date"&gt;&lt;/tdinput&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;br&gt;
+    &lt;table border="1" width="900px"&gt;
+      &lt;tr&gt;
+        &lt;th rowspan="3"&gt;병&lt;br&gt;역&lt;/th&gt;
+        &lt;th&gt;군필&lt;/th&gt;
+        &lt;td colspan="2"&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;th&gt;면제사유&lt;/th&gt;
+        &lt;td colspan="2"&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;th&gt;보훈 대상 여부&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;군별&lt;/th&gt;
+        &lt;td colspan="2"&gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;th&gt;계급&lt;/th&gt;
+        &lt;td&gt;
+                &lt;select&gt;
+                &lt;option selected value="0"&gt;병장&lt;/option&gt;
+                &lt;option value="1"&gt;상병&lt;/option&gt;
+                &lt;option value="2"&gt;일병&lt;/option&gt;
+                &lt;option value="3"&gt;이등병&lt;/option&gt;
+              &lt;/select&gt;
+        &lt;th&gt;병과&lt;/th&gt;
+        &lt;td &gt;&lt;input type="text" maxlength="11"&gt;&lt;/td&gt;
+        &lt;th colspan="3"&gt;비대상&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th colspan="3"&gt;복무기간&lt;/th&gt;
+        &lt;td colspan="5"&gt;&lt;input type="date"&gt;&lt;/tdinput&gt;~&lt;input type="date"&gt;&lt;/tdinput&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+   &lt;/form&gt;
+        &lt;a href="index.html"&gt;&lt;button&gt;메인으로 가기&lt;/button&gt;&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>3일차</span>
+    </footer>
+  </div>
+</body>
+</html>

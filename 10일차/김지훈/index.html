@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <div class="page">
+
+    <aside class="side-panel">
+      <div class="panel-top">
+        <div class="hamburger-menu">
+          <button class="hamburger-btn" aria-label="메뉴 열기">=</button>
+          <nav class="hamburger-dropdown" id="hamburger-dropdown"></nav>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          SYSTEM ONLINE
+        </div>
+      </div>
+
+      <div class="brand">
+        <span class="brand-prompt">$</span>
+        <span class="brand-text" id="brand-text"></span><span class="brand-cursor">▌</span>
+      </div>
+      <p class="tagline">피지컬 AI 일경험 프로젝트 학습기록 · 2026</p>
+
+      <div class="stat-row">
+        <div class="stat-tile">
+          <span class="stat-num">10</span>
+          <span class="stat-label">DAYS</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">PROJECTS</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-num">9</span>
+          <span class="stat-label">TOOLS</span>
+        </div>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">TensorFlow.js</span>
+        <span class="tech-tag">Jupyter</span>
+        <span class="tech-tag">Teachable Machine</span>
+        <span class="tech-tag">Cursor</span>
+        <span class="tech-tag">Claude Code</span>
+      </div>
+
+      <div class="hacker-avatar" id="hacker-avatar">
+        <div class="avatar-speech" id="avatar-speech"></div>
+        <div class="avatar-hood"></div>
+        <div class="avatar-face">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+        </div>
+        <div class="typing-hands"></div>
+      </div>
+
+      <canvas class="network-anim" id="network-anim" aria-hidden="true"></canvas>
+
+      <div class="panel-footer">
+        <span>session://physical-ai</span>
+        <span id="live-clock">--:--:--</span>
+        <span>day 01&ndash;10</span>
+      </div>
+    </aside>
+
+    <section class="terminal-window" id="terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">guest@physical-ai:~$</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <canvas class="matrix-rain" id="matrix-rain"></canvas>
+        <div class="terminal-output" id="terminal-output"></div>
+        <div class="terminal-input-line">
+          <span class="prompt">$</span>
+          <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

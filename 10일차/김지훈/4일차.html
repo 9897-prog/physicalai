@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="3일차.html">&larr; 3일</a>
+        <span class="day-title"><span class="n">4일차</span></span>
+        <a class="back-link" href="5일차.html">5일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">JavaScript</span>
+          <span class="badge">종합 실습</span>
+        </div>
+        <h2>JavaScript 기초 문법 연습</h2>
+        <p class="lede">
+          변수 선언, 반복문, 조건문, 연산자를 하나씩 다뤄본 미니 예제와 이를 응용한 종합
+          실습 페이지 모음입니다. 각 항목에서 결과 페이지를 열어보거나 작성한 코드를 바로
+          확인할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>변수 선언문</h3>
+          </div>
+          <p>var 선언, 문자열·불리언 값과 document.write 출력</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/0806/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="tete/html;" charset="utf-8"&gt;
+    &lt;title&gt;선언문&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var box;     // = 은 대입연산자
+        box=100;
+        box=30;
+        var str="javascript";
+        var num="100";
+        var tag="&lt;h1&gt; string &lt;/h1&gt;";
+        document.write("환영합니다.");
+        document.write(box);
+        document.write(str);
+        document.write(num);
+        document.write(tag);
+
+
+        var a = true;
+        var b = false;
+        var c = 10&gt;5;
+        var d = Boolean(null)
+
+        document.write(a, "&lt;br/&gt;")
+        document.write(b, "&lt;br/&gt;")
+        document.write(c, "&lt;br/&gt;")
+        document.write(d, "&lt;br/&gt;")
+    &lt;/script&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>break</h3>
+          </div>
+          <p>for문에서 break로 반복 중단하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/java/break/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+    &lt;title&gt;변수 선언 및 출력&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var num = 0;
+        for(var i = 1; i &lt;= 10 ; i ++){
+            if(i == 9){
+                break;          
+            }
+        num++;
+        }
+        document.write(num); //4
+    
+    &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/head&gt;
+
+
+// continue는 break와 반대개념</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>for문</h3>
+          </div>
+          <p>for 반복문으로 값 출력하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/java/for문/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+    &lt;title&gt;변수 선언 및 출력&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var count = 5;
+        var i;
+        for (i=0; i &lt; count; i++) {
+            document.write(i);
+        } 
+        // 0 1 2 3 4
+    
+    &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>다중 조건문</h3>
+          </div>
+          <p>if / else if / else 다중 조건 분기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/java/다중 조건문/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+    &lt;title&gt;변수 선언 및 출력&lt;/title&gt;
+     &lt;script type="text/javascript"&gt;
+     var i = 24;
+        if (i &gt; 25) {
+            document.write("Greater than 25.");
+        }
+        else if (i &gt; 12) {
+            document.write("12에서 25 사이");
+        }
+        else if (i &lt; 0) {
+            document.write("Less than 0.");
+        }
+        else {
+            document.write("Between 0 and 25, inclusive.");
+        }
+    &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>반복문</h3>
+          </div>
+          <p>while 반복문 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/java/반복문/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+    &lt;title&gt;반복문&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var i = 0;
+        while (i &lt; 10) {
+            i += 2;
+        }
+        document.write(i);
+    &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>삼항 연산자 활용</h3>
+          </div>
+          <p>prompt 입력값으로 적정 체중 여부 판정하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/java/삼항 활용 문제/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="tete/html;" charset="utf-8"&gt;
+    &lt;title&gt;변수 선언 및 출력&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var user_height = prompt("당신의 신장은?","0");
+        var user_weight = prompt("당신의 체중은?","0");
+
+        var normal_weight = (user_height-100)*0.9;
+        var result = (user_weight &gt;= normal_weight) ? "적정몸무게 이상" : "적정몸무게 미달";
+
+        document.write(result);
+    &lt;/script&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>증감·비교·삼항 연산자</h3>
+          </div>
+          <p>증감 연산자, 비교 연산자, 삼항 연산자 종합 연습</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/java/증감+비교+삼항/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="tete/html;" charset="utf-8"&gt;
+    &lt;title&gt;변수 선언 및 출력&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var num1 = 10;
+        var num2 = 20;
+        var result;
+        num1--;
+        document.write(num1,"&lt;/br&gt;");
+        num1++;
+        document.write(num1,"&lt;/br&gt;");
+        result=num2++;
+        document.write(result,"&lt;/br&gt;"); 
+        result=++num2;
+        document.write(result,"&lt;/br&gt;");   
+//증감 연산자
+
+        var a = 10;
+        var b = 20;
+        var c = 10;
+        var f = "20";
+        var result;
+        result = a&gt;b;
+        document.write(result,"&lt;/br&gt;")
+        result = a&lt;b;
+        document.write(result,"&lt;/br&gt;")
+        result = a&lt;=b;
+        document.write(result,"&lt;/br&gt;")
+        result = b==f;
+        document.write(result,"&lt;/br&gt;")
+        result = a!=b;
+        document.write(result,"&lt;/br&gt;")
+//비교 연산자
+        var age = 18;
+        var status = (age &gt;= 18) ? "adult" : "minor";
+        document.write(status)
+
+//삼항 연사자
+    &lt;/script&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>프로필 카드</h3>
+          </div>
+          <p>flex로 가운데 정렬한 프로필 카드 UI</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/프로필/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;mata charrest="UTF-8"&gt;
+        &lt;title&gt;프로필 카드&lt;/title&gt;
+        &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="card"&gt;
+            &lt;img src="image.jpg" class="profile"&gt;
+            &lt;h1&gt;홍길동&lt;/h1&gt;
+            &lt;div class="info"&gt;
+                대학교 졸업생 | 인공지능 개발자
+            &lt;/div&gt;
+            &lt;div class="intro"&gt;
+                HTML과 CSS를 배우며 웹 개발에 관심을 가지고 있습니다.
+            &lt;/div&gt;
+            &lt;a href="#" class="btn"&gt; Github&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>styles.css 코드 보기</summary>
+            <pre><code>body{
+    background-color: #f4f4f4;
+    font-family: arial;
+    display: flex;             /*위아래 정렬*/
+    justify-content: center;   /*좌우 정렬*/
+    align-items: center;       /*위아래 정렬*/
+    height: 100vh;
+}
+.card{
+    width: 400px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+h1{
+    color: #333;
+    margin: 15pxp 0 5px;
+}
+.info{
+    color: #777;
+    margin-bottom: 20px;
+}
+.intro{
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.btn{
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #4a6cf7;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+.btn:hover{
+    background-color: #2748d8;
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>고양이 도감 만들기</h3>
+          </div>
+          <p>샘플을 응용해 직접 만든 고양이 소개 페이지 (카드별 다른 이미지, 주석으로 정리)</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../4일차/김지훈/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;   
+&lt;title&gt;우리 동네 고양이 도감&lt;/title&gt;    /* = Html의 기본틀 = */
+&lt;style&gt;
+body{
+    background-color:#eef2ec;       /* = 바디 부분의 배경색상 = */
+    font-family: Arial, sans-serif;   /* = 바디 부분의 폰트설정 = */
+    margin:0;
+    padding:0;
+}
+/* ===== 상단 바 : 로고와 메뉴가 한 줄에 ===== */
+header{
+    background-color:#2f6f4e;       /* = 헤더 부분의 배경색상 = */
+    color:white;                    /* = 헤더 부분의 글자색상 = */
+    padding:15px;                     /* = 헤더 부분의 패딩부분 폭 = */
+    display:flex;                     /* = 위아래 정렬 = */
+    justify-content:center;           /* = 좌우 중앙 = */
+    align-items:center;               /* = 상하 중앙 = */
+}
+header h1{
+    color:white;                    /* = 머릿글 글자색상 = */
+    margin:0;
+    padding:0 30px;                   
+}
+nav ul{
+    list-style-type:none;            /* = 리스트 불릿 제거 = */
+    margin:0;
+    padding:0;
+}
+nav ul li{
+    display:inline;                 /*나란히 정렬*/
+    margin:0 12px;                  /*소개 고양이 제보하기 마진 12px*/
+}
+nav ul li a{
+    color:white;
+    text-decoration:none;           /*하이퍼링크 밑줄제거*/
+}
+nav ul li a:hover{
+    color:#ffd66b;
+}
+/* ===== 소개 영역 : 글은 왼쪽, 사진은 오른쪽 ===== */
+.hero{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px;                       /*hero 부분 위아래 패딩부분 50px*/
+    background-color:white;
+}
+.hero-text{
+    width:340px;                        /*hero text 크기 340px*/
+    padding:20px;                       /*hero text 패딩 크기 20px*/
+}
+.hero-text h2{
+    color:#2f6f4e;
+    margin:0;
+    padding:0;
+}
+.hero-text p{
+    color:#666;
+}
+.hero-img{
+    width:200px;                           /*hero 부분 사진크기 50px*/
+    height:200px;                          /*hero 부분 사진크기 50px*/
+    border-radius:50%;                        /*hero 부분 모서리 R처리 50px*/
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);  /*hero 부분 그림자표시 50px*/
+}
+/* ===== 카드 3개가 가로로 나란히 ===== */
+.cards{
+    display:flex;
+    justify-content:center;
+    padding:40px;
+}
+.card{
+    width:220px;                               /*card요소 좌우크기 설정*/
+    background-color:white;
+    border-radius:12px;
+    padding:20px;                              /*흰색부분 크기*/
+    margin:0 15px;                             /*마진 좌우 간격*/
+    text-align:center;                         /*글씨 가운데 정렬*/
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+.card img{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+}
+.card h2{
+    color:#2f6f4e;
+    margin:15px 0 5px;
+}
+.card p{
+    color:#777;
+}
+.btn{
+    display:inline-block;
+    padding:8px 18px;
+    background-color:#2f6f4e;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+}
+.btn:hover{
+    background-color:#1d4a33;
+}
+footer{
+    text-align:center;
+    padding:20px;
+    background-color:#2f6f4e;
+    color:white;
+}
+/* ===== 화면이 좁아지면 가로 배치를 세로로 ===== */
+@media screen and (max-width:600px){                             /* 반응형디자인 */
+    header{
+        display:block;
+        text-align:center;
+    }
+    header h1{
+        padding:0;
+    }
+    nav ul li{
+        display:inline-block;
+        margin:10px 8px;
+    }
+    .hero{
+        display:block;
+        text-align:center;
+        padding:30px;
+    }
+    .hero-text{
+        width:260px;
+    }
+    .cards{
+        display:block;
+        padding:20px;
+    }
+    .card{
+        width:220px;
+        margin:15px;
+    }
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+    &lt;h1&gt;고양이 도감&lt;/h1&gt;                                 /* = 머릿글 = */
+    &lt;nav&gt;                                               /* = 네비게이션= */
+        &lt;ul&gt;                                            /* = 리스트 = */
+            &lt;li&gt;&lt;a href="#"&gt;소개&lt;/a&gt;&lt;/li&gt;               /* = 리스트 설정후 하이퍼링크 연결 = */
+            &lt;li&gt;&lt;a href="#"&gt;고양이들&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;제보하기&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+&lt;div class="hero"&gt;                                                                                              /* = 디비전 클래스 히어로로 설정 = */
+    &lt;div class="hero-text"&gt;                                                                                     /* = horo에 test 공간설정 = */
+        &lt;h2&gt;우리 동네 고양이들&lt;/h2&gt;                                                                               /* = h1보다 작은 h2로 소제목 설정 = */
+        &lt;p&gt;골목에서 만난 고양이들을 기록하는 페이지입니다. 이름과 성격, 자주 나타나는 자리를 함께 적어 두었습니다.&lt;/p&gt;  /* = 문장설정 */
+        &lt;a href="#" class="btn"&gt;제보하기&lt;/a&gt;                                                                     /* = 제보하기 버튼설정후 하이퍼링크 = */
+    &lt;/div&gt;
+    &lt;img src="image.jpg" class="hero-img"&gt;                                                                      /* = 사진 삽입= */
+&lt;/div&gt;
+&lt;div class="cards"&gt;
+    &lt;div class="card"&gt;
+        &lt;img src="image1.jpg"&gt;
+        &lt;h2&gt;치즈&lt;/h2&gt;                                                                     
+        &lt;p&gt;편의점 앞 담장에 자주 앉아 있습니다. 사람을 별로 무서워하지 않습니다.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="card"&gt;
+        &lt;img src="image2.jpg"&gt;
+        &lt;h2&gt;까망&lt;/h2&gt;
+        &lt;p&gt;주차장 3번 자리 아래가 지정석입니다. 낮에는 거의 자고 있습니다.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="card"&gt;
+        &lt;img src="image3.jpg"&gt;
+        &lt;h2&gt;삼색&lt;/h2&gt;
+        &lt;p&gt;놀이터 미끄럼틀 근처에 나타납니다. 셋 중 가장 겁이 많습니다.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;footer&gt;                                                    /* 맨아래 */
+    &lt;p&gt;&amp;copy; 2026 고양이 도감&lt;/p&gt;                           /* 저작권표시 설정 */
+&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>4일차</span>
+    </footer>
+  </div>
+</body>
+</html>

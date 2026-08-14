@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="8일차.html">&larr; 8일</a>
+        <span class="day-title"><span class="n">9일차</span></span>
+        <a class="back-link" href="10일차.html">10일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">AI 활용</span>
+          <span class="badge">게임 개발</span>
+        </div>
+        <h2>AI 이미지 인식 · 게임 · 클로드 코드 데모</h2>
+        <p class="lede">
+          TensorFlow.js로 사진 속 사물을 인식하는 앱, 캔버스로 만든 스네이크 게임, 그리고
+          클로드 코드에게 자연어로 요청해본 터미널 데모를 정리했습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">AI · 이미지 인식</span>
+            <h3>내 사진 분석기</h3>
+          </div>
+          <p>TensorFlow.js + coco-ssd 모델로 업로드한 사진에서 사람·강아지를 찾아 박스로 표시</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../9일차/사진분석기.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>사진분석기.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;내 사진 분석기&lt;/title&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="사진분석기.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="app"&gt;
+    &lt;h1&gt;내 사진 분석기&lt;/h1&gt;
+
+    &lt;div id="uploadArea"&gt;
+      &lt;input type="file" id="fileInput" accept="image/*" hidden&gt;
+      &lt;label for="fileInput" class="upload-label"&gt;사진 업로드&lt;/label&gt;
+      &lt;p style="margin-top:16px; font-size:13px;"&gt;사진을 업로드하면 사람/강아지를 찾아드려요&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div id="resultArea"&gt;
+      &lt;p id="fileNameDisplay"&gt;&lt;/p&gt;
+      &lt;div class="image-wrap"&gt;
+        &lt;img id="preview"&gt;
+        &lt;canvas id="overlay"&gt;&lt;/canvas&gt;
+      &lt;/div&gt;
+      &lt;button id="detectBtn" style="margin-bottom: 20px;"&gt;물체찾기&lt;/button&gt;
+      &lt;p id="resultText" style="color: gray;"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;button id="resetBtn"&gt;리셋&lt;/button&gt;
+  &lt;/div&gt;
+
+&lt;script&gt;
+const fileInput = document.getElementById('fileInput');
+const uploadArea = document.getElementById('uploadArea');
+const resultArea = document.getElementById('resultArea');
+const preview = document.getElementById('preview');
+const overlay = document.getElementById('overlay');
+const detectBtn = document.getElementById('detectBtn');
+const resultText = document.getElementById('resultText');
+const resetBtn = document.getElementById('resetBtn');
+const ctx = overlay.getContext('2d');
+
+let model = null;
+
+const LABEL_MAP = {
+  person: { ko: '사람', color: '#c9a227' },
+  dog: { ko: '강아지', color: '#ff9800' }
+};
+
+const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+fileInput.addEventListener('change', () =&gt; {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  fileNameDisplay.textContent = `📄 파일 선택 - ${file.name}`;
+
+  const reader = new FileReader();
+  reader.onload = e =&gt; {
+    preview.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+preview.addEventListener('load', () =&gt; {
+  uploadArea.style.display = 'none';
+  resultArea.style.display = 'flex';
+  resultText.textContent = '';
+  const w = preview.clientWidth;
+  const h = preview.clientHeight;
+  overlay.width = w;
+  overlay.height = h;
+  overlay.style.width = w + 'px';
+  overlay.style.height = h + 'px';
+  ctx.clearRect(0, 0, w, h);
+});
+
+detectBtn.addEventListener('click', async () =&gt; {
+  detectBtn.disabled = true;
+  detectBtn.textContent = model ? '분석 중...' : '모델 불러오는 중...';
+  resultText.textContent = '';
+
+  try {
+    if (!model) {
+      model = await cocoSsd.load();
+    }
+
+    detectBtn.textContent = '분석 중...';
+    const predictions = await model.detect(preview);
+
+    const w = preview.clientWidth;
+    const h = preview.clientHeight;
+    overlay.width = w;
+    overlay.height = h;
+    ctx.clearRect(0, 0, w, h);
+
+    const found = predictions.filter(p =&gt; LABEL_MAP[p.class]);
+
+    found.forEach(p =&gt; {
+      const info = LABEL_MAP[p.class];
+      const [x, y, bw, bh] = p.bbox;
+      const percent = Math.round(p.score * 100);
+
+      ctx.strokeStyle = info.color;
+      ctx.lineWidth = 3;
+      ctx.strokeRect(x, y, bw, bh);
+
+      const label = `${info.ko} ${percent}%`;
+      ctx.font = '15px sans-serif';
+      const textWidth = ctx.measureText(label).width;
+
+      ctx.fillStyle = info.color;
+      ctx.fillRect(x, Math.max(y - 22, 0), textWidth + 12, 22);
+
+      ctx.fillStyle = '#fff';
+      ctx.fillText(label, x + 6, Math.max(y - 6, 16));
+    });
+
+    if (found.length &gt; 0) {
+      const names = found.map(p =&gt; LABEL_MAP[p.class].ko).join(' ');
+      resultText.textContent = `물체를 ${found.length}개 찾았어요: ${names}`;
+    } else {
+      resultText.textContent = '사람이나 강아지를 찾지 못했어요';
+    }
+  } catch (err) {
+    resultText.textContent = '분석 중 오류가 발생했어요';
+    console.error(err);
+  } finally {
+    detectBtn.disabled = false;
+    detectBtn.textContent = '물체찾기';
+  }
+});
+
+resetBtn.addEventListener('click', () =&gt; {
+  fileInput.value = '';
+  preview.src = '';
+  ctx.clearRect(0, 0, overlay.width, overlay.height);
+  resultText.textContent = '';
+  fileNameDisplay.textContent = '';
+  resultArea.style.display = 'none';
+  uploadArea.style.display = 'block';
+  detectBtn.disabled = false;
+  detectBtn.textContent = '물체찾기';
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>사진분석기.css 코드 보기</summary>
+            <pre><code>* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: beige;
+  font-family: "Malgun Gothic", sans-serif;
+  color: #333;
+  padding: 30px 10px 60px;
+}
+.app {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  margin: 0 0 16px;
+  font-size: 26px;
+  color: orange;
+}
+#uploadArea {
+  width: 100%;
+  padding: 8px 20px 24px;
+  text-align: center;
+  color: #777;
+}
+.upload-label {
+  display: inline-block;
+  background: none;
+  color: #555;
+  padding: 0;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: underline;
+}
+.upload-label:hover { color: orange; }
+
+#resultArea {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+#fileNameDisplay { order: 0; }
+#detectBtn { order: 1; }
+.image-wrap { order: 2; }
+#resultText { order: 3; }
+#fileNameDisplay {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #666;
+}
+.image-wrap {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+  border: 2px dashed #999;
+}
+#preview {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+}
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#detectBtn {
+  margin-top: 16px;
+  padding: 12px 28px;
+  font-size: 16px;
+  background: orange;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#detectBtn:hover { background: #e08e00; }
+#detectBtn:disabled { background: #555; cursor: not-allowed; }
+
+#resultText {
+  margin-top: 16px;
+  font-size: 17px;
+  text-align: center;
+}
+
+#resetBtn {
+  margin-top: 40px;
+  padding: 10px 24px;
+  font-size: 15px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#resetBtn:hover { background: #d32f2f; }</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">게임 개발</span>
+            <h3>스네이크 게임</h3>
+          </div>
+          <p>canvas와 방향키 입력으로 만든 스네이크 게임 (점수 표시, 게임오버·재시작 포함)</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../9일차/스네이크게임/snake.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>snake.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;스네이크 게임&lt;/title&gt;
+&lt;style&gt;
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: #1e1e2e;
+    font-family: "Malgun Gothic", sans-serif;
+    color: #eee;
+  }
+  h1 {
+    margin: 20px 0 10px;
+  }
+  #score {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  #gameCanvas {
+    background: #111;
+    border: 3px solid #444;
+    border-radius: 6px;
+  }
+  #overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #overlay h2 {
+    font-size: 36px;
+    color: #ff5555;
+    margin-bottom: 10px;
+  }
+  #overlay p {
+    font-size: 20px;
+    margin: 5px 0 20px;
+  }
+  #restartBtn {
+    padding: 10px 24px;
+    font-size: 16px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #restartBtn:hover {
+    background: #45a049;
+  }
+  #hint {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #999;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;🐍 스네이크 게임&lt;/h1&gt;
+  &lt;div id="score"&gt;점수: 0&lt;/div&gt;
+  &lt;canvas id="gameCanvas" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;div id="hint"&gt;방향키(↑ ↓ ← →)로 이동하세요&lt;/div&gt;
+
+  &lt;div id="overlay"&gt;
+    &lt;h2&gt;게임 오버&lt;/h2&gt;
+    &lt;p id="finalScore"&gt;최종 점수: 0&lt;/p&gt;
+    &lt;button id="restartBtn"&gt;다시 시작&lt;/button&gt;
+  &lt;/div&gt;
+
+&lt;script&gt;
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('score');
+const overlay = document.getElementById('overlay');
+const finalScoreEl = document.getElementById('finalScore');
+const restartBtn = document.getElementById('restartBtn');
+
+const gridSize = 20;
+const tileCount = canvas.width / gridSize;
+
+let snake, direction, nextDirection, food, score, gameOver, gameLoopId;
+
+function init() {
+  snake = [{ x: 10, y: 10 }];
+  direction = { x: 0, y: 0 };
+  nextDirection = { x: 0, y: 0 };
+  score = 0;
+  gameOver = false;
+  placeFood();
+  scoreEl.textContent = '점수: 0';
+  overlay.style.display = 'none';
+  if (gameLoopId) clearInterval(gameLoopId);
+  gameLoopId = setInterval(tick, 120);
+}
+
+function placeFood() {
+  do {
+    food = {
+      x: Math.floor(Math.random() * tileCount),
+      y: Math.floor(Math.random() * tileCount)
+    };
+  } while (snake.some(seg =&gt; seg.x === food.x &amp;&amp; seg.y === food.y));
+}
+
+function tick() {
+  if (gameOver) return;
+
+  direction = nextDirection;
+
+  if (direction.x === 0 &amp;&amp; direction.y === 0) {
+    draw();
+    return;
+  }
+
+  const head = {
+    x: snake[0].x + direction.x,
+    y: snake[0].y + direction.y
+  };
+
+  if (
+    head.x &lt; 0 || head.x &gt;= tileCount ||
+    head.y &lt; 0 || head.y &gt;= tileCount ||
+    snake.some(seg =&gt; seg.x === head.x &amp;&amp; seg.y === head.y)
+  ) {
+    endGame();
+    return;
+  }
+
+  snake.unshift(head);
+
+  if (head.x === food.x &amp;&amp; head.y === food.y) {
+    score += 10;
+    scoreEl.textContent = '점수: ' + score;
+    placeFood();
+  } else {
+    snake.pop();
+  }
+
+  draw();
+}
+
+function draw() {
+  ctx.fillStyle = '#111';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = '#ff5555';
+  ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+
+  snake.forEach((seg, i) =&gt; {
+    ctx.fillStyle = i === 0 ? '#4caf50' : '#8bc34a';
+    ctx.fillRect(seg.x * gridSize, seg.y * gridSize, gridSize - 2, gridSize - 2);
+  });
+}
+
+function endGame() {
+  gameOver = true;
+  clearInterval(gameLoopId);
+  finalScoreEl.textContent = '최종 점수: ' + score;
+  overlay.style.display = 'flex';
+}
+
+document.addEventListener('keydown', e =&gt; {
+  switch (e.key) {
+    case 'ArrowUp':
+      if (direction.y === 0) nextDirection = { x: 0, y: -1 };
+      e.preventDefault();
+      break;
+    case 'ArrowDown':
+      if (direction.y === 0) nextDirection = { x: 0, y: 1 };
+      e.preventDefault();
+      break;
+    case 'ArrowLeft':
+      if (direction.x === 0) nextDirection = { x: -1, y: 0 };
+      e.preventDefault();
+      break;
+    case 'ArrowRight':
+      if (direction.x === 0) nextDirection = { x: 1, y: 0 };
+      e.preventDefault();
+      break;
+  }
+});
+
+restartBtn.addEventListener('click', init);
+
+init();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Claude Code</span>
+            <h3>클로드 코드 사용법 (터미널 데모)</h3>
+          </div>
+          <p>클로드 코드에게 자연어로 요청해서 코드 작성 · 실행 · 파일 정리까지 시켜본 데모 스크린샷 3장</p>
+
+          <p>1. 온도가 30도 넘으면 "덥다"고 판단하는 파이썬 코드를 작성 · 실행</p>
+          <img class="content-image" src="../../9일차/클로드코드 사용법/코드.png" alt="온도 조건문 파이썬 코드 실행 스크린샷">
+
+          <p>2. 실행 결과를 자연스러운 문장으로 말해달라고 추가 요청</p>
+          <img class="content-image" src="../../9일차/클로드코드 사용법/문장.png" alt="실행 결과를 문장으로 표현한 스크린샷">
+
+          <p>3. 바탕화면 "테스트" 폴더의 파일들을 확장자 기준으로 분류해달라고 요청</p>
+          <img class="content-image" src="../../9일차/클로드코드 사용법/파일분류.png" alt="파일 분류 요청 스크린샷">
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>9일차</span>
+    </footer>
+  </div>
+</body>
+</html>

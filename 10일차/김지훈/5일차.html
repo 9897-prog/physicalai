@@ -1,0 +1,2861 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="4일차.html">&larr; 4일</a>
+        <span class="day-title"><span class="n">5일차</span></span>
+        <a class="back-link" href="6일차.html">6일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">AI 도구 활용</span>
+          <span class="badge">종합 실습</span>
+        </div>
+        <h2>AI 코딩 도구로 만든 실습 프로젝트</h2>
+        <p class="lede">
+          Cursor·Claude 같은 AI 도구를 활용해 만든 미니 SPA, JS 예제, 리서치 보고서 모음입니다.
+          각 항목에서 결과 페이지를 열어보거나 작성한 코드를 바로 확인할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>온라인 쇼핑몰 SPA</h3>
+          </div>
+          <p>Cursor AI로 만든 미니 쇼핑몰 — 이미지 슬라이더, 상품 목록, 장바구니 사이드바</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../5일차/Cursor testing/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;온라인 쇼핑몰&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- 상단 네비게이션 --&gt;
+  &lt;header class="header"&gt;
+    &lt;div class="header-inner"&gt;
+      &lt;a href="#" class="logo" data-page="home"&gt;쇼핑몰&lt;/a&gt;
+      &lt;nav class="nav"&gt;
+        &lt;a href="#" class="nav-link" data-page="about"&gt;학교소개&lt;/a&gt;
+        &lt;a href="#" class="nav-link" data-page="products"&gt;상품목록&lt;/a&gt;
+        &lt;a href="#" class="nav-link" data-page="notice"&gt;공지사항&lt;/a&gt;
+      &lt;/nav&gt;
+      &lt;div class="auth-buttons"&gt;
+        &lt;button class="btn btn-outline" id="loginBtn"&gt;로그인&lt;/button&gt;
+        &lt;button class="btn btn-primary" id="signupBtn"&gt;회원가입&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main class="main-content"&gt;
+    &lt;!-- 홈 페이지 --&gt;
+    &lt;section id="homePage" class="page active"&gt;
+      &lt;!-- 이미지 슬라이더 --&gt;
+      &lt;div class="slider"&gt;
+        &lt;div class="slider-track"&gt;
+          &lt;div class="slide active"&gt;
+            &lt;img src="https://picsum.photos/1200/500?random=1" alt="슬라이드 1"&gt;
+            &lt;div class="slide-caption"&gt;
+              &lt;h2&gt;신학기 특별 할인&lt;/h2&gt;
+              &lt;p&gt;최대 50% 할인된 상품을 만나보세요&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="slide"&gt;
+            &lt;img src="https://picsum.photos/1200/500?random=2" alt="슬라이드 2"&gt;
+            &lt;div class="slide-caption"&gt;
+              &lt;h2&gt;베스트 셀러 모음&lt;/h2&gt;
+              &lt;p&gt;인기 상품을 한눈에 확인하세요&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="slide"&gt;
+            &lt;img src="https://picsum.photos/1200/500?random=3" alt="슬라이드 3"&gt;
+            &lt;div class="slide-caption"&gt;
+              &lt;h2&gt;무료 배송 이벤트&lt;/h2&gt;
+              &lt;p&gt;3만원 이상 구매 시 무료 배송&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button class="slider-btn prev" aria-label="이전"&gt;&amp;lsaquo;&lt;/button&gt;
+        &lt;button class="slider-btn next" aria-label="다음"&gt;&amp;rsaquo;&lt;/button&gt;
+        &lt;div class="slider-dots"&gt;
+          &lt;span class="dot active" data-index="0"&gt;&lt;/span&gt;
+          &lt;span class="dot" data-index="1"&gt;&lt;/span&gt;
+          &lt;span class="dot" data-index="2"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="home-intro"&gt;
+        &lt;h2&gt;환영합니다!&lt;/h2&gt;
+        &lt;p&gt;다양한 상품을 합리적인 가격에 만나보세요. 상단 메뉴에서 상품목록을 클릭하여 쇼핑을 시작하세요.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- 학교소개 페이지 --&gt;
+    &lt;section id="aboutPage" class="page"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;학교소개&lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;div class="about-content"&gt;
+        &lt;p&gt;저희 학교는 1985년에 설립되어 40년 이상의 역사를 자랑하는 교육 기관입니다.&lt;/p&gt;
+        &lt;p&gt;창의적이고 실용적인 교육을 통해 미래를 이끌어갈 인재를 양성하고 있습니다.&lt;/p&gt;
+        &lt;p&gt;온라인 쇼핑몰은 학교 구성원 및 지역사회를 위한 편리한 쇼핑 서비스를 제공합니다.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- 상품목록 페이지 --&gt;
+    &lt;section id="productsPage" class="page"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;상품목록&lt;/h1&gt;
+        &lt;p&gt;총 30개의 상품&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="products-grid" id="productsGrid"&gt;
+        &lt;!-- JS로 상품 카드 생성 --&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- 공지사항 페이지 --&gt;
+    &lt;section id="noticePage" class="page"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;공지사항&lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;ul class="notice-list"&gt;
+        &lt;li&gt;&lt;span class="notice-date"&gt;2026-08-01&lt;/span&gt; 여름방학 특별 할인 이벤트 안내&lt;/li&gt;
+        &lt;li&gt;&lt;span class="notice-date"&gt;2026-07-15&lt;/span&gt; 배송 지연 안내 (태풍 영향)&lt;/li&gt;
+        &lt;li&gt;&lt;span class="notice-date"&gt;2026-07-01&lt;/span&gt; 신규 회원 가입 이벤트&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;!-- 장바구니 사이드바 --&gt;
+  &lt;aside class="cart-sidebar" id="cartSidebar"&gt;
+    &lt;div class="cart-header"&gt;
+      &lt;h2&gt;장바구니&lt;/h2&gt;
+      &lt;button class="cart-close" id="cartClose"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="cart-items" id="cartItems"&gt;
+      &lt;p class="cart-empty"&gt;장바구니가 비어 있습니다.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="cart-footer"&gt;
+      &lt;div class="cart-total"&gt;
+        &lt;span&gt;총 금액&lt;/span&gt;
+        &lt;span id="cartTotalPrice"&gt;0원&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;button class="btn btn-primary btn-block" id="checkoutBtn"&gt;주문하기&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/aside&gt;
+
+  &lt;!-- 장바구니 토글 버튼 --&gt;
+  &lt;button class="cart-toggle" id="cartToggle"&gt;
+    🛒 &lt;span class="cart-count" id="cartCount"&gt;0&lt;/span&gt;
+  &lt;/button&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>script.js 코드 보기</summary>
+            <pre><code>// ===== 상품 데이터 (5열 x 6행 = 30개) =====
+const products = [
+  { id: 1,  name: '무선 이어폰',       price: 89000,  image: 'https://picsum.photos/300/300?random=11' },
+  { id: 2,  name: '노트북 파우치',     price: 35000,  image: 'https://picsum.photos/300/300?random=12' },
+  { id: 3,  name: 'USB-C 허브',        price: 42000,  image: 'https://picsum.photos/300/300?random=13' },
+  { id: 4,  name: '기계식 키보드',     price: 129000, image: 'https://picsum.photos/300/300?random=14' },
+  { id: 5,  name: '무선 마우스',       price: 45000,  image: 'https://picsum.photos/300/300?random=15' },
+  { id: 6,  name: '모니터 받침대',     price: 28000,  image: 'https://picsum.photos/300/300?random=16' },
+  { id: 7,  name: '블루투스 스피커',   price: 67000,  image: 'https://picsum.photos/300/300?random=17' },
+  { id: 8,  name: '태블릿 거치대',     price: 22000,  image: 'https://picsum.photos/300/300?random=18' },
+  { id: 9,  name: '웹캠 HD',           price: 55000,  image: 'https://picsum.photos/300/300?random=19' },
+  { id: 10, name: 'SSD 1TB',           price: 98000,  image: 'https://picsum.photos/300/300?random=20' },
+  { id: 11, name: '게이밍 헤드셋',     price: 78000,  image: 'https://picsum.photos/300/300?random=21' },
+  { id: 12, name: '보조배터리 20000mAh', price: 39000, image: 'https://picsum.photos/300/300?random=22' },
+  { id: 13, name: 'LED 데스크 램프',   price: 48000,  image: 'https://picsum.photos/300/300?random=23' },
+  { id: 14, name: '캔버스 백팩',       price: 52000,  image: 'https://picsum.photos/300/300?random=24' },
+  { id: 15, name: '스마트워치',        price: 199000, image: 'https://picsum.photos/300/300?random=25' },
+  { id: 16, name: '멀티탭 6구',        price: 18000,  image: 'https://picsum.photos/300/300?random=26' },
+  { id: 17, name: '노트북 쿨링패드',   price: 32000,  image: 'https://picsum.photos/300/300?random=27' },
+  { id: 18, name: 'HDMI 케이블 2m',    price: 12000,  image: 'https://picsum.photos/300/300?random=28' },
+  { id: 19, name: '무선 충전기',       price: 29000,  image: 'https://picsum.photos/300/300?random=29' },
+  { id: 20, name: '키보드 손목 받침',  price: 15000,  image: 'https://picsum.photos/300/300?random=30' },
+  { id: 21, name: 'USB 메모리 128GB',  price: 24000,  image: 'https://picsum.photos/300/300?random=31' },
+  { id: 22, name: '노트북 스탠드',     price: 38000,  image: 'https://picsum.photos/300/300?random=32' },
+  { id: 23, name: '마우스 패드 XL',    price: 19000,  image: 'https://picsum.photos/300/300?random=33' },
+  { id: 24, name: '블루라이트 차단 안경', price: 25000, image: 'https://picsum.photos/300/300?random=34' },
+  { id: 25, name: '휴대용 선풍기',     price: 34000,  image: 'https://picsum.photos/300/300?random=35' },
+  { id: 26, name: '텀블러 500ml',      price: 21000,  image: 'https://picsum.photos/300/300?random=36' },
+  { id: 27, name: '책상 정리함',       price: 16000,  image: 'https://picsum.photos/300/300?random=37' },
+  { id: 28, name: '와이파이 공유기',   price: 89000,  image: 'https://picsum.photos/300/300?random=38' },
+  { id: 29, name: '에어팟 케이스',     price: 14000,  image: 'https://picsum.photos/300/300?random=39' },
+  { id: 30, name: '노트북 청소 키트',  price: 11000,  image: 'https://picsum.photos/300/300?random=40' },
+];
+
+// ===== 장바구니 상태 =====
+let cart = [];
+
+// ===== DOM 요소 =====
+const pages = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('.nav-link');
+const logo = document.querySelector('.logo');
+const productsGrid = document.getElementById('productsGrid');
+const cartSidebar = document.getElementById('cartSidebar');
+const cartItems = document.getElementById('cartItems');
+const cartTotalPrice = document.getElementById('cartTotalPrice');
+const cartCount = document.getElementById('cartCount');
+const cartToggle = document.getElementById('cartToggle');
+const cartClose = document.getElementById('cartClose');
+
+// ===== 페이지 전환 =====
+function showPage(pageName) {
+  pages.forEach(page =&gt; page.classList.remove('active'));
+  navLinks.forEach(link =&gt; link.classList.remove('active'));
+
+  const targetPage = document.getElementById(pageName + 'Page');
+  if (targetPage) {
+    targetPage.classList.add('active');
+  }
+
+  const activeLink = document.querySelector(`.nav-link[data-page="${pageName}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+}
+
+navLinks.forEach(link =&gt; {
+  link.addEventListener('click', (e) =&gt; {
+    e.preventDefault();
+    showPage(link.dataset.page);
+  });
+});
+
+logo.addEventListener('click', (e) =&gt; {
+  e.preventDefault();
+  showPage('home');
+});
+
+// ===== 상품 목록 렌더링 =====
+function renderProducts() {
+  productsGrid.innerHTML = products.map(product =&gt; `
+    &lt;div class="product-card"&gt;
+      &lt;img class="product-image" src="${product.image}" alt="${product.name}"&gt;
+      &lt;div class="product-info"&gt;
+        &lt;div class="product-name"&gt;${product.name}&lt;/div&gt;
+        &lt;div class="product-price"&gt;${product.price.toLocaleString()}원&lt;/div&gt;
+        &lt;button class="add-to-cart" data-id="${product.id}"&gt;장바구니 담기&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `).join('');
+
+  productsGrid.querySelectorAll('.add-to-cart').forEach(btn =&gt; {
+    btn.addEventListener('click', () =&gt; {
+      const productId = parseInt(btn.dataset.id);
+      addToCart(productId);
+    });
+  });
+}
+
+// ===== 장바구니 기능 =====
+function addToCart(productId) {
+  const product = products.find(p =&gt; p.id === productId);
+  if (!product) return;
+
+  const existing = cart.find(item =&gt; item.id === productId);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  updateCartUI();
+  cartSidebar.classList.add('open');
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(item =&gt; item.id !== productId);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const totalItems = cart.reduce((sum, item) =&gt; sum + item.quantity, 0);
+  const totalPrice = cart.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0);
+
+  cartCount.textContent = totalItems;
+  cartTotalPrice.textContent = totalPrice.toLocaleString() + '원';
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = '&lt;p class="cart-empty"&gt;장바구니가 비어 있습니다.&lt;/p&gt;';
+    return;
+  }
+
+  cartItems.innerHTML = cart.map(item =&gt; `
+    &lt;div class="cart-item"&gt;
+      &lt;img class="cart-item-image" src="${item.image}" alt="${item.name}"&gt;
+      &lt;div class="cart-item-details"&gt;
+        &lt;div class="cart-item-name"&gt;${item.name}&lt;/div&gt;
+        &lt;div class="cart-item-qty"&gt;수량: ${item.quantity}&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="cart-item-price"&gt;${(item.price * item.quantity).toLocaleString()}원&lt;/div&gt;
+      &lt;button class="cart-item-remove" data-id="${item.id}"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+  `).join('');
+
+  cartItems.querySelectorAll('.cart-item-remove').forEach(btn =&gt; {
+    btn.addEventListener('click', () =&gt; {
+      removeFromCart(parseInt(btn.dataset.id));
+    });
+  });
+}
+
+// ===== 장바구니 토글 =====
+cartToggle.addEventListener('click', () =&gt; {
+  cartSidebar.classList.toggle('open');
+});
+
+cartClose.addEventListener('click', () =&gt; {
+  cartSidebar.classList.remove('open');
+});
+
+// ===== 슬라이더 =====
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.querySelector('.slider-btn.prev');
+const nextBtn = document.querySelector('.slider-btn.next');
+let slideInterval;
+
+function goToSlide(index) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+
+  currentSlide = (index + slides.length) % slides.length;
+
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+function startAutoSlide() {
+  slideInterval = setInterval(() =&gt; {
+    goToSlide(currentSlide + 1);
+  }, 4000);
+}
+
+function resetAutoSlide() {
+  clearInterval(slideInterval);
+  startAutoSlide();
+}
+
+prevBtn.addEventListener('click', () =&gt; {
+  goToSlide(currentSlide - 1);
+  resetAutoSlide();
+});
+
+nextBtn.addEventListener('click', () =&gt; {
+  goToSlide(currentSlide + 1);
+  resetAutoSlide();
+});
+
+dots.forEach(dot =&gt; {
+  dot.addEventListener('click', () =&gt; {
+    goToSlide(parseInt(dot.dataset.index));
+    resetAutoSlide();
+  });
+});
+
+// ===== 로그인 / 회원가입 =====
+document.getElementById('loginBtn').addEventListener('click', () =&gt; {
+  alert('로그인 페이지로 이동합니다.');
+});
+
+document.getElementById('signupBtn').addEventListener('click', () =&gt; {
+  alert('회원가입 페이지로 이동합니다.');
+});
+
+document.getElementById('checkoutBtn').addEventListener('click', () =&gt; {
+  if (cart.length === 0) {
+    alert('장바구니가 비어 있습니다.');
+    return;
+  }
+  alert('주문이 완료되었습니다!');
+  cart = [];
+  updateCartUI();
+  cartSidebar.classList.remove('open');
+});
+
+// ===== 초기화 =====
+renderProducts();
+startAutoSlide();
+showPage('home');</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>style.css 코드 보기</summary>
+            <pre><code>* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ===== 헤더 ===== */
+.header {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #2563eb;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid #2563eb;
+  color: #2563eb;
+}
+
+.btn-outline:hover {
+  background: #eff6ff;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-block {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+/* ===== 메인 콘텐츠 ===== */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #888;
+}
+
+/* ===== 슬라이더 ===== */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.slide-caption h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.slide-caption p {
+  font-size: 1.1rem;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.slider-btn:hover {
+  background: #fff;
+}
+
+.slider-btn.prev {
+  left: 16px;
+}
+
+.slider-btn.next {
+  right: 16px;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dot.active {
+  background: #fff;
+}
+
+/* ===== 홈 소개 ===== */
+.home-intro {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.home-intro h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.home-intro p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ===== 학교소개 ===== */
+.about-content {
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  line-height: 1.8;
+}
+
+.about-content p {
+  margin-bottom: 12px;
+}
+
+/* ===== 공지사항 ===== */
+.notice-list {
+  list-style: none;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.notice-list li {
+  padding: 16px 24px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.notice-list li:last-child {
+  border-bottom: none;
+}
+
+.notice-date {
+  color: #888;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* ===== 상품 그리드 (5열 x 6행) ===== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 14px;
+}
+
+.product-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 8px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.add-to-cart:hover {
+  background: #1d4ed8;
+}
+
+/* ===== 장바구니 사이드바 ===== */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 380px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+
+.cart-sidebar.open {
+  right: 0;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-header h2 {
+  font-size: 1.3rem;
+}
+
+.cart-close {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 24px;
+}
+
+.cart-empty {
+  color: #aaa;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.cart-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.cart-item-qty {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.cart-item-price {
+  font-weight: 700;
+  color: #2563eb;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.cart-item-remove:hover {
+  color: #ef4444;
+}
+
+.cart-footer {
+  padding: 20px 24px;
+  border-top: 1px solid #eee;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* ===== 장바구니 토글 버튼 ===== */
+.cart-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.cart-toggle:hover {
+  transform: scale(1.08);
+}
+
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.75rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nav {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .cart-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">JavaScript</span>
+            <h3>윤년 판별기</h3>
+          </div>
+          <p>switch문과 조건문으로 입력한 연/월의 마지막 날짜 계산하기</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../5일차/java/윤년, 평년/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+    &lt;title&gt;변수 선언 및 출력&lt;/title&gt;
+    &lt;script type="text/javascript"&gt;
+        var year = prompt("현재 몇 년입니까?", "2024");
+        var mon = prompt("현재 몇 월입니까?", "0");
+        var last_day;
+        switch(mon){
+            case "1" : 
+                last_day=31;
+                break;
+            case "2" : 
+                last_day=28;
+                if( (year % 4==0 &amp;&amp; year % 100 !=0) || year % 400 ==0){
+                    last_day=29;
+                }  
+                break;
+            case "3": last_day=31;
+            break;
+            case "4": last_day=30;
+            break;
+            case "5": last_day=31;
+            break;
+            case "6": last_day=30;
+            break;
+            case "7": last_day=31;
+            break;
+            case "8": last_day=31;
+            break;
+            case "9": last_day=30;
+            break;
+            case "10": last_day=31;
+            break;
+            case "11": last_day=30;
+            break;
+            case "12": last_day=31;
+            break;
+        }
+  /*현재 1일부터 마지막일까지 문서에 출력합니다.*/
+  for(var i=1; i&lt;=last_day; i++){
+    document.write(i+" ");
+  }
+    &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/head&gt;</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">리서치 보고서</span>
+            <h3>2025년 하반기 AI 도구 인기 순위 보고서</h3>
+          </div>
+          <p>Claude로 작성한 리서치 보고서 — 웹·모바일 트래픽, 개발자 설문, 바이럴 확산 등 여러 지표를 교차 검증해 정리</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../5일차/testing/AI_도구_인기순위_보고서_2025_하반기.pdf" target="_blank" rel="noopener">PDF로 열기 →</a>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>코드 학습 Lab</h3>
+          </div>
+          <p>HTML/JS 기초 문법 정리 + 객관식·주관식 퀴즈로 구성한 학습용 웹앱. 지금 이 포트폴리오 메인 페이지의 다크 터미널 디자인이 여기서 참고한 것입니다.</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../5일차/김지훈/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+            <a class="card-link" href="../../5일차/김지훈/프로젝트_계획서.pdf" target="_blank" rel="noopener">프로젝트 계획서 보기 →</a>
+          </div>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;title&gt;코드 학습 Lab — HTML &amp; JavaScript&lt;/title&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700;900&amp;display=swap" rel="stylesheet" /&gt;
+  &lt;link rel="stylesheet" href="style.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- 상단 네비게이션 --&gt;
+  &lt;header class="navbar"&gt;
+    &lt;div class="navbar-brand"&gt;
+      &lt;span class="brand-icon"&gt;&amp;lt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="brand-text"&gt;Code Lab&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;nav class="navbar-menu"&gt;
+      &lt;button class="nav-btn active" data-screen="home"&gt;홈&lt;/button&gt;
+      &lt;button class="nav-btn" data-screen="html-codes"&gt;HTML 코드&lt;/button&gt;
+      &lt;button class="nav-btn" data-screen="js-codes"&gt;JS 코드&lt;/button&gt;
+    &lt;/nav&gt;
+    &lt;div class="navbar-spacer" aria-hidden="true"&gt;
+      &lt;span class="brand-icon"&gt;&amp;lt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="brand-text"&gt;Code Lab&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main id="app"&gt;
+
+    &lt;!-- ===== 홈 화면 ===== --&gt;
+    &lt;section id="screen-home" class="screen active"&gt;
+      &lt;div class="hero"&gt;
+        &lt;div class="hero-text"&gt;
+          &lt;h1 class="hero-title"&gt;
+            &lt;span class="glitch" data-text="CODE LAB"&gt;CODE LAB&lt;/span&gt;
+          &lt;/h1&gt;
+          &lt;p class="hero-subtitle"&gt;HTML과 JavaScript를 배우는 인터랙티브 학습 공간&lt;/p&gt;
+          &lt;div class="hero-tags"&gt;
+            &lt;button type="button" class="tag tag-html" data-screen="html-info"&gt;HTML&lt;/button&gt;
+            &lt;button type="button" class="tag tag-js" data-screen="js-info"&gt;JavaScript&lt;/button&gt;
+            &lt;button type="button" class="tag tag-quiz" data-screen="html-quiz"&gt;퀴즈&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 해커 코드 작성 애니메이션 --&gt;
+        &lt;div class="hacker-scene"&gt;
+          &lt;div class="terminal-window"&gt;
+            &lt;div class="terminal-bar"&gt;
+              &lt;span class="dot red"&gt;&lt;/span&gt;
+              &lt;span class="dot yellow"&gt;&lt;/span&gt;
+              &lt;span class="dot green"&gt;&lt;/span&gt;
+              &lt;span class="terminal-title"&gt;root@hacklab:~$&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="terminal-body" id="terminal-body"&gt;
+              &lt;div class="hacker-row"&gt;
+                &lt;div class="hacker-avatar" id="hacker-avatar"&gt;
+                  &lt;div class="avatar-hood"&gt;&lt;/div&gt;
+                  &lt;div class="avatar-face"&gt;
+                    &lt;span class="eye left"&gt;&lt;/span&gt;
+                    &lt;span class="eye right"&gt;&lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;div class="typing-hands"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="code-stream"&gt;
+                  &lt;pre id="typing-code" class="typing-code"&gt;&lt;/pre&gt;
+                  &lt;textarea id="visitor-input" class="visitor-input" spellcheck="false" autocomplete="off" autocapitalize="off" rows="1"&gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="type-hint" id="type-hint"&gt;⌨ 클릭하고 직접 코드를 작성해보세요&lt;/div&gt;
+              &lt;div class="scan-line"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="matrix-rain" aria-hidden="true"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="home-cards"&gt;
+        &lt;button class="home-card" data-screen="html-info"&gt;
+          &lt;span class="home-card-icon"&gt;&amp;lt;HTML&amp;gt;&lt;/span&gt;
+          &lt;h3&gt;HTML 학습&lt;/h3&gt;
+          &lt;p&gt;웹 페이지의 뼈대, HTML 태그와 구조를 배워보세요.&lt;/p&gt;
+        &lt;/button&gt;
+        &lt;button class="home-card" data-screen="js-info"&gt;
+          &lt;span class="home-card-icon"&gt;{ JS }&lt;/span&gt;
+          &lt;h3&gt;JavaScript 학습&lt;/h3&gt;
+          &lt;p&gt;동적인 웹, 변수·조건문·함수를 배워보세요.&lt;/p&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===== HTML 코드 목록 화면 (상단바) ===== --&gt;
+    &lt;section id="screen-html-codes" class="screen"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;HTML 기초 코드 모음&lt;/h1&gt;
+        &lt;p class="page-desc"&gt;HTML을 처음 배울 때 가장 먼저 만나는 코드들을 하나씩 모았습니다. 코드와 함께 쉬운 설명을 확인해보세요.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div id="html-codes-container" class="code-ref-list"&gt;&lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===== JS 코드 목록 화면 (상단바) ===== --&gt;
+    &lt;section id="screen-js-codes" class="screen"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;JavaScript 기초 코드 모음&lt;/h1&gt;
+        &lt;p class="page-desc"&gt;JavaScript를 처음 배울 때 가장 먼저 만나는 코드들을 하나씩 모았습니다. 코드와 함께 쉬운 설명을 확인해보세요.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div id="js-codes-container" class="code-ref-list"&gt;&lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===== HTML 설명 화면 ===== --&gt;
+    &lt;section id="screen-html-info" class="screen"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;HTML 코드란?&lt;/h1&gt;
+        &lt;p class="page-desc"&gt;HTML(HyperText Markup Language)은 웹 페이지의 구조와 내용을 정의하는 마크업 언어입니다.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class="info-grid"&gt;
+        &lt;article class="info-card"&gt;
+          &lt;h3&gt;기본 구조&lt;/h3&gt;
+          &lt;pre class="code-block"&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="ko"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;title&amp;gt;페이지 제목&amp;lt;/title&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;안녕하세요!&amp;lt;/h1&amp;gt;
+    &amp;lt;p&amp;gt;문단 텍스트&amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+        &lt;/article&gt;
+
+        &lt;article class="info-card"&gt;
+          &lt;h3&gt;주요 태그&lt;/h3&gt;
+          &lt;ul class="info-list"&gt;
+            &lt;li&gt;&lt;code&gt;&amp;lt;h1&amp;gt;~&amp;lt;h6&amp;gt;&lt;/code&gt; — 제목 (Heading)&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; — 문단 (Paragraph)&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&amp;lt;a href=""&amp;gt;&lt;/code&gt; — 링크 (Anchor)&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&amp;lt;img src="" alt=""&amp;gt;&lt;/code&gt; — 이미지&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; — 블록 컨테이너&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&amp;lt;ul&amp;gt; / &amp;lt;li&amp;gt;&lt;/code&gt; — 목록&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/article&gt;
+
+        &lt;article class="info-card"&gt;
+          &lt;h3&gt;HTML의 역할&lt;/h3&gt;
+          &lt;p&gt;HTML은 웹 페이지의 &lt;strong&gt;뼈대&lt;/strong&gt;입니다. CSS가 꾸미고, JavaScript가 동작을 추가합니다. 세 가지가 함께 작동하여 완성된 웹 페이지를 만듭니다.&lt;/p&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+
+      &lt;button class="btn-primary btn-learn" data-screen="html-quiz"&gt;HTML 학습 시작 →&lt;/button&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===== HTML 퀴즈 화면 ===== --&gt;
+    &lt;section id="screen-html-quiz" class="screen"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;nav class="breadcrumb"&gt;
+          &lt;button class="crumb" data-screen="html-info"&gt;HTML 학습&lt;/button&gt;
+          &lt;span&gt;/&lt;/span&gt;
+          &lt;span class="crumb-current"&gt;학습 문제&lt;/span&gt;
+        &lt;/nav&gt;
+        &lt;h1&gt;HTML 학습 문제&lt;/h1&gt;
+        &lt;p class="page-desc"&gt;객관식 5문제, 주관식 5문제 — 총 10문제. 힌트를 확인하고 즉시 정답을 검증해보세요.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div id="html-quiz-container" class="quiz-container"&gt;&lt;/div&gt;
+      &lt;div class="quiz-score" id="html-score"&gt;0 / 10 문제 정답&lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===== JS 설명 화면 ===== --&gt;
+    &lt;section id="screen-js-info" class="screen"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;h1&gt;JavaScript 코드란?&lt;/h1&gt;
+        &lt;p class="page-desc"&gt;JavaScript는 웹 페이지에 동적인 기능을 추가하는 프로그래밍 언어입니다.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class="info-grid"&gt;
+        &lt;article class="info-card"&gt;
+          &lt;h3&gt;기본 문법&lt;/h3&gt;
+          &lt;pre class="code-block"&gt;&lt;code&gt;// 변수 선언
+var name = "철수";
+let age = 20;
+
+// 조건문
+if (age &gt;= 18) {
+  console.log("성인입니다");
+}
+
+// 함수
+function greet(n) {
+  return "안녕, " + n;
+}&lt;/code&gt;&lt;/pre&gt;
+        &lt;/article&gt;
+
+        &lt;article class="info-card"&gt;
+          &lt;h3&gt;핵심 개념&lt;/h3&gt;
+          &lt;ul class="info-list"&gt;
+            &lt;li&gt;&lt;strong&gt;변수&lt;/strong&gt; — 데이터를 저장하는 상자&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;연산자&lt;/strong&gt; — +, -, ==, &amp;amp;&amp;amp;, || 등&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;조건문&lt;/strong&gt; — if / else로 분기 처리&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;반복문&lt;/strong&gt; — for, while로 반복 실행&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;함수&lt;/strong&gt; — 재사용 가능한 코드 블록&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/article&gt;
+
+        &lt;article class="info-card"&gt;
+          &lt;h3&gt;JavaScript의 역할&lt;/h3&gt;
+          &lt;p&gt;JavaScript는 버튼 클릭, 입력 검증, 애니메이션, API 호출 등 &lt;strong&gt;사용자와 상호작용&lt;/strong&gt;하는 모든 동적 기능을 담당합니다. 브라우저에서 바로 실행됩니다.&lt;/p&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+
+      &lt;button class="btn-primary btn-learn" data-screen="js-quiz"&gt;JS 학습 시작 →&lt;/button&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===== JS 퀴즈 화면 ===== --&gt;
+    &lt;section id="screen-js-quiz" class="screen"&gt;
+      &lt;div class="page-header"&gt;
+        &lt;nav class="breadcrumb"&gt;
+          &lt;button class="crumb" data-screen="js-info"&gt;JS 학습&lt;/button&gt;
+          &lt;span&gt;/&lt;/span&gt;
+          &lt;span class="crumb-current"&gt;학습 문제&lt;/span&gt;
+        &lt;/nav&gt;
+        &lt;h1&gt;JavaScript 학습 문제&lt;/h1&gt;
+        &lt;p class="page-desc"&gt;객관식 5문제, 주관식 5문제 — 총 10문제. 힌트를 확인하고 즉시 정답을 검증해보세요.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div id="js-quiz-container" class="quiz-container"&gt;&lt;/div&gt;
+      &lt;div class="quiz-score" id="js-score"&gt;0 / 10 문제 정답&lt;/div&gt;
+    &lt;/section&gt;
+
+  &lt;/main&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>script.js 코드 보기</summary>
+            <pre><code>/* =========================================================
+   HTML 학습 문제 (객관식 5 + 주관식 3)
+   ========================================================= */
+const HTML_QUIZ = [
+  {
+    type: "mcq",
+    question: "웹 페이지에 이미지를 삽입할 때 사용하는 태그는?",
+    options: ["&lt;image&gt;", "&lt;img&gt;", "&lt;pic&gt;", "&lt;src&gt;"],
+    answerIndex: 1,
+    hint: "&lt;img src=\"경로\" alt=\"설명\"&gt; 형태로 사용하며, 닫는 태그가 없습니다.",
+  },
+  {
+    type: "mcq",
+    question: "다음 중 HTML 문서에서 가장 큰 제목을 나타내는 태그는?",
+    options: ["&lt;h6&gt;", "&lt;h1&gt;", "&lt;title&gt;", "&lt;header&gt;"],
+    answerIndex: 1,
+    hint: "h 뒤의 숫자가 작을수록 더 크고 중요한 제목입니다. h1이 가장 큽니다.",
+  },
+  {
+    type: "mcq",
+    question: "링크가 이동할 주소를 지정하는 속성은?",
+    options: ["src", "href", "link", "url"],
+    answerIndex: 1,
+    hint: "&lt;a href=\"이동할 주소\"&gt;글자&lt;/a&gt; 형태로 사용합니다.",
+  },
+  {
+    type: "mcq",
+    question: "번호가 매겨진(순서가 있는) 목록을 만드는 태그는?",
+    options: ["&lt;ul&gt;", "&lt;ol&gt;", "&lt;li&gt;", "&lt;dl&gt;"],
+    answerIndex: 1,
+    hint: "ol은 Ordered List(순서 있는 목록), ul은 Unordered List(순서 없는 목록)입니다.",
+  },
+  {
+    type: "mcq",
+    question: "이미지가 안 보일 때 대신 표시할 설명 글을 지정하는 속성은?",
+    options: ["title", "href", "alt", "src"],
+    answerIndex: 2,
+    hint: "alt는 alternative(대체)의 줄임말로, 이미지에 대한 설명을 적어둡니다.",
+  },
+  {
+    type: "fill",
+    question: "문단을 나타내는 태그 이름을 입력하세요. (꺾쇠 없이)",
+    answer: "p",
+    hint: "Paragraph(문단)의 줄임말로, 긴 글을 나눌 때 사용합니다.",
+  },
+  {
+    type: "fill",
+    question: "문서 제목, 문자 인코딩 등 '문서에 대한 정보'를 담는 태그 이름을 입력하세요. (꺾쇠 없이)",
+    answer: "head",
+    hint: "화면에는 보이지 않으며, &lt;title&gt;이나 스타일시트 연결 등이 이 태그 안에 들어갑니다.",
+  },
+  {
+    type: "fill",
+    question: "특별한 의미 없이 여러 내용을 묶는 대표적인 블록 상자 태그 이름을 입력하세요. (꺾쇠 없이)",
+    answer: "div",
+    hint: "레이아웃을 나누거나 CSS 스타일을 적용할 때 자주 사용하는 만능 상자 태그입니다.",
+  },
+  {
+    type: "fill",
+    question: "클릭할 수 있는 버튼을 만드는 태그 이름을 입력하세요. (꺾쇠 없이)",
+    answer: "button",
+    hint: "사용자가 누르는 버튼을 만들며, 실제 동작은 JavaScript로 연결합니다.",
+  },
+  {
+    type: "fill",
+    question: "사용자가 글자를 입력할 수 있는 입력창을 만드는 태그 이름을 입력하세요. (꺾쇠 없이)",
+    answer: "input",
+    hint: "type 속성으로 텍스트, 숫자, 비밀번호 등 입력 종류를 정할 수 있습니다.",
+  },
+];
+
+/* =========================================================
+   JavaScript 학습 문제 (객관식 5 + 주관식 3)
+   ========================================================= */
+const JS_QUIZ = [
+  {
+    type: "mcq",
+    question: "재할당이 불가능한(한 번 정하면 값을 바꿀 수 없는) 변수를 선언할 때 사용하는 키워드는?",
+    options: ["var", "let", "const", "function"],
+    answerIndex: 2,
+    hint: "const는 constant(상수)의 줄임말로, 절대 변하지 않는 값을 저장할 때 사용합니다.",
+  },
+  {
+    type: "mcq",
+    question: "두 값이 완전히 같은지(타입까지) 비교하는 연산자는?",
+    options: ["==", "===", "=", "!="],
+    answerIndex: 1,
+    hint: "=== 은 값과 타입이 모두 같아야 true를 반환하는 엄격한 비교 연산자입니다.",
+  },
+  {
+    type: "mcq",
+    question: "정해진 횟수만큼 코드를 반복 실행할 때 사용하는 문장은?",
+    options: ["if", "for", "function", "switch"],
+    answerIndex: 1,
+    hint: "for (let i = 0; i &lt; 5; i++) { ... } 형태로 반복 횟수를 조절합니다.",
+  },
+  {
+    type: "mcq",
+    question: "여러 개의 값을 순서대로 담아두는 자료구조는?",
+    options: ["객체 { }", "배열 [ ]", "문자열 \"\"", "숫자"],
+    answerIndex: 1,
+    hint: "대괄호 [ ] 로 만들며, 각 값을 콤마(,)로 구분해서 순서대로 저장합니다.",
+  },
+  {
+    type: "mcq",
+    question: "재사용 가능한 코드 블록을 만들 때 사용하는 키워드는?",
+    options: ["let", "function", "if", "return"],
+    answerIndex: 1,
+    hint: "function 이름(매개변수) { ... } 형태로 코드를 이름 붙여 묶어둡니다.",
+  },
+  {
+    type: "fill",
+    question: "브라우저 콘솔(개발자 도구)에 값을 출력할 때 사용하는 함수 이름을 입력하세요. (console. 은 제외)",
+    answer: "log",
+    hint: "console.log(\"메시지\") 형태로 사용하며, 디버깅할 때 자주 씁니다.",
+  },
+  {
+    type: "fill",
+    question: "숫자를 1 증가시키는 연산자를 입력하세요. (기호)",
+    answer: "++",
+    hint: "num++ 처럼 변수 뒤에 붙여서 값을 1씩 늘립니다. 반대로 1 감소는 --입니다.",
+  },
+  {
+    type: "fill",
+    question: "함수가 결과값을 호출한 곳으로 돌려줄 때 사용하는 키워드를 입력하세요.",
+    answer: "return",
+    hint: "function 안에서 return 값; 을 만나면 그 값을 함수 밖으로 돌려주고 함수가 끝납니다.",
+  },
+  {
+    type: "fill",
+    question: "대괄호 [ ] 로 여러 값을 순서대로 저장하는 자료구조의 이름을 한글로 입력하세요.",
+    answer: "배열",
+    hint: "영어로는 Array라고 부르며, let list = [1, 2, 3]; 처럼 만듭니다.",
+  },
+  {
+    type: "fill",
+    question: "두 값이 서로 다른지 비교할 때 사용하는 연산자를 입력하세요. (기호, 3글자)",
+    answer: "!==",
+    hint: "=== 의 반대 의미로, 값이나 타입이 다르면 true를 반환합니다.",
+  },
+];
+
+/* =========================================================
+   해커 타이핑 애니메이션 코드 목록
+   ========================================================= */
+const HACKER_CODES = [
+  `// Accessing mainframe...
+const target = "secure_server";
+let password = "";
+
+function bruteForce() {
+  for (let i = 0; i &lt; 9999; i++) {
+    password = String(i).padStart(4, "0");
+    if (tryLogin(password)) {
+      console.log("ACCESS GRANTED:", password);
+      break;
+    }
+  }
+}`,
+  `&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;title&gt;Hidden Portal&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Welcome, Hacker&lt;/h1&gt;
+  &lt;script&gt;
+    document.title = "System Breached";
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;`,
+  `var firewall = false;
+var accessLevel = 0;
+
+if (firewall === false) {
+  accessLevel = 99;
+  console.log("Firewall bypassed!");
+  injectPayload();
+} else {
+  console.log("Retrying...");
+}`,
+  `function decrypt(data, key) {
+  var result = "";
+  for (var i = 0; i &lt; data.length; i++) {
+    result += String.fromCharCode(
+      data.charCodeAt(i) ^ key
+    );
+  }
+  return result;
+}
+
+var secret = decrypt("KHOOR", 3);
+console.log(secret); // HELLO`,
+];
+
+/* =========================================================
+   HTML 기초 코드 모음 (상단바 "HTML 코드")
+   ========================================================= */
+const HTML_BASICS = [
+  {
+    title: "&lt;!DOCTYPE html&gt;",
+    code: `&lt;!DOCTYPE html&gt;`,
+    desc: "이 문서가 최신 방식(HTML5)으로 작성되었다는 것을 브라우저에게 알려주는 선언입니다. 항상 문서의 맨 첫 줄에 한 번만 적어줍니다.",
+  },
+  {
+    title: "&lt;html&gt; 태그",
+    code: `&lt;html lang="ko"&gt;\n  ...\n&lt;/html&gt;`,
+    desc: "HTML 문서 전체를 감싸는 가장 바깥쪽 상자입니다. lang=\"ko\"는 '이 페이지는 한국어로 되어 있다'는 뜻이에요.",
+  },
+  {
+    title: "&lt;head&gt; 태그",
+    code: `&lt;head&gt;\n  &lt;title&gt;내 페이지&lt;/title&gt;\n&lt;/head&gt;`,
+    desc: "화면에는 보이지 않지만 문서 제목, 문자 인코딩, 연결할 CSS 파일처럼 '문서에 대한 정보'를 적어두는 곳입니다.",
+  },
+  {
+    title: "&lt;title&gt; 태그",
+    code: `&lt;title&gt;페이지 제목&lt;/title&gt;`,
+    desc: "브라우저 탭에 표시되는 제목을 정합니다. &lt;head&gt; 태그 안에 넣습니다.",
+  },
+  {
+    title: "&lt;body&gt; 태그",
+    code: `&lt;body&gt;\n  &lt;h1&gt;안녕하세요!&lt;/h1&gt;\n&lt;/body&gt;`,
+    desc: "사용자 화면에 실제로 보이는 모든 내용(글, 이미지, 버튼 등)은 이 태그 안에 작성합니다.",
+  },
+  {
+    title: "&lt;h1&gt; ~ &lt;h6&gt; 제목 태그",
+    code: `&lt;h1&gt;가장 큰 제목&lt;/h1&gt;\n&lt;h2&gt;그 다음 크기 제목&lt;/h2&gt;`,
+    desc: "글의 제목을 나타냅니다. 숫자가 작을수록(h1) 더 크고 중요한 제목이고, 숫자가 클수록(h6) 작은 소제목이에요.",
+  },
+  {
+    title: "&lt;p&gt; 태그",
+    code: `&lt;p&gt;이것은 문단입니다.&lt;/p&gt;`,
+    desc: "긴 글을 문단 단위로 나눌 때 사용합니다. 워드프로세서에서 엔터로 문단을 나누는 것과 비슷해요.",
+  },
+  {
+    title: "&lt;a&gt; 링크 태그",
+    code: `&lt;a href="https://naver.com"&gt;네이버로 이동&lt;/a&gt;`,
+    desc: "클릭하면 다른 페이지로 이동하는 링크를 만듭니다. href 속성에 이동할 주소를 적어줍니다.",
+  },
+  {
+    title: "&lt;img&gt; 이미지 태그",
+    code: `&lt;img src="cat.jpg" alt="고양이 사진"&gt;`,
+    desc: "이미지를 화면에 보여줍니다. src는 이미지 파일 경로, alt는 이미지가 안 보일 때 대신 표시할 설명 글이에요.",
+  },
+  {
+    title: "&lt;div&gt; 태그",
+    code: `&lt;div&gt;\n  여기에 여러 내용을 담아요\n&lt;/div&gt;`,
+    desc: "특별한 의미 없이 여러 내용을 하나로 묶는 상자입니다. 레이아웃을 나누거나 스타일을 적용할 때 자주 사용해요.",
+  },
+  {
+    title: "&lt;ul&gt;과 &lt;li&gt; 목록 태그",
+    code: `&lt;ul&gt;\n  &lt;li&gt;사과&lt;/li&gt;\n  &lt;li&gt;바나나&lt;/li&gt;\n&lt;/ul&gt;`,
+    desc: "점(•) 목록을 만듭니다. &lt;ul&gt;은 목록 전체를 감싸고, 그 안의 각 항목은 &lt;li&gt;로 하나씩 적어줍니다.",
+  },
+  {
+    title: "&lt;button&gt; 버튼 태그",
+    code: `&lt;button&gt;클릭하세요&lt;/button&gt;`,
+    desc: "사용자가 누를 수 있는 버튼을 만듭니다. 실제 동작(무엇을 할지)은 JavaScript로 연결해줍니다.",
+  },
+  {
+    title: "&lt;input&gt; 입력창 태그",
+    code: `&lt;input type="text" placeholder="이름을 입력하세요"&gt;`,
+    desc: "사용자가 글자를 입력할 수 있는 칸을 만듭니다. type 속성으로 텍스트, 숫자, 비밀번호 등 입력 종류를 정할 수 있어요.",
+  },
+  {
+    title: "class와 id 속성",
+    code: `&lt;div class="box" id="main-box"&gt;&lt;/div&gt;`,
+    desc: "태그를 구분하기 위한 이름표예요. class는 여러 태그에 반복해서 붙일 수 있고, id는 문서 안에서 딱 하나뿐인 이름이어야 해요. CSS나 JavaScript에서 이 이름으로 태그를 찾아 스타일을 주거나 조작합니다.",
+  },
+];
+
+/* =========================================================
+   JavaScript 기초 코드 모음 (상단바 "JS 코드")
+   ========================================================= */
+const JS_BASICS = [
+  {
+    title: "var / let 변수 선언",
+    code: `var name = "철수";\nlet age = 20;`,
+    desc: "값을 저장해두는 '상자'를 만드는 것을 변수 선언이라고 해요. var나 let 뒤에 이름을 적고 = 로 값을 넣어줍니다.",
+  },
+  {
+    title: "const 상수 선언",
+    code: `const PI = 3.14;`,
+    desc: "한 번 값을 정하면 다시 바꿀 수 없는 변수예요. 절대 변하지 않는 값을 저장할 때 사용합니다.",
+  },
+  {
+    title: "문자열 (String)",
+    code: `let msg = "안녕하세요";`,
+    desc: "따옴표(\" \" 또는 ' ')로 감싼 글자 데이터를 문자열이라고 합니다.",
+  },
+  {
+    title: "숫자 계산 (연산자)",
+    code: `let sum = 3 + 5;\nlet result = 10 % 3;`,
+    desc: "+, -, *, / 는 더하기·빼기·곱하기·나누기이고, %는 나눈 나머지를 구하는 연산자예요.",
+  },
+  {
+    title: "비교 연산자",
+    code: `10 === 10   // true\n10 !== 5    // true`,
+    desc: "===는 '두 값이 완전히 같다', !==는 '두 값이 다르다'를 확인할 때 사용합니다. 결과는 true(참) 또는 false(거짓)로 나와요.",
+  },
+  {
+    title: "if / else 조건문",
+    code: `if (age &gt;= 18) {\n  console.log("성인");\n} else {\n  console.log("미성년자");\n}`,
+    desc: "조건이 참(true)이면 if 블록을, 거짓(false)이면 else 블록을 실행합니다. '만약 ~라면'이라는 뜻이에요.",
+  },
+  {
+    title: "for 반복문",
+    code: `for (let i = 0; i &lt; 5; i++) {\n  console.log(i);\n}`,
+    desc: "정해진 횟수만큼 같은 코드를 반복 실행합니다. i는 0부터 시작해서 5보다 작은 동안 1씩 증가하며 반복돼요.",
+  },
+  {
+    title: "함수 (function)",
+    code: `function greet(name) {\n  return "안녕, " + name;\n}`,
+    desc: "자주 쓰는 코드를 이름 붙여 묶어두고, 필요할 때 이름만 불러서(호출해서) 재사용하는 것이 함수입니다.",
+  },
+  {
+    title: "배열 (Array)",
+    code: `let fruits = ["사과", "바나나", "포도"];`,
+    desc: "여러 개의 값을 순서대로 담아두는 상자입니다. 대괄호 [ ]로 만들고, 각 값은 콤마(,)로 구분해요.",
+  },
+  {
+    title: "논리 연산자 &amp;&amp;, ||",
+    code: `true &amp;&amp; false   // false\ntrue || false   // true`,
+    desc: "&amp;&amp;(AND)는 양쪽이 모두 참일 때만 true, ||(OR)는 둘 중 하나만 참이어도 true가 됩니다.",
+  },
+  {
+    title: "console.log()",
+    code: `console.log("디버깅 메시지");`,
+    desc: "값이나 메시지를 브라우저 개발자 도구의 콘솔 창에 출력합니다. 코드가 잘 작동하는지 확인할 때 자주 사용해요.",
+  },
+  {
+    title: "document.getElementById()",
+    code: `const box = document.getElementById("main-box");`,
+    desc: "HTML 문서에서 특정 id를 가진 태그를 찾아옵니다. 찾아온 태그의 내용이나 스타일을 JavaScript로 바꿀 수 있어요.",
+  },
+  {
+    title: "addEventListener()",
+    code: `button.addEventListener("click", () =&gt; {\n  alert("클릭됨!");\n});`,
+    desc: "버튼 등의 요소에 '클릭했을 때 실행할 동작'을 연결합니다. 사용자와 상호작용하는 기능의 핵심이에요.",
+  },
+];
+
+/* =========================================================
+   전역 상태
+   ========================================================= */
+const quizResults = {
+  html: {},
+  js: {},
+};
+
+let typingIndex = 0;
+let charIndex = 0;
+let typingTimer = null;
+let isLiveMode = false;
+
+/* =========================================================
+   화면 전환
+   ========================================================= */
+function showScreen(screenId) {
+  document.querySelectorAll(".screen").forEach((s) =&gt; s.classList.remove("active"));
+  const target = document.getElementById("screen-" + screenId);
+  if (target) target.classList.add("active");
+
+  document.querySelectorAll(".nav-btn").forEach((btn) =&gt; {
+    btn.classList.toggle("active", btn.dataset.screen === screenId);
+  });
+
+  if (screenId === "home") {
+    document.querySelector('.nav-btn[data-screen="home"]').classList.add("active");
+  } else if (screenId.startsWith("html")) {
+    document.querySelector('.nav-btn[data-screen="html-codes"]').classList.add("active");
+  } else if (screenId.startsWith("js")) {
+    document.querySelector('.nav-btn[data-screen="js-codes"]').classList.add("active");
+  }
+
+  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+}
+
+/* =========================================================
+   HTML 이스케이프
+   ========================================================= */
+function escapeHtml(str) {
+  return str
+    .replace(/&amp;/g, "&amp;amp;")
+    .replace(/&lt;/g, "&amp;lt;")
+    .replace(/&gt;/g, "&amp;gt;");
+}
+
+/* =========================================================
+   해커 타이핑 애니메이션
+   ========================================================= */
+function startTypingAnimation() {
+  const codeEl = document.getElementById("typing-code");
+  if (!codeEl) return;
+
+  function typeNextChar() {
+    if (isLiveMode) return;
+    const currentCode = HACKER_CODES[typingIndex];
+
+    if (charIndex &lt; currentCode.length) {
+      const visible = currentCode.substring(0, charIndex + 1);
+      codeEl.innerHTML = escapeHtml(visible) + '&lt;span class="cursor-inline"&gt;|&lt;/span&gt;';
+      charIndex++;
+      typingTimer = setTimeout(typeNextChar, 30 + Math.random() * 40);
+    } else {
+      typingTimer = setTimeout(() =&gt; {
+        typingIndex = (typingIndex + 1) % HACKER_CODES.length;
+        charIndex = 0;
+        codeEl.innerHTML = "";
+        typeNextChar();
+      }, 2500);
+    }
+  }
+
+  typeNextChar();
+}
+
+/* =========================================================
+   방문자 실시간 코드 입력
+   ========================================================= */
+function setupVisitorInput() {
+  const terminalBody = document.getElementById("terminal-body");
+  const terminalWindow = document.querySelector(".terminal-window");
+  const codeEl = document.getElementById("typing-code");
+  const input = document.getElementById("visitor-input");
+  const hint = document.getElementById("type-hint");
+  if (!terminalBody || !codeEl || !input || !hint) return;
+
+  function render() {
+    const value = input.value;
+    const caret = input.selectionEnd;
+    const before = value.substring(0, caret);
+    const after = value.substring(caret);
+    codeEl.innerHTML =
+      escapeHtml(before) + '&lt;span class="cursor-inline"&gt;|&lt;/span&gt;' + escapeHtml(after);
+    codeEl.scrollTop = codeEl.scrollHeight;
+  }
+
+  function goLive() {
+    if (isLiveMode) return;
+    isLiveMode = true;
+    clearTimeout(typingTimer);
+    input.value = "";
+    codeEl.innerHTML = '&lt;span class="cursor-inline"&gt;|&lt;/span&gt;';
+    terminalWindow.classList.add("is-live");
+  }
+
+  terminalBody.addEventListener("click", () =&gt; {
+    goLive();
+    input.focus();
+  });
+
+  input.addEventListener("focus", () =&gt; {
+    goLive();
+    hint.classList.add("hidden");
+  });
+
+  input.addEventListener("blur", () =&gt; {
+    if (!input.value) hint.classList.remove("hidden");
+  });
+
+  input.addEventListener("keydown", (e) =&gt; {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const caret = input.selectionStart;
+      input.value = input.value.substring(0, caret) + "  " + input.value.substring(input.selectionEnd);
+      input.selectionStart = input.selectionEnd = caret + 2;
+      render();
+    }
+  });
+
+  input.addEventListener("input", () =&gt; {
+    hint.classList.add("hidden");
+    render();
+  });
+
+  input.addEventListener("keyup", render);
+  input.addEventListener("click", render);
+}
+
+/* =========================================================
+   코드 모음 렌더링 (상단바 HTML 코드 / JS 코드)
+   ========================================================= */
+function renderCodeList(containerId, items) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = items
+    .map(
+      (item, idx) =&gt; `
+    &lt;article class="code-ref-item"&gt;
+      &lt;div class="code-ref-head"&gt;
+        &lt;span class="code-ref-num"&gt;${idx + 1}&lt;/span&gt;
+        &lt;span class="code-ref-title"&gt;${escapeHtml(item.title)}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;pre class="code-block"&gt;&lt;code&gt;${escapeHtml(item.code)}&lt;/code&gt;&lt;/pre&gt;
+      &lt;p class="code-ref-desc"&gt;${escapeHtml(item.desc)}&lt;/p&gt;
+    &lt;/article&gt;`
+    )
+    .join("");
+}
+
+/* =========================================================
+   퀴즈 렌더링
+   ========================================================= */
+function renderQuiz(containerId, quizData, category) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  quizData.forEach((q, idx) =&gt; {
+    const key = `${category}-${idx}`;
+    const card = document.createElement("div");
+    card.className = "quiz-card";
+
+    const badgeClass = q.type === "mcq" ? "badge-mcq" : "badge-fill";
+    const badgeText = q.type === "mcq" ? `문제 ${idx + 1} · 객관식` : `문제 ${idx + 1} · 주관식`;
+
+    let bodyHtml = "";
+
+    if (q.type === "mcq") {
+      bodyHtml = `
+        &lt;div class="quiz-options"&gt;
+          ${q.options
+            .map(
+              (opt, oIdx) =&gt; `
+            &lt;label class="quiz-option" data-opt="${oIdx}"&gt;
+              &lt;input type="radio" name="mcq-${key}" value="${oIdx}" /&gt;
+              &lt;span&gt;${opt}&lt;/span&gt;
+            &lt;/label&gt;`
+            )
+            .join("")}
+        &lt;/div&gt;`;
+    } else {
+      bodyHtml = `
+        &lt;input type="text" class="quiz-input" id="input-${key}" placeholder="정답을 입력하세요" /&gt;`;
+    }
+
+    card.innerHTML = `
+      &lt;span class="quiz-badge ${badgeClass}"&gt;${badgeText}&lt;/span&gt;
+      &lt;p class="quiz-question"&gt;${q.question}&lt;/p&gt;
+      ${bodyHtml}
+      &lt;div class="quiz-actions"&gt;
+        &lt;button class="btn-hint" data-hint="${key}"&gt;💡 힌트 보기&lt;/button&gt;
+        &lt;button class="btn-check" data-check="${key}"&gt;✓ 즉시 답 확인&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="quiz-hint" id="hint-${key}"&gt;${q.hint}&lt;/div&gt;
+      &lt;div class="quiz-result" id="result-${key}"&gt;&lt;/div&gt;
+    `;
+
+    container.appendChild(card);
+  });
+
+  container.querySelectorAll(".quiz-option").forEach((label) =&gt; {
+    label.addEventListener("click", () =&gt; {
+      const group = label.closest(".quiz-options");
+      group.querySelectorAll(".quiz-option").forEach((l) =&gt; l.classList.remove("selected"));
+      label.classList.add("selected");
+    });
+  });
+
+  container.querySelectorAll(".btn-hint").forEach((btn) =&gt; {
+    btn.addEventListener("click", () =&gt; {
+      const key = btn.dataset.hint;
+      const hintEl = document.getElementById(`hint-${key}`);
+      hintEl.classList.toggle("show");
+      btn.textContent = hintEl.classList.contains("show") ? "💡 힌트 숨기기" : "💡 힌트 보기";
+    });
+  });
+
+  container.querySelectorAll(".btn-check").forEach((btn) =&gt; {
+    btn.addEventListener("click", () =&gt; {
+      const key = btn.dataset.check;
+      const qIdx = Number(key.split("-")[1]);
+      checkAnswer(category, qIdx, key, quizData);
+    });
+  });
+}
+
+function checkAnswer(category, qIdx, key, quizData) {
+  const q = quizData[qIdx];
+  const resultEl = document.getElementById(`result-${key}`);
+  let isCorrect = false;
+
+  if (q.type === "mcq") {
+    const selected = document.querySelector(`input[name="mcq-${key}"]:checked`);
+    if (!selected) {
+      resultEl.textContent = "⚠ 보기를 하나 선택해주세요.";
+      resultEl.className = "quiz-result show wrong";
+      return;
+    }
+    isCorrect = Number(selected.value) === q.answerIndex;
+  } else {
+    const input = document.getElementById(`input-${key}`);
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = q.answer.trim().toLowerCase();
+    if (!userAnswer) {
+      resultEl.textContent = "⚠ 정답을 입력해주세요.";
+      resultEl.className = "quiz-result show wrong";
+      return;
+    }
+    isCorrect = userAnswer === correctAnswer;
+  }
+
+  quizResults[category][key] = isCorrect;
+
+  if (isCorrect) {
+    resultEl.textContent = "✓ 정답입니다!";
+    resultEl.className = "quiz-result show correct";
+  } else {
+    const correctText = q.type === "mcq" ? q.options[q.answerIndex] : q.answer;
+    resultEl.textContent = `✗ 오답입니다. 정답: ${correctText}`;
+    resultEl.className = "quiz-result show wrong";
+  }
+
+  updateScore(category);
+}
+
+function updateScore(category) {
+  const total = category === "html" ? HTML_QUIZ.length : JS_QUIZ.length;
+  const correct = Object.values(quizResults[category]).filter(Boolean).length;
+  const scoreEl = document.getElementById(`${category}-score`);
+  if (scoreEl) scoreEl.textContent = `${correct} / ${total} 문제 정답`;
+}
+
+/* =========================================================
+   이벤트 바인딩
+   ========================================================= */
+document.querySelectorAll(".nav-btn").forEach((btn) =&gt; {
+  btn.addEventListener("click", () =&gt; showScreen(btn.dataset.screen));
+});
+
+document.querySelectorAll("[data-screen]").forEach((el) =&gt; {
+  if (el.classList.contains("nav-btn")) return;
+  el.addEventListener("click", () =&gt; showScreen(el.dataset.screen));
+});
+
+document.querySelectorAll(".crumb").forEach((btn) =&gt; {
+  btn.addEventListener("click", () =&gt; showScreen(btn.dataset.screen));
+});
+
+/* =========================================================
+   초기화
+   ========================================================= */
+renderQuiz("html-quiz-container", HTML_QUIZ, "html");
+renderQuiz("js-quiz-container", JS_QUIZ, "js");
+renderCodeList("html-codes-container", HTML_BASICS);
+renderCodeList("js-codes-container", JS_BASICS);
+startTypingAnimation();
+setupVisitorInput();
+showScreen("home");</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>style.css 코드 보기</summary>
+            <pre><code>/* =========================================================
+   디자인 토큰
+   ========================================================= */
+:root {
+  --bg: #0a0e17;
+  --bg-panel: #111827;
+  --bg-card: #1a2234;
+  --bg-elevated: #243049;
+  --border: #2d3a52;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --green: #00ff88;
+  --green-dim: #00cc6a;
+  --blue: #38bdf8;
+  --purple: #a78bfa;
+  --orange: #fb923c;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --font-body: "Noto Sans KR", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input { font-family: inherit; cursor: pointer; }
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   상단 네비게이션
+   ========================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 60px;
+}
+
+.navbar-spacer {
+  justify-self: end;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 18px;
+  pointer-events: none;
+  grid-column: 3;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 18px;
+  justify-self: start;
+  grid-column: 1;
+}
+
+.brand-icon {
+  color: var(--green);
+  font-size: 20px;
+}
+
+.brand-text { color: var(--text); }
+
+.navbar-menu {
+  display: flex;
+  gap: 4px;
+  justify-self: center;
+  grid-column: 2;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-btn:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+  color: var(--green);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+/* =========================================================
+   화면 전환
+   ========================================================= */
+#app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.screen { display: none; }
+.screen.active {
+  display: block;
+  animation: fadeUp 0.35s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   홈 — 히어로 &amp; 해커 애니메이션
+   ========================================================= */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: stretch;
+  margin-bottom: 48px;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.glitch {
+  position: relative;
+  color: var(--green);
+  font-family: var(--font-mono);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  color: var(--blue);
+  animation: glitch1 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch::after {
+  color: var(--purple);
+  animation: glitch2 3s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch1 {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-3px, 1px); }
+  94% { transform: translate(3px, -1px); }
+}
+
+@keyframes glitch2 {
+  0%, 90%, 100% { transform: translate(0); }
+  91% { transform: translate(2px, 2px); }
+  93% { transform: translate(-2px, -1px); }
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+.tag-html { color: var(--orange); border-color: rgba(251, 146, 60, 0.4); background: rgba(251, 146, 60, 0.1); }
+.tag-js { color: var(--yellow); border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.1); }
+.tag-quiz { color: var(--green); border-color: rgba(0, 255, 136, 0.4); background: rgba(0, 255, 136, 0.1); }
+
+/* 해커 씬 */
+.hacker-scene {
+  position: relative;
+  height: 340px;
+  min-height: 340px;
+  max-height: 340px;
+}
+
+.terminal-window {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.dot.red { background: var(--red); }
+.dot.yellow { background: var(--yellow); }
+.dot.green { background: var(--green); }
+
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-left: 8px;
+}
+
+.terminal-body {
+  position: relative;
+  padding: 20px;
+  flex: 1;
+  height: 0;
+  overflow: hidden;
+}
+
+.hacker-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  height: 100%;
+}
+
+/* 해커 아바타 */
+.hacker-avatar {
+  position: relative;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.avatar-hood {
+  width: 60px;
+  height: 50px;
+  background: #1e293b;
+  border-radius: 30px 30px 10px 10px;
+  border: 2px solid var(--green);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  animation: hoodGlow 2s ease-in-out infinite;
+}
+
+@keyframes hoodGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(0, 255, 136, 0.6); }
+}
+
+.avatar-face {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+}
+
+.eye {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green);
+  animation: blink 4s infinite;
+}
+
+@keyframes blink {
+  0%, 48%, 52%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+.typing-hands {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 12px;
+  background: var(--text-dim);
+  border-radius: 4px;
+  animation: typing 0.15s infinite alternate;
+}
+
+@keyframes typing {
+  from { transform: translateX(-50%) translateY(0); }
+  to { transform: translateX(-50%) translateY(3px); }
+}
+
+/* 코드 스트림 */
+.code-stream {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.typing-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--green);
+  white-space: pre-wrap;
+  word-break: break-all;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.typing-code .cursor-inline {
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.visitor-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.8;
+  padding: 0;
+  cursor: text;
+}
+
+.terminal-window.is-live {
+  border-color: var(--green);
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.type-hint {
+  position: absolute;
+  left: 20px;
+  bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  opacity: 0.85;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  animation: hintPulse 1.8s ease-in-out infinite;
+}
+
+.type-hint.hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.95; }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.4), transparent);
+  animation: scan 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* 매트릭스 배경 */
+.matrix-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, var(--green) 2px, var(--green) 3px);
+  background-size: 20px 40px;
+  animation: matrixScroll 8s linear infinite;
+  border-radius: var(--radius);
+}
+
+@keyframes matrixScroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 400px; }
+}
+
+/* 홈 카드 */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.home-card {
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  color: var(--text);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.home-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green);
+  box-shadow: 0 8px 30px rgba(0, 255, 136, 0.12);
+}
+
+.home-card-icon {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+.home-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.home-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   설명 페이지
+   ========================================================= */
+.page-header {
+  margin-bottom: 36px;
+}
+
+.page-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.page-desc {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 640px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.crumb {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+.crumb:hover { color: var(--green); text-decoration: underline; }
+.crumb-current { color: var(--text-muted); }
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.info-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--green);
+}
+
+.info-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.code-block {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-list li {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+
+.info-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+}
+
+.info-list code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--orange);
+  background: rgba(251, 146, 60, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   코드 모음 (상단바 — HTML 코드 / JS 코드)
+   ========================================================= */
+.code-ref-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.code-ref-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.code-ref-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.code-ref-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #0a0e17;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-ref-title {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.code-ref-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-top: 14px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: #0a0e17;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  transition: filter 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-primary:active { transform: scale(0.98); }
+
+/* =========================================================
+   퀴즈
+   ========================================================= */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.quiz-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.badge-mcq { background: rgba(56, 189, 248, 0.15); color: var(--blue); }
+.badge-fill { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
+
+.quiz-question {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.quiz-snippet {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 16px;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--text);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.quiz-option:hover { border-color: var(--green); }
+.quiz-option.selected { border-color: var(--green); background: rgba(0, 255, 136, 0.08); }
+.quiz-option input { accent-color: var(--green); }
+
+.quiz-input {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.quiz-input::placeholder { color: var(--text-dim); }
+
+.quiz-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-hint {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: var(--yellow);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.btn-hint:hover { background: rgba(251, 191, 36, 0.2); }
+
+.btn-check {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.btn-check:hover { background: #2d3f5c; }
+
+.quiz-hint {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--yellow);
+  line-height: 1.6;
+}
+
+.quiz-hint.show { display: block; }
+
+.quiz-result {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.quiz-result.show { display: block; }
+.quiz-result.correct {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+.quiz-result.wrong {
+  background: rgba(248, 113, 113, 0.1);
+  color: var(--red);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.quiz-score {
+  position: sticky;
+  bottom: 20px;
+  margin-top: 32px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================================
+   반응형
+   ========================================================= */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hacker-scene {
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
+  }
+
+  .hacker-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .navbar {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 10px 12px;
+    height: auto;
+    gap: 10px;
+  }
+
+  .navbar-brand {
+    justify-self: center;
+    grid-row: 1;
+  }
+
+  .navbar-menu {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-spacer {
+    display: none;
+  }
+
+  .nav-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  #app {
+    padding: 24px 16px 60px;
+  }
+}</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>5일차</span>
+    </footer>
+  </div>
+</body>
+</html>

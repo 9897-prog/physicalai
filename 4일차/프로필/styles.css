@@ -1,0 +1,46 @@
+body{
+    background-color: #f4f4f4;
+    font-family: arial;
+    display: flex;             /*위아래 정렬*/
+    justify-content: center;   /*좌우 정렬*/
+    align-items: center;       /*위아래 정렬*/
+    height: 100vh;
+}
+.card{
+    width: 400px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+h1{
+    color: #333;
+    margin: 15pxp 0 5px;
+}
+.info{
+    color: #777;
+    margin-bottom: 20px;
+}
+.intro{
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.btn{
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #4a6cf7;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+.btn:hover{
+    background-color: #2748d8;
+}

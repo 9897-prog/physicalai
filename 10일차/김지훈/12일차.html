@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="11일차.html">&larr; 11일</a>
+        <span class="day-title"><span class="n">12일차</span></span>
+        
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">외부 API</span>
+          <span class="badge">Supabase</span>
+        </div>
+        <h2>외부 API 활용 + Supabase 연동 방명록</h2>
+        <p class="lede">
+          날씨·대기질 공개 API를 호출하는 연습을 거쳐, Supabase를 백엔드로 쓰는 실제 동작하는
+          방명록 웹앱까지 만들었습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>외부 API 활용 연습 (날씨 · 대기질)</h3>
+          </div>
+          <p>Open-Meteo 공개 API로 GET 요청, JSON 파싱을 연습한 뒤, 도시 이름으로 날씨와 미세먼지를 조회해 외출 여부까지 종합 판정하는 프로그램으로 발전시켰습니다</p>
+          <details class="code-viewer">
+            <summary>1. first_call.py — 기본 GET 요청 코드 보기</summary>
+            <pre><code>import requests
+# ↑HTTP 요청을 보내기 위한 라이브러리
+URL = "https://api.open-meteo.com/v1/forecast"
+# ↑Open-meteo(오픈소스 날씨 API)의 예보 조회 엔드포인트 URL
+params={
+    "latitude":37.55,        #위도 (서울기준, 북위37.55도)
+    "longitude":127.0,       #경도 (동경 127.0도)
+    "current": "temperature_2m,precipitation"
+    # ↑ 현재 시각 기준으로 받아올 항목 지정
+    # - temperature_2m : 지상 2m 높이의 기온
+    # - precipitation  : 강수량
+}
+   
+# GET 요청 보내기 (변수)
+# - params에 담긴 값들이 URL 뒤에 쿼리스트링으로 자동 변환됨
+# - timeout=5 : 5초 안에 응답이 없으면 예외 발생 (무한 대기 방지)
+r = requests.get(URL, params=params, timeout=5)
+
+print("status code :", r.status_code)  # HTTP 상태 코드 (200이면 정상 응답)
+print("ok?         :", r.ok)           # 상태 코드가 200~399면 True
+print("first 60 ch :", r.text[:60])    # 응답 본문(JSON 문자열)의 앞 60글자만 미리보기</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>2. show_json.py — JSON 파싱 코드 보기</summary>
+            <pre><code>import json
+# ↑ 딕셔너리를 보기 좋은 JSON 문자열로 출력하기 위한 라이브러리
+import requests
+
+URL="https://api.open-meteo.com/v1/forecast"
+params = {
+    "latitude": 37.55,
+    "longitude": 127.0,
+    "current": "temperature_2m,precipitation"
+}
+r= requests.get(URL, params=params, timeout=5)
+data=r.json()
+# ↑ 응답 본문(JSON 문자열)을 파이썬 딕셔너리로 변환
+#   r.text는 문자열 그대로지만, r.json()은 바로 data["current"]처럼 키로 값을 꺼낼 수 있게 해줌
+
+print("key        :", list(data.keys()))
+# ↑ data 딕셔너리에 어떤 최상위 키들이 들어있는지 확인
+print("current box:")
+print(json.dumps(data["current"], indent=2))
+# ↑ data["current"] 안에는 시각(time), 기온, 강수량 등이 들어있음
+#   json.dumps(..., indent=2)로 들여쓰기를 적용해 읽기 좋게 출력
+print("temperature: ", data["current"]["temperature_2m"],"C")
+# ↑ current 딕셔너리 안에서 temperature_2m 값만 꺼내서 단위(C)와 함께 출력</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>3. weather.py — 도시별 날씨 조회 코드 보기</summary>
+            <pre><code>import sys
+# ↑ 프로그램 실행할 때 넘긴 값(명령줄 인자)을 읽기 위한 라이브러리
+#   예: python first_call.py Busan → "Busan"이라는 값을 코드에서 읽을 수 있게 해줌
+import requests
+
+GEO="https://geocoding-api.open-meteo.com/v1/search"
+# ↑ "도시 이름"을 "위도/경도"로 변환해주는 검색 API 주소
+FORECAST="https://api.open-meteo.com/v1/forecast"
+# ↑ 위도/경도를 넣으면 날씨를 알려주는 API 주소
+TIMEOUT = 5
+# ↑ 5초로 고정된 타임아웃 값을 변수로 빼둔 것
+#   나중에 여러 requests.get()에서 timeout=TIMEOUT으로 재사용
+
+def find_city(name):
+    """도시 이름 -&gt; (위도, 경도, 표시용 이름)"""
+    # ↑ 이 함수가 뭘 받아서 뭘 돌려주는지 요약해둔 설명(docstring)
+    r = requests.get(GEO, params={"name":name, "count":1}, timeout=TIMEOUT)
+    # ↑ GEO 주소에 "이 이름으로 도시 찾아줘(name), 결과는 1개만(count:1)" 요청
+    hit = r.json()["results"][0]
+    # ↑ 응답 안의 "results"는 검색된 도시 목록(리스트)
+    #   여러 개가 검색될 수 있어서 리스트 형태인데, 그중 첫 번째([0]) 결과만 사용
+    label = hit["name"] + ", " + hit["country_code"]
+    # ↑ "도시명, 국가코드" 형태의 문자열을 만듦 (예: "Seoul, KR")
+    #   화면에 출력할 때 보기 좋게 쓰려고 미리 만들어두는 것
+    return hit["latitude"], hit["longitude"], label
+    # ↑ 위도, 경도, 표시용 이름 세 가지를 한꺼번에 돌려줌
+    # 호출하는 쪽에서는 세 변수의 나눠서 받음
+
+city = sys.argv[1] if len (sys.argv) &gt; 1 else "Seoul"
+# ↑ 실행할 때 도시 이름을 넘겼으면 그 값을 쓰고(sys.argv[1]),
+#   안 넘겼으면(len(sys.argv) &gt; 1이 거짓) 기본값 "Seoul"을 씀
+#   예: "python first_call.py Busan" → city는 "Busan"
+#       "python first_call.py"      → city는 "Seoul
+lat, lon, label = find_city(city)
+#위에서 만든 함수를 호출해서 위도/경도/표시이름을 한 번에 받음
+
+params = {
+    "latitude": lat,
+    "longitude": lon,
+    "current": "temperature_2m",
+    "hourly": "precipitation_probability",
+     # ↑ hourly는 "시간대별" 데이터를 요청하는 항목
+    #   여기서는 시간별 "강수 확률(precipitation_probability)"을 요청
+    "forecast_days":1,
+    # ↑ 예보를 며칠치 받을지 지정 (1이면 오늘 하루치만)
+}
+r= requests.get(FORECAST, params=params, timeout=TIMEOUT)
+data=r.json()
+
+temp=data["current"]["temperature_2m"]
+# ↑ 현재 기온
+rain=data["hourly"]["precipitation_probability"][0]
+# ↑ hourly로 요청하면 시간대별 값이 리스트로 옴 (예: 24시간이면 24개짜리 리스트)
+# [0]은 그 리스트의 첫 번째 시간(가장 이른 시간)의 강수 확률 값을 꺼낸다는 뜻
+print("city       :", label)
+print("temperature:", temp, "C")
+print("rain chance:", rain, "%")</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>4. air.py — 대기질(미세먼지) 조회 코드 보기</summary>
+            <pre><code>import sys
+import requests
+
+GEO="https://geocoding-api.open-meteo.com/v1/search"
+AIR="https://air-quality-api.open-meteo.com/v1/air-quality"
+# 대기질을 알려주는 별도의 API주소
+TIMEOUT = 5
+
+def find_city(name):
+    r=requests.get(GEO, params={"name": name, "count":1}, timeout=TIMEOUT)
+    hit=r.json()["results"][0]
+    label = hit["name"] + ", " + hit["country_code"]
+    #이름과 국가코드를 하나의 문자열로 합쳐서 라벨 생성
+    return hit["latitude"], hit["longitude"], label
+    #받는쪽과 갯수를 맞춤
+
+city=sys.argv[1] if len(sys.argv) &gt; 1 else "Seoul"
+lat, lon, label = find_city(city)
+
+params = {"latitude": lat, "longitude": lon, "current": "pm2_5,pm10"}
+#pm2_5, pm10 : 초미세먼지, 미세먼지 농도를 요청
+cur = requests.get(AIR, params=params, timeout=TIMEOUT).json()["current"]
+#json 변환 &gt; current 키 꺼내기를 한줄로
+
+pm25 = cur["pm2_5"]
+grade="GOOD" if pm25 &lt;= 15 else ("CAUTION" if pm25 &lt;= 35 else "BAD")
+#두번 겹친 (중첩 조건식)
+# pm25가 15이하면 GOOD
+# 아니면 다시 확인해서 35이하면 CAUTION
+# 그것도 아니면 35초과 BAD
+
+print("city      :", label)
+print("pm2.5     :", pm25, "ug/m3")
+print("pm10      :", cur["pm10"], "ug/m3")
+print("grade     :", grade)</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>5. app.py — 종합 외출 판정 프로그램 코드 보기</summary>
+            <pre><code>import sys
+import requests
+
+GEO = "https://geocoding-api.open-meteo.com/v1/search"
+FORECAST = "https://api.open-meteo.com/v1/forecast"
+AIR = "https://air-quality-api.open-meteo.com/v1/air-quality"
+TIMEOUT = 5
+# ↑ 각 요청이 5초 넘게 응답 없으면 그 요청만 포기하고 다음으로 넘어감
+
+
+def find_city(name):
+    """도시 이름 -&gt; (위도, 경도, 표시용 이름). 실패하면 None"""
+    try:
+    #↑ 이 블록 안에서 에러가 나면 프로그램이 멈추지 않고 except로 넘어가게 함
+        r = requests.get(GEO, params={"name": name, "count": 1}, timeout=TIMEOUT)
+        r.raise_for_status()
+        # ↑ 응답 상태 코드가 400/500대(에러)면 강제로 예외를 발생시킴
+        # (에러 응답이 와도 조용히 넘어가는데, 이 줄이 있어야 에러를 바로 알아챌 수 있음)
+        results = r.json().get("results")
+        if not results:
+            return None
+        hit = results[0]
+        label = hit["name"] + ", " + hit["country_code"]
+        return hit["latitude"], hit["longitude"], label
+    except requests.exceptions.RequestException:
+    #↑ 위 try 블록에서 네트워크 관련 에러(타임아웃, 연결 끊김 등)가 나면 여기로 옴
+        return None
+        # ↑ 에러가 나도 프로그램이 멈추지 않고, "실패했다"는 표시로 None을 돌려줌
+
+
+def get_weather(lat, lon):
+    """(기온, 강수확률) -&gt; 실패하면 (None, None)"""
+    try:
+        params = {
+            "latitude": lat,
+            "longitude": lon,
+            "current": "temperature_2m",
+            "hourly": "precipitation_probability",
+            "forecast_days": 1,
+        }
+        data = requests.get(FORECAST, params=params, timeout=TIMEOUT).json()
+        temp = data["current"]["temperature_2m"]
+        rain = data["hourly"]["precipitation_probability"][0]
+        return temp, rain
+    except requests.exceptions.RequestException:
+        return None, None
+
+
+def get_pm25(lat, lon):
+    """PM2.5 -&gt; 실패하면 None"""
+    try:
+        params = {"latitude": lat, "longitude": lon, "current": "pm2_5"}
+        data = requests.get(AIR, params=params, timeout=TIMEOUT).json()
+        return data["current"]["pm2_5"]
+    except requests.exceptions.RequestException:
+        return None
+
+
+def judge(temp, rain, pm25):
+    """기온/강수확률/PM2.5를 종합해서 외출 판정 한 줄을 만듦"""
+    reasons = []
+    level = 0
+    # ↑ 0=좋음, 1=주의, 2=비권장. 셋 중 가장 나쁜 값으로 최종 판정
+
+    if rain is not None:
+        if rain &gt;= 70:
+            level = max(level, 2)
+            reasons.append("비 올 확률 높음")
+        elif rain &gt;= 40:
+            level = max(level, 1)
+            reasons.append("비 올 수도 있음")
+
+    if pm25 is not None:
+        if pm25 &gt; 35:
+            level = max(level, 2)
+            reasons.append("미세먼지 나쁨")
+        elif pm25 &gt; 15:
+            level = max(level, 1)
+            reasons.append("미세먼지 보통")
+
+    if temp is not None:
+        if temp &lt;= -5 or temp &gt;= 35:
+            level = max(level, 2)
+            reasons.append("기온 극단적")
+        elif temp &lt;= 0 or temp &gt;= 30:
+            level = max(level, 1)
+            reasons.append("기온 부담")
+
+    if not reasons:
+        reasons.append("데이터 부족")
+
+    verdict = ["외출 좋음", "외출 주의", "외출 비권장"][level]
+    return verdict + " (" + ", ".join(reasons) + ")"
+
+
+def main():
+    city = sys.argv[1] if len(sys.argv) &gt; 1 else "Seoul"
+    # 실행할 때 도시 이름을 넘겼으면 그 값을, 안 넘겼으면 "Seoul"을 기본값으로 사용
+
+    found = find_city(city)
+    if found is None:
+        print("city       :", city)
+        print("error      : 도시를 찾지 못했습니다 (검색 실패 또는 응답 없음)")
+        return
+
+    lat, lon, label = found
+    temp, rain = get_weather(lat, lon)
+    pm25 = get_pm25(lat, lon)
+
+    print("city       :", label)
+    print("temperature:", temp if temp is not None else "정보 없음", "C")
+    #temp 값이 있으면 그 값을, 없으면(None이면) "정보 없음"이라는 글자를 출력
+    print("rain chance:", rain if rain is not None else "정보 없음", "%")
+    print("pm2.5      :", pm25 if pm25 is not None else "정보 없음", "ug/m3")
+    print("verdict    :", judge(temp, rain, pm25))
+    #↑ 세 값을 judge()에 넘겨서 만든 종합 판정 문장을 출력
+
+
+if __name__ == "__main__":
+#↑ 이 파일을 "직접" 실행했을 때만 아래 main()을 호출하라는 뜻
+    main()
+
+# 손코딩은 작성자의 실력향상과 이해도를 높이기 위한 핵심로직을 익히기 위한게 우선.
+# (API호출 &gt;&gt; 값 꺼내기 &gt;&gt; 출력)
+# 둘다 API가 정상 응답할때만 결과값은 같지만, 정상응답하지 않을때는 결과값이 달라짐.
+
+# 비유 : timeout "전화 안 받으면 5초까지만 기다려"  
+#      : try/except "5초 기다려도 안 받으면 통화 실패라고 기록하고 다음 사람한테 전화 걸어"</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Supabase · 종합 실습</span>
+            <h3>오늘의 한줄평 (방명록)</h3>
+          </div>
+          <p>Supabase를 백엔드로 써서 닉네임과 오늘 하루 한줄평을 실시간으로 남기고 조회하는 방명록 웹앱</p>
+          <div class="project-item-actions">
+            <a class="card-link" href="../../12일차/김지훈/index.html" target="_blank" rel="noopener">새 탭에서 열기 →</a>
+          </div>
+          <img class="content-image" src="../../12일차/김지훈/SQL Editor.png" alt="Supabase SQL Editor로 테이블·RLS 정책을 설정하는 화면">
+          <img class="content-image" src="../../12일차/김지훈/Table Editor.png" alt="Supabase Table Editor로 저장된 한줄평 데이터를 확인하는 화면">
+          <details class="code-viewer">
+            <summary>supabase_setup.sql 코드 보기</summary>
+            <pre><code>-- ============================================
+-- 1. counsels 테이블 생성
+-- ============================================
+create table if not exists counsels (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  student_name text not null,
+  content text not null
+);
+
+-- ============================================
+-- (권장) Row Level Security 설정
+-- 웹페이지에서 anon key로 읽고/쓰려면 RLS 정책이 필요합니다.
+-- 친구들끼리 자유롭게 쓰는 방명록 형태이므로 누구나 읽기/쓰기 가능하도록 설정합니다.
+-- ============================================
+alter table counsels enable row level security;
+
+create policy "누구나 조회 가능"
+  on counsels for select
+  using (true);
+
+create policy "누구나 작성 가능"
+  on counsels for insert
+  with check (true);
+
+-- ============================================
+-- 2. 테스트용 가짜 데이터 5건 INSERT
+-- ============================================
+insert into counsels (student_name, content) values
+  ('김지훈', '오늘은 코딩하다가 커피를 세 잔이나 마셨다.'),
+  ('이서연', '드디어 버그를 잡았다! 오늘 하루는 승리한 날.'),
+  ('박민준', '점심에 먹은 돈까스가 인생 최고의 맛이었다.'),
+  ('최유진', 'Supabase 처음 써보는데 생각보다 재밌다.'),
+  ('정하늘', '오늘은 그냥... 그런 하루였다. 내일은 더 힘내야지.');</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>index.html 코드 보기</summary>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8" /&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+&lt;title&gt;오늘의 한줄평&lt;/title&gt;
+&lt;style&gt;
+  :root {
+    --bg: #fdf6ec;
+    --card: #ffffff;
+    --accent: #ff9f68;
+    --accent-dark: #e8814a;
+    --text: #3a3a3a;
+    --sub: #999;
+    --border: #f0e4d4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 26px;
+    margin: 0 0 6px;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--sub);
+    font-size: 14px;
+  }
+
+  form {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    margin-bottom: 32px;
+  }
+
+  form input, form textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    margin-bottom: 12px;
+    resize: none;
+  }
+
+  form textarea {
+    min-height: 70px;
+  }
+
+  form input:focus, form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  form button {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  form button:hover { background: var(--accent-dark); }
+  form button:disabled { background: #ddd; cursor: not-allowed; }
+
+  #status {
+    font-size: 13px;
+    margin-top: 8px;
+    min-height: 16px;
+  }
+
+  #status.error { color: #d1453b; }
+  #status.ok { color: #4a9d5f; }
+
+  .list { display: flex; flex-direction: column; gap: 12px; }
+
+  .entry {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .entry .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+
+  .entry .name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--accent-dark);
+  }
+
+  .entry .time {
+    font-size: 12px;
+    color: var(--sub);
+  }
+
+  .entry .content {
+    font-size: 15px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--sub);
+    font-size: 14px;
+    padding: 40px 0;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="wrap"&gt;
+    &lt;header&gt;
+      &lt;h1&gt;📔 오늘의 한줄평&lt;/h1&gt;
+      &lt;p&gt;친구들의 오늘 하루, 한 줄로 남겨보세요&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;form id="entry-form"&gt;
+      &lt;input type="text" id="student_name" placeholder="닉네임" maxlength="20" required /&gt;
+      &lt;textarea id="content" placeholder="오늘 하루 한줄평을 남겨주세요" maxlength="200" required&gt;&lt;/textarea&gt;
+      &lt;button type="submit" id="submit-btn"&gt;작성하기&lt;/button&gt;
+      &lt;div id="status"&gt;&lt;/div&gt;
+    &lt;/form&gt;
+
+    &lt;div class="list" id="list"&gt;
+      &lt;div class="empty"&gt;불러오는 중...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    // ============================================
+    // 여기에 본인의 Supabase 프로젝트 정보를 입력하세요
+    // Supabase 대시보드 -&gt; Settings -&gt; API 에서 확인 가능
+    // ============================================
+    const SUPABASE_URL = "https://mftbbemfavowclaqrpoh.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mdGJiZW1mYXZvd2NsYXFycG9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMTExODIsImV4cCI6MjEwMjY4NzE4Mn0.0h77kygkMRbLxxw8TgnHAZ1a7UTDdz3tcerOFybN4l4";
+
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById("entry-form");
+    const nameInput = document.getElementById("student_name");
+    const contentInput = document.getElementById("content");
+    const statusEl = document.getElementById("status");
+    const submitBtn = document.getElementById("submit-btn");
+    const listEl = document.getElementById("list");
+
+    function formatTime(iso) {
+      const d = new Date(iso);
+      return d.toLocaleString("ko-KR", {
+        month: "long", day: "numeric",
+        hour: "2-digit", minute: "2-digit"
+      });
+    }
+
+    function renderEntries(entries) {
+      if (!entries || entries.length === 0) {
+        listEl.innerHTML = '&lt;div class="empty"&gt;아직 작성된 한줄평이 없어요.&lt;/div&gt;';
+        return;
+      }
+      listEl.innerHTML = entries.map(e =&gt; `
+        &lt;div class="entry"&gt;
+          &lt;div class="top"&gt;
+            &lt;span class="name"&gt;${escapeHtml(e.student_name)}&lt;/span&gt;
+            &lt;span class="time"&gt;${formatTime(e.created_at)}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class="content"&gt;${escapeHtml(e.content)}&lt;/div&gt;
+        &lt;/div&gt;
+      `).join("");
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    async function loadEntries() {
+      const { data, error } = await client
+        .from("counsels")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        listEl.innerHTML = '&lt;div class="empty"&gt;불러오기에 실패했습니다.&lt;/div&gt;';
+        console.error(error);
+        return;
+      }
+      renderEntries(data);
+    }
+
+    form.addEventListener("submit", async (e) =&gt; {
+      e.preventDefault();
+      const student_name = nameInput.value.trim();
+      const content = contentInput.value.trim();
+
+      if (!student_name || !content) {
+        statusEl.textContent = "닉네임과 한줄평을 모두 입력해주세요.";
+        statusEl.className = "error";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      statusEl.textContent = "";
+      statusEl.className = "";
+
+      const { error } = await client
+        .from("counsels")
+        .insert([{ student_name, content }]);
+
+      submitBtn.disabled = false;
+
+      if (error) {
+        statusEl.textContent = "작성에 실패했습니다. 잠시 후 다시 시도해주세요.";
+        statusEl.className = "error";
+        console.error(error);
+        return;
+      }
+
+      statusEl.textContent = "작성되었습니다!";
+      statusEl.className = "ok";
+      contentInput.value = "";
+      loadEntries();
+    });
+
+    loadEntries();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </details>
+        </div>
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>12일차</span>
+    </footer>
+  </div>
+</body>
+</html>

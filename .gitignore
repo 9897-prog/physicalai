@@ -1,2 +1,12 @@
 .claude/
 .ipynb_checkpoints/
+node_modules/
+.next/
+__pycache__/
+*.pyc
+*.db
+
+# 11일차 장바구니 프로젝트는 별도 저장소(Wish-List)에 이미 있는 별도 git 저장소임 - 그대로 둠
+11일차/제출/
+# create-next-app 초기 스캐폴드 그대로(수정 전), 실제 작업 내용 없음
+11일차/dev/

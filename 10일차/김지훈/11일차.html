@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="10일차.html">&larr; 10일</a>
+        <span class="day-title"><span class="n">11일차</span></span>
+        <a class="back-link" href="12일차.html">12일 &rarr;</a>
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">Next.js</span>
+          <span class="badge">FastAPI</span>
+          <span class="badge">SQLite</span>
+        </div>
+        <h2>풀스택 미니 쇼핑몰 장바구니</h2>
+        <p class="lede">
+          Next.js(프론트) + FastAPI(백엔드) + SQLite(DB)로 처음 만들어본 풀스택 웹앱입니다.
+          영수증 스타일 UI로 상품을 담고, 수량을 바꾸고, 삭제하는 것까지 전부 실제 DB에
+          반영됩니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">종합 실습</span>
+            <h3>미니 쇼핑몰 장바구니</h3>
+          </div>
+          <p>상품 목록 표시, 장바구니 담기(중복 시 수량+1), 수량 +/- 변경, 개별/전체 삭제, 총 금액 자동 계산까지 되는 실제 동작하는 쇼핑몰 카트</p>
+          <img class="content-image" src="../../11일차/screenshots/미니쇼핑몰_실행화면.png" alt="미니 쇼핑몰 장바구니 실행 화면 (영수증 스타일 UI)">
+          <ul class="meta-list">
+            <li><strong>API</strong> : GET /products, GET /cart, POST /cart, PATCH /cart/{id}, DELETE /cart/{id}, DELETE /cart</li>
+            <li><strong>실행 방법</strong> : backend는 uvicorn main:app --reload (127.0.0.1:8000), frontend는 npm run dev (localhost:3000)</li>
+          </ul>
+          <details class="code-viewer">
+            <summary>backend/main.py 코드 보기</summary>
+            <pre><code>from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from database import get_connection, init_db
+from models import CartItemCreate, CartItemOut, CartItemUpdate, Product
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+init_db()
+
+
+def _fetch_cart_row(conn, cart_id: int):
+    return conn.execute(
+        """
+        SELECT cart.id AS id,
+               cart.product_id AS product_id,
+               products.name AS name,
+               products.price AS price,
+               cart.quantity AS quantity
+        FROM cart
+        JOIN products ON products.id = cart.product_id
+        WHERE cart.id = ?
+        """,
+        (cart_id,),
+    ).fetchone()
+
+
+@app.get("/products", summary="상품목록가져오기")
+def get_products() -&gt; list[Product]:
+    conn = get_connection()
+    rows = conn.execute("SELECT id, name, price FROM products").fetchall()
+    conn.close()
+    return [Product(**dict(row)) for row in rows]
+
+
+@app.get("/cart", summary="장바구니가져오기")
+def get_cart() -&gt; list[CartItemOut]:
+    conn = get_connection()
+    rows = conn.execute(
+        """
+        SELECT cart.id AS id,
+               cart.product_id AS product_id,
+               products.name AS name,
+               products.price AS price,
+               cart.quantity AS quantity
+        FROM cart
+        JOIN products ON products.id = cart.product_id
+        """
+    ).fetchall()
+    conn.close()
+    return [CartItemOut(**dict(row)) for row in rows]
+
+
+@app.post("/cart", summary="장바구니에상품추가")
+def add_to_cart(item: CartItemCreate) -&gt; CartItemOut:
+    conn = get_connection()
+    existing = conn.execute(
+        "SELECT id, quantity FROM cart WHERE product_id = ?", (item.product_id,)
+    ).fetchone()
+
+    if existing is None:
+        cursor = conn.execute(
+            "INSERT INTO cart (product_id, quantity) VALUES (?, 1)",
+            (item.product_id,),
+        )
+        cart_id = cursor.lastrowid
+    else:
+        cart_id = existing["id"]
+        conn.execute(
+            "UPDATE cart SET quantity = ? WHERE id = ?",
+            (existing["quantity"] + 1, cart_id),
+        )
+
+    conn.commit()
+    row = _fetch_cart_row(conn, cart_id)
+    conn.close()
+    return CartItemOut(**dict(row))
+
+
+@app.patch("/cart/{id}", summary="장바구니수량변경")
+def update_cart_quantity(id: int, item: CartItemUpdate) -&gt; CartItemOut:
+    quantity = max(1, item.quantity)
+    conn = get_connection()
+    conn.execute("UPDATE cart SET quantity = ? WHERE id = ?", (quantity, id))
+    conn.commit()
+    row = _fetch_cart_row(conn, id)
+    conn.close()
+    return CartItemOut(**dict(row))
+
+
+@app.delete("/cart/{id}", summary="장바구니에서상품삭제")
+def delete_from_cart(id: int):
+    conn = get_connection()
+    conn.execute("DELETE FROM cart WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return {"deleted": id}
+
+
+@app.delete("/cart", summary="장바구니비우기")
+def clear_cart():
+    conn = get_connection()
+    conn.execute("DELETE FROM cart")
+    conn.commit()
+    conn.close()
+    return {"cleared": True}</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>backend/database.py 코드 보기</summary>
+            <pre><code>import sqlite3
+from pathlib import Path
+
+DB_PATH = Path(__file__).parent / "cart.db"
+
+INITIAL_PRODUCTS = [
+    ("노트북", 1200000),
+    ("키보드", 80000),
+    ("마우스", 40000),
+    ("헤드셋", 100000),
+]
+
+
+def get_connection():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def init_db():
+    conn = get_connection()
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            price INTEGER NOT NULL
+        )
+        """
+    )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS cart (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id INTEGER NOT NULL,
+            quantity INTEGER NOT NULL,
+            FOREIGN KEY (product_id) REFERENCES products (id)
+        )
+        """
+    )
+
+    count = conn.execute("SELECT COUNT(*) FROM products").fetchone()[0]
+    if count == 0:
+        conn.executemany(
+            "INSERT INTO products (name, price) VALUES (?, ?)", INITIAL_PRODUCTS
+        )
+
+    conn.commit()
+    conn.close()</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>backend/models.py 코드 보기</summary>
+            <pre><code>from pydantic import BaseModel
+
+
+class Product(BaseModel):
+    id: int
+    name: str
+    price: int
+
+
+class CartItemCreate(BaseModel):
+    product_id: int
+
+
+class CartItemUpdate(BaseModel):
+    quantity: int
+
+
+class CartItemOut(BaseModel):
+    id: int
+    product_id: int
+    name: str
+    price: int
+    quantity: int</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>frontend/app/page.tsx 코드 보기</summary>
+            <pre><code>"use client";
+
+import { useEffect, useState } from "react";
+
+const API_BASE = "http://127.0.0.1:8000";
+
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+type CartItem = {
+  id: number;
+  product_id: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+export default function Home() {
+  const [products, setProducts] = useState&lt;Product[]&gt;([]);
+  const [cart, setCart] = useState&lt;CartItem[]&gt;([]);
+
+  async function fetchProducts() {
+    const res = await fetch(`${API_BASE}/products`, { cache: "no-store" });
+    setProducts(await res.json());
+  }
+
+  async function fetchCart() {
+    const res = await fetch(`${API_BASE}/cart`, { cache: "no-store" });
+    setCart(await res.json());
+  }
+
+  useEffect(() =&gt; {
+    fetchProducts();
+    fetchCart();
+  }, []);
+
+  async function handleAdd(productId: number) {
+    await fetch(`${API_BASE}/cart`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product_id: productId }),
+    });
+    fetchCart();
+  }
+
+  async function handleRemove(itemId: number) {
+    await fetch(`${API_BASE}/cart/${itemId}`, { method: "DELETE" });
+    fetchCart();
+  }
+
+  async function handleChangeQuantity(itemId: number, quantity: number) {
+    await fetch(`${API_BASE}/cart/${itemId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantity }),
+    });
+    fetchCart();
+  }
+
+  async function handleClearCart() {
+    await fetch(`${API_BASE}/cart`, { method: "DELETE" });
+    fetchCart();
+  }
+
+  const total = cart.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0);
+
+  return (
+    &lt;div className="receipt"&gt;
+      &lt;div className="store-title"&gt;미니쇼핑몰&lt;/div&gt;
+      &lt;div className="subtitle"&gt;MINI SHOPPING MALL RECEIPT&lt;/div&gt;
+
+      &lt;hr className="divider" /&gt;
+
+      &lt;div className="section-title"&gt;상품 목록&lt;/div&gt;
+      {products.map((product) =&gt; (
+        &lt;div className="line" key={product.id}&gt;
+          &lt;span className="label"&gt;{product.name}&lt;/span&gt;
+          &lt;span className="fill" /&gt;
+          &lt;span className="value"&gt;{product.price.toLocaleString()}원&lt;/span&gt;
+          &lt;button className="receipt-btn" onClick={() =&gt; handleAdd(product.id)}&gt;
+            [담기]
+          &lt;/button&gt;
+        &lt;/div&gt;
+      ))}
+
+      &lt;hr className="divider" /&gt;
+
+      &lt;div className="section-title"&gt;장바구니&lt;/div&gt;
+      &lt;button className="receipt-btn clear-btn" onClick={handleClearCart}&gt;
+        [장바구니 비우기]
+      &lt;/button&gt;
+
+      {cart.length === 0 ? (
+        &lt;p className="empty-cart"&gt;장바구니가 비어 있습니다.&lt;/p&gt;
+      ) : (
+        cart.map((item) =&gt; (
+          &lt;div className="line" key={item.id}&gt;
+            &lt;span className="label"&gt;{item.name}&lt;/span&gt;
+            &lt;span className="fill" /&gt;
+            &lt;span className="value"&gt;{item.price.toLocaleString()}원&lt;/span&gt;
+            &lt;div className="qty-controls"&gt;
+              &lt;button
+                className="receipt-btn"
+                onClick={() =&gt;
+                  handleChangeQuantity(item.id, item.quantity - 1)
+                }
+              &gt;
+                -
+              &lt;/button&gt;
+              &lt;span&gt;{item.quantity}&lt;/span&gt;
+              &lt;button
+                className="receipt-btn"
+                onClick={() =&gt;
+                  handleChangeQuantity(item.id, item.quantity + 1)
+                }
+              &gt;
+                +
+              &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;button className="receipt-btn" onClick={() =&gt; handleRemove(item.id)}&gt;
+              [삭제]
+            &lt;/button&gt;
+          &lt;/div&gt;
+        ))
+      )}
+
+      &lt;div className="total-line"&gt;
+        &lt;span&gt;총 금액&lt;/span&gt;
+        &lt;span&gt;{total.toLocaleString()}원&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>frontend/app/globals.css 코드 보기</summary>
+            <pre><code>:root {
+  --paper: #fffef2;
+  --ink: #2b2b2b;
+  --muted: #8a8a8a;
+  --page-bg: #e8e8e8;
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--page-bg);
+  font-family: "Courier New", Courier, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.receipt {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 48px auto 40px;
+  padding: 28px 24px 32px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -11px;
+  height: 12px;
+  background: linear-gradient(-45deg, var(--paper) 8px, transparent 0),
+    linear-gradient(45deg, var(--paper) 8px, transparent 0);
+  background-position: left bottom;
+  background-repeat: repeat-x;
+  background-size: 16px 16px;
+}
+
+.store-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px dashed var(--muted);
+  margin: 16px 0;
+}
+
+.section-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.line {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.line .label {
+  white-space: nowrap;
+}
+
+.line .fill {
+  flex: 1;
+  border-bottom: 1px dotted var(--muted);
+  margin: 0 4px;
+  height: 1em;
+}
+
+.line .value {
+  white-space: nowrap;
+}
+
+.receipt-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.receipt-btn:hover {
+  text-decoration: underline;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.clear-btn {
+  display: block;
+  margin: 0 auto 16px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  border-top: 2px double var(--ink);
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.empty-cart {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Python</span>
+            <h3>FastAPI + SQLite 기초 연습</h3>
+          </div>
+          <p>장바구니 앱을 만들기 전에 연습한 FastAPI 메모 API와 sqlite3 기본 사용법</p>
+          <details class="code-viewer">
+            <summary>메모 API (main.py) 코드 보기</summary>
+            <pre><code>from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+memos = []
+
+
+class Memo(BaseModel):
+    content: str
+
+
+@app.get("/")
+def read_root():
+    return "안녕하세요"
+
+
+@app.post("/memos")
+def create_memo(memo: Memo):
+    memos.append(memo)
+    return memo
+
+
+@app.get("/memos")
+def list_memos():
+    return memos</code></pre>
+          </details>
+          <details class="code-viewer">
+            <summary>sqlite_demo.py 코드 보기</summary>
+            <pre><code>import sqlite3
+
+conn = sqlite3.connect("memos.db")
+cursor = conn.cursor()
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS memos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        content TEXT NOT NULL
+    )
+""")
+
+cursor.execute("INSERT INTO memos (content) VALUES (?)", ("첫 번째 메모",))
+cursor.execute("INSERT INTO memos (content) VALUES (?)", ("두 번째 메모",))
+conn.commit()
+
+cursor.execute("SELECT * FROM memos")
+for row in cursor.fetchall():
+    print(row)
+
+conn.close()</code></pre>
+          </details>
+        </div>
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>11일차</span>
+    </footer>
+  </div>
+</body>
+</html>

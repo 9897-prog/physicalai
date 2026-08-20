@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13일차 - 피지컬AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0e17%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2267%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2244%22%20fill%3D%22%2300ff88%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="day-page">
+    <header class="day-header">
+      <div class="header-left">
+        <a class="back-link" href="index.html">&larr; 메인</a>
+      </div>
+      <div class="header-center">
+        <a class="back-link" href="12일차.html">&larr; 12일</a>
+        <span class="day-title"><span class="n">13일차</span></span>
+        
+      </div>
+    </header>
+    <main class="day-main">
+
+      <div class="content-card">
+        <div class="badge-row">
+          <span class="badge">Arduino</span>
+          <span class="badge">피지컬 컴퓨팅</span>
+        </div>
+        <h2>Arduino 센서 · 액추에이터 실습</h2>
+        <p class="lede">
+          드디어 소프트웨어를 넘어 진짜 "피지컬" AI로! Tinkercad 회로 시뮬레이터로 LED, 부저,
+          동작 감지 센서(PIR), 초음파 거리 센서를 하나씩 다뤄보고, 마지막엔 이걸 합쳐서
+          물체 감지 알람 회로까지 만들었습니다.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Arduino</span>
+            <h3>LED 3색 순차 점등</h3>
+          </div>
+          <p>빨강·노랑·파랑 LED 3개를 순서대로 켰다 끄는 기본 회로</p>
+          <img class="content-image" src="../../13일차/LED.png" alt="LED 3색 순차 점등 Tinkercad 회로도 및 코드">
+          <details class="code-viewer">
+            <summary>코드 보기</summary>
+            <pre><code>// C++ code
+//
+
+int Red=7;
+int Yellow=6;
+int Blue=5;
+
+void setup()
+{
+  pinMode(Red, OUTPUT);
+  pinMode(Yellow, OUTPUT);
+  pinMode(Blue, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(Red, LOW);
+  digitalWrite(Yellow, LOW);
+  digitalWrite(Blue, LOW);
+  delay(1000);
+
+  digitalWrite(Red, HIGH);
+  delay(1000);
+  digitalWrite(Red, LOW);
+  digitalWrite(Yellow, HIGH);
+  delay(1000);
+  pinMode(Yellow, LOW);
+  digitalWrite(Blue, HIGH);
+  delay(1000);
+  digitalWrite(Blue, LOW);
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Arduino</span>
+            <h3>부저(Buzzer)로 소리 내기</h3>
+          </div>
+          <p>piezo 부저로 도(523Hz)·레(587Hz)·미(659Hz) 음을 순서대로 재생</p>
+          <img class="content-image" src="../../13일차/Buzzer.png" alt="부저(Buzzer)로 소리 내기 Tinkercad 회로도 및 코드">
+          <details class="code-viewer">
+            <summary>코드 보기</summary>
+            <pre><code>// C++ code
+//
+
+int Buzzer = 7;
+
+void setup()
+{
+  pinMode(Buzzer, OUTPUT);
+}
+
+void loop()
+{
+  tone(Buzzer, 523);
+  delay(500);
+  tone(Buzzer, 587);
+  delay(500);
+  tone(Buzzer, 659);
+  delay(500);
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Arduino</span>
+            <h3>PIR 동작 감지 센서</h3>
+          </div>
+          <p>PIR 센서로 움직임을 감지하면 LED를 켜고 시리얼 모니터에 &quot;Welcome!&quot; 출력</p>
+          <img class="content-image" src="../../13일차/PIR.png" alt="PIR 동작 감지 센서 Tinkercad 회로도 및 코드">
+          <details class="code-viewer">
+            <summary>코드 보기</summary>
+            <pre><code>// C++ code
+
+int ledPin = 8;
+int inputPin = 7;
+int val = 0;
+
+void setup()
+{
+  pinMode(ledPin, OUTPUT);
+  pinMode(inputPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  val = digitalRead(inputPin);
+
+  if(val == HIGH){
+    digitalWrite(ledPin, HIGH);
+    Serial.println("Welcome!");
+  }
+  else{
+    digitalWrite(ledPin, LOW);
+    Serial.println("Nothing");
+  }
+  delay(1000);
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Arduino</span>
+            <h3>초음파 거리 센서 (HC-SR04)</h3>
+          </div>
+          <p>초음파 센서로 물체까지의 거리를 mm 단위로 계산해 시리얼 모니터에 출력</p>
+          <img class="content-image" src="../../13일차/Ulteasonic.png" alt="초음파 거리 센서 (HC-SR04) Tinkercad 회로도 및 코드">
+          <details class="code-viewer">
+            <summary>코드 보기</summary>
+            <pre><code>// C++ code
+
+int echoPin = 7;
+int trigPin = 8;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(echoPin, INPUT);
+  pinMode(trigPin, OUTPUT);
+}
+
+void loop()
+{
+  long duration, distance;
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = ((float)(340*duration) /1000) / 2;
+
+  Serial.print("Distance:");
+  Serial.print(distance);
+  Serial.print("mm/n");
+  delay(1000);
+}</code></pre>
+          </details>
+        </div>
+
+        <div class="project-item">
+          <div class="project-item-head">
+            <span class="badge">Arduino</span>
+            <h3>종합 과제 — 물체 감지 알람</h3>
+          </div>
+          <p>초음파 센서 + 부저 + LED를 합쳐서, 300~3000mm 사이에 물체가 감지되면 &quot;물체감지!&quot;를 알리는 알람 회로</p>
+          <img class="content-image" src="../../13일차/과제.png" alt="종합 과제 — 물체 감지 알람 Tinkercad 회로도 및 코드">
+          <details class="code-viewer">
+            <summary>코드 보기</summary>
+            <pre><code>// C++ code
+//
+int Buzzer = 4;
+int Red = 5;
+int echoPin = 7;
+int trigPin = 8;
+
+long duration;
+float distance;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(echoPin, INPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(Buzzer, OUTPUT);
+  pinMode(Red, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = ((float)(340 * duration) / 1000) / 2;
+
+  if (distance &gt; 300&amp;&amp;distance &lt; 3000) {
+    digitalWrite(Red, HIGH);
+    tone(Buzzer, 523);
+    Serial.println("물체감지!");
+  } else {
+    digitalWrite(Red, LOW);
+    noTone(Buzzer);
+    Serial.println("Nothing");
+  }
+
+  delay(300);
+}</code></pre>
+          </details>
+        </div>
+
+      </div>
+
+    </main>
+    <footer class="day-footer">
+      <span>session://physical-ai</span>
+      <span>13일차</span>
+    </footer>
+  </div>
+</body>
+</html>

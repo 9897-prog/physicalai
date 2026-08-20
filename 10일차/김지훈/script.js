@@ -1,4 +1,4 @@
-const TOTAL_DAYS = 12;
+const TOTAL_DAYS = 13;
 
 // ---- 패널 하단 실시간 시계 ----
 (() => {
